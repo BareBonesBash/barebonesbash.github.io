@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Bare Bones Bash</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700);
+      @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:300,300i,400,400i,700);
+      @import url(https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700);
+
+
+      /* font/size formatting */
+      body { 
+        font-family: 'Raleway', sans-serif;
+        font-weight: 300;
+        color: #000000;
+      }
+      
+      h1 {
+        font-family: 'Roboto Slab', sans-serif;
+        color: #7570b3;
+        font-weight: 400;
+        font-size: 40px;
+      }
+
+      h2 {
+        font-family: 'Roboto Slab', sans-serif;
+        font-weight: 400;
+        font-size: 30px;
+        color: #7570b3;
+      }
+
+      h3 {
+        font-family: 'Raleway', sans-serif;
+        color: #7570b3;
+      }
+
+      /* improve font size modifications - https://github.com/yihui/xaringan/wiki/Font-Size */
+
+      .huge { font-size: 160% }
+      .large { font-size: 130% }
+      .small { font-size: 70% }
+      .tiny{font-size: 40%}
+
+      /* https://github.com/gnab/remark/issues/305#issuecomment-403309989 */
+      blockquote {
+        border-left: 0.3em solid #ccc;
+        padding: 0 15px;
+        font-style: italic;
+        color: #777;
+        quotes: "\201C""\201D""\2018""\2019";
+        font-size: 18px;
+      }
+
+      .remark-code, .remark-inline-code { 
+        font-family: 'Ubuntu Mono'; color: grey;
+      }
+      
+      /* Two-column layouts */
+      .left-column  { width: 49%; float: left; }
+      .right-column { width: 49%; float: right; }
+
+      .left-column-33  { width: 33%; float: left; }
+      .right-column-66 { width: 66%; float: right; }
+
+      .left-column-66  { width: 66%; float: left; }
+      .right-column-33 { width: 33%; float: right; }
+
+      .right-column ~ p { clear: both; }
+      .right-column ~ ul { clear: both; }
+
+      /* use with e.g. <div class=vertical-center"> */
+      .vertical-center {
+         margin: 0;
+         position: absolute;
+         top: 50%;
+         -ms-transform: translateY(-50%);
+         transform: translateY(-50%);
+      }
+
+
+      .vertical-center-with-title {
+         margin: 0;
+         position: absolute;
+         top: 60%;
+         -ms-transform: translateY(-50%);
+         transform: translateY(-50%);
+      }
+
+
+      /* For progress bar */
+      .remark-slide-number {
+        position: inherit;
+      }
+
+      .remark-slide-number .progress-bar-container {
+        position: absolute;
+        bottom: 0;
+        height: 4px;
+        display: block;
+        left: 0;
+        right: 0;
+      }
+
+      .remark-slide-number .progress-bar {
+        height: 100%;
+        background-color: #6a3d9a;
+      }
+
+    /* Header and Footer from 
+    https://github.com/gnab/remark/issues/501#issuecomment-392961900/ 
+    */
+
+    div.my-header {
+      background-color: #7570b3;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 10px;
+      width: 100%;
+      text-align: left;
+    }
+
+    div.my-footer img {
+      height: 75px;
+      width: 75px;
+      bottom: 5px;
+      right: 5px;
+      position: fixed;
+    }
+
+  /* Comment  */
+  .remark-slide-content { 
+    font-size: 20px; 
+
+  }
+
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source" bar>
+
+layout: true
+<div class="my-header"></div>
+   <div class="my-footer"><img src=".images/BareBonesBash_Icon.png" /></div>
+
+
+---
+
+class: center, middle
+
+# .tiny[_Basic_ Bespoke]
+# .large[**Bare Bones Bash**]
+## .tiny[Brought By Blissfully Baffled Bioinformaticians]
+
+Thiseas C. Lamnidis
+
+James A. Fellows Yates
+<br/>
+<br/>
+<br/>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+</a>
+.small[<br />This work is licensed under a <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.]
+
+---
+
+# Who are we?
+
+.left-column-66[
+### ~~Bowser~~ James
+
+- BSc. @ Department of Archaeology (York)
+- MSc. @ Institute for Archaeological Sciences (Tübingen)
+- Ph.D.(?) @ Department of Archaeogenetics (Jena)
+
+### ~~Yoshi~~ Thiseas 
+
+- BSc. @ Department of Biology (York)
+- MSc. @ Department of Anthropology (Durham)
+- Ph.D.(?) @ Department of Archaeogenetics (Jena)
+]
+
+.right-column-33[
+<div class="vertical-center-with-title">
+  <img src=".images/James_JamessDaughter_Thiseas_In_Japan.jpg" width="80%">
+</div>
+]
+
+???
+BOTH
+---
+
+class: center, middle
+
+.left-column[
+# Neither of us...
+## ...has a computational background
+]
+
+--
+
+.right-column[
+<div class="vertical-center">
+  <p align="center">
+    Except in internet memes!
+    <img src=".images/science_dog.jpg" width="95%" height = "95%">
+  </p>
+</div>
+]
+
+???
+BOTH
+---
+
+# How did we get here?
+
+How did we learn to do everything you're about to learn?
+
+- Being lazy
+
+???
+JAMES
+--
+
+- Google
+
+--
+
+- Talking to each other
+
+--
+
+- Metric tons of TRIAL AND ERROR (tears, manic screaming, blood...)
+
+---
+
+# Aims of this course
+
+- Aim:
+
+  - To get you comfortable enough with the terminal to try it out
+
+--
+
+- Objectives
+  1. What is a terminal?
+  2. How to navigate around your computer with the terminal?
+  3. How to interact with text files?
+  4. How to combine multiple programs into a single command?
+  5. How to save file space with shortcuts
+  6. What is a variable? What is a for loop?
+
+---
+
+# Future outcomes
+
+- Make your work more efficient
+
+  - Large scale modifications of files
+  - Make your work more reproducible
+  - Wizardary (stuff that we can't even imagine...)
+
+--
+
+- Make fewer mistakes
+  - Eliminate human error (blame it on the computer!)
+
+--
+
+- Look like a ~~computer nerd~~ really cool
+
+---
+
+class: center, middle
+
+# Five Commandments of Bare Bones Bash
+
+???
+THISEAS
+---
+
+class: middle
+
+# Rule Nr. 1
+
+.left-column[
+## Be lazy!
+]
+
+.right-column[
+- Desire for shortcuts motivates you explore more!
+]
+
+???
+It's better to spend 1day working on a script that will save you 5min per day for the rest of your PhD, than putting in those 5 minutes!
+
+TAB will be you favourite key by the time we are done here.
+
+---
+
+class: middle
+
+# Rule Nr. 2
+.left-column[
+## ~~Google~~ The Hive-Mind knows everything.
+]
+.right-column[
+- 99% of the time, someone else has already had the same issue.
+- Let the poor soul do the work for you!
+- (...and pass it on!)
+]
+???
+HOW to google programming questions is not as trivial as it sounds. In the final part of today's session we can talk a bit about this.
+
+---
+
+class: middle
+
+# Rule Nr. 3
+
+.left-column[
+## Document everything you do.
+]
+.right-column[
+- Makes future you happy
+- Reproducibility
+- Helps others!
+]
+
+---
+
+class: middle
+
+# Rule Nr. 4
+
+.left-column[
+## There will ALWAYS be a typo!
+]
+.right-column[
+- Don't get disheartned, even best programmers make mistakes
+- Sometimes the problem _isn't_ you being 'stupid', programmers are crap at documentation
+]
+
+---
+
+class: middle
+
+# Rule Nr. 5
+
+.left-column[
+## Don't be afraid of you freedom!
+
+]
+
+.right-column[
+- Explore! Try out things! 
+- It never works the first time. But it does work eventually!
+]
+
+???
+In my experience, most of learning in programming happens by failing. Repeatedly! 
+
+---
+
+class: center middle
+
+# Preparation!
+
+---
+
+# Materials
+
+- A long-form walkthrough, and these slides, are all freely avaliable avaliable at: 
+[https://github.com/TCLamnidis/BareBonesBash](https://github.com/TCLamnidis/BareBonesBash)
+
+- This session is under **Basic Bare Bones Bash**
+
+<p align="center"><img src=".images/walkthrough.png" width = "50%"></p>
+
+
+
+---
+
+# Into the hacker-verse
+
+### You are about to use the terminal!
+
+__A terminal is a window that allows you to access the command line interface of a computer/server.__
+
+--
+
+i.e. a place for you to write to the computer what you want it to do.
+
+--
+
+----
+
+__Bash is the programming language that is used within the Terminal.__
+
+--
+
+i.e. it is _how_ you tell the computer what you want it to do.
+
+---
+
+# Combine the two and become L33T H4X0RZ
+<p align="center"><img title="Source: https://i.imgur.com/BkDkTxY.jpg" src="https://i.imgur.com/BkDkTxY.jpg" width=55% ></p>
+
+---
+
+# Connecting to our server
+
+
+ * In your browser, go to the URL that you got with your login information.
+ * Log-in with the user and password we provided you. 
+
+---
+
+class: center
+
+<p align="left"><img src=".images/Jupyter1.png" width="100%" ></p>
+
+---
+
+class: center
+
+<p align="left"><img src=".images/Jupyter2.png" width="100%" ></p>
+
+---
+
+class: center
+
+<p align="left"><img src=".images/Jupyter3.png" width="100%" ></p>
+
+---
+
+class: center
+
+<p align="left"><img src=".images/Jupyter4.png" width="100%" ></p>
+
+---
+
+class: center
+
+<p align="left"><img src=".images/Jupyter5.png" width="100%" ></p>
+
+???
+What you see here is the "command prompt". username@server:pwd$
+me, at the workshop server. ~ means "my HOME directory" (user specific). 
+
+---
+
+class: middle, center
+
+# Always mind the $!
+
+<p align="center"><img title="Source: https://giphy.com/gifs/studiosoriginals-gilphabet-3o84U72tKO389H2lI4" src="https://media.giphy.com/media/3o84U72tKO389H2lI4/giphy.gif" ></p>
+
+???
+in Bash ALWAYS MIND THE $. Only copy after the $ so you dont paste the command prompt too. $ is also important when dealing with variables, which you will see later today.
+
+---
+
+# Navigating the maze
+
+`pwd` stands for "__p__rint __w__rite __d__irectory" 
+```bash
+$ pwd
+```
+???
+As we mentioned, _~_ is your _home directory_. But where _is_ your home?
+--
+
+```
+/home/thiseas
+```
+???
+This prints the entire "filepath" of the directory i.e. the route from the "root" 
+(a specific directory on the machine), through every subdirectory, leading to your 
+particular folder. 
+
+Each user has their own home directory!
+
+---
+
+# Let's talk about paths!
+
+.left-column-66[
+While walking around downtown Jena, you feel a rumble in your belly, and feel a craving that only a _currywurst with sweet potato fries_ can fulfill. 
+
+You look around and see a stranger sitting under __the statue of Kurfürst Johann Friedrich.__ You approach the stranger and ask them for directions to Fritz Mitte!]
+
+.left-column-33[<p align="right"><img src=".images/Jena_Marktplatz_by_C.Loeser.jpg" width="80%" > <figcaption align="right">Photo by C. Loeser. CC-BY</figcaption></p>
+]
+
+---
+
+# Absolute paths
+
+.left-column-66[
+The location of a file or folder, __from the “root” directory__ (`/`).
+
+]
+
+.right-column-33[
+<p align="center">
+  <img src=".images/JenTower_by_Igor_Slovak.jpg" width="80%" > 
+  <figcaption align="right">Photo by Igor Slovak. CC-BY-SA</figcaption>
+</p>
+]
+
+--
+
+.left-column-66[
+
+Equivalent to getting directions to Fritz Mitte, from Jentower (the de facto landmark in Jena).
+
+
+>___“From Jentower, cross Leutragraben and turn right. You will see FM 100m ahead!”___
+<p align="right"><i>Kind stranger, 2019</i></p>
+]
+
+
+
+
+???
+These directions are true no matter where in town you happen to be.
+
+--
+
+.left-column-66[
+
+__Example of an absolute path:__
+```
+/home/thiseas
+```
+]
+???
+__Absolute__ paths always start with `/`. Paths starting with `~` are also absolute paths, since `~` translates to the absolute path of your specific home directory. That is the directory path you see in the output of the `pwd` command you just ran.
+
+
+---
+
+# Relative paths
+
+.left-column-66[
+The location of a file or folder, __from your current directory.__
+]
+
+.right-column-33[
+<p align="right">
+  <img src=".images/Jena_Johannistor_by_Andreas_Praefcke.jpg" width="75%" > 
+  <figcaption align="right">Photo by Andreas Praefcke. CC-BY</figcaption></p>
+]
+
+--
+
+.left-column-66[
+
+Equivalent getting directions to Fritz Mitte from your current location.
+
+>___“Go down that road, turn left, then keep going straight until you see it!”___
+<p align="right"><i>also Kind stranger, 2019</i></p>
+
+]
+
+???
+These directions are easier to follow, but only work if you begin AT MARKTPLATZ.
+
+--
+
+.left-column-66[
+__Example of a relative path:__
+```
+../Documents/Memes/Pepe.png
+```
+]
+???
+__Relative__ paths are always relative to your working directory (i.e.
+  your current directory). Often this type of path will begin with one (`./`) 
+  or two (`../`) dots followed by a forward slash. 
+
+In the syntax of relative paths `.` means "the current directory" and `..` means "the parent directory" (or the 'one above'). 
+
+---
+
+# The contents of a directory
+
+`ls` is shorthand for **l**i**s**t. 
+
+```bash
+$ ls
+
+```
+???
+Now let's look around at our current location and see what we can find within 
+our home directory.
+
+`ls` is shorthand for "list". It will (surprise surprise) list the contents of the current directory.
+
+This will produce no output, since your current directory is empty. Let's change that!
+--
+<br><br>
+`mkdir` is shorthand for "**m**a**k**e **dir**ectory".
+
+```bash
+$ mkdir ~/BBB
+$ ls ~
+```
+???
+You can make a new empty directory using the command `mkdir`, shorthand for 
+"**m**a**k**e **dir**ectory".
+
+--
+```
+BBB
+```
+Now that your home directory is not empty, `ls` has output!
+???
+Also notice that if we provide a path to `ls`, it will list the contents of the given directory.
+
+---
+
+# Directory Management
+
+__However, `BBB` is not a very descriptive name.__
+
+???
+In two years when you start looking through these folders `BBB` won't mean much and you will likely go like this. (click)
+
+--
+
+<p align="center"><img title="Source: https://giphy.com/gifs/table-flip-ieGdB2g5kDIkg" src="https://media.giphy.com/media/ieGdB2g5kDIkg/giphy.gif" width="25%"> <img title="Source: https://tenor.com/view/it-crowd-moss-computer-throw-gif-5404468" src="https://media.tenor.co/images/d82c7edc4b04227b4c973f24b904695f/raw" width="32%"></p>
+
+--
+
+**Important:** keep your corner of the computer well organised!
+- The trick: make own directories. 
+- Often, _a lot_ of them. 
+
+--
+
+But don't lose hope, as we can rename things with the `mv` command, 
+shorthand for "**m**o**v**e". 
+
+```bash
+$ mv ~/BBB BearBonesBash
+
+```
+???
+In fact move, as the name suggests, will move a file/folder into a new location, 
+also renaming it in the process if necessary. It works by typing `mv`, the old 
+location and a target location.
+
+__Can you tell me what type of path each argument to the command used is?__
+
+---
+
+# Oh no! Not again! 
+```bash
+$ ls
+```
+```
+BearBonesBash
+```
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/bear-forest-water-IQ9KefLJHfJPq" src="https://media.giphy.com/media/IQ9KefLJHfJPq/giphy.gif" width="20%">
+</p>
+???
+This is not a bash tutorial for ancient __bear__ genomics! Let's just delete that empty directory and start over.
+--
+`rmdir` is short for "**r**e**m**ove **dir**ectory"
+???
+__rmdir only works on EMPTY directories!__
+--
+
+```bash
+$ rmdir ~/BearBonesBash
+$ ls
+```
+???
+Now your home directory is empty again.
+
+---
+
+# From the beginning...
+
+<p align="center">
+  <img title="Source: https://66.media.tumblr.com/f36d6c252af07ce3202ef9d73413e9c6/tumblr_mqm45nq9e01sqsny9o1_400.gif" src="https://66.media.tumblr.com/f36d6c252af07ce3202ef9d73413e9c6/tumblr_mqm45nq9e01sqsny9o1_400.gif" width="70%">
+</p>
+
+```bash
+$ mkdir ~/BareBonesBash
+$ ls
+```
+???
+And now we can create our directory, properly named this time.
+
+--
+```
+BareBonesBash
+```
+Much better!
+
+---
+
+# Navigating the file system
+`cd` is short for "__c__hange __d__irectory".
+
+```bash
+$ cd BareBonesBash
+```
+???
+
+Now that we have our directory, we should move into it. 
+--
+???
+You can see that your current directory has changed on your command prompt! (or you can use `pwd`).
+--
+To move to the parent directory of your current location:
+```bash
+$ cd ..
+```
+--
+
+```bash
+$ cd ~/BareBonesBash
+```
+???
+You can also use an abosolute path to move to a directory:
+--
+
+You can also use the shortcut `-` (hyphen) to indicate 'my previous location'. 
+
+This is useful since you can traverse multiple directories with one `cd` command. Try it now!
+
+```bash
+cd -
+```
+
+---
+
+# Concept: Comments
+
+Try running the following code:
+```bash
+$ ## Remember in "A land before time" when the dinosaur's mother died?
+```
+???
+
+While reading that command, you 
+might have been reminded of one of the most emotionally devastating moments of 
+any young person's life.
+--
+ <p align="center"><img title="Source: https://www.buzzfeed.com/bradesposito/sad-before-time?utm_term=.cjY4banJZ#.ixJ815NjJ" src="https://img.buzzfeed.com/buzzfeed-static/static/2015-04/29/21/enhanced/webdr15/anigif_enhanced-31175-1430357953-19.gif" width="35%"></p>
+???
+However, the computer would show no signs of emotional 
+struggle whatsoever, because it __ignores anything that comes after a _comment character_, which in bash is a hash (`#`).__
+
+???
+--
+
+## `#` is the comment character
+???
+If you are writing scripts for others to use, you should use comments to explain what a certain bit of code does. 
+This is also a great way to ignore selected parts of code. 
+
+Often this also works with input files, as you will see later.
+
+---
+
+class: center,middle
+### To rehash:
+##In bash, a hash (`#`) will stash your code in a flash!
+
+---
+
+class: center,middle
+# Playing with the files, one bit at a time
+
+???
+James
+
+---
+
+# Time to play!
+
+
+.left-column[
+
+We have a place to organise our files... but no files :\
+
+We aren't playing with bears today
+  > That's dangerous! 
+]
+
+--
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/sid-ice-age-a-mammoth-christmas-kbuQOkATEo6VW" src="https://media.giphy.com/media/kbuQOkATEo6VW/giphy.gif"> 
+</p>
+] 
+
+--
+
+.left-column[
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+.huge[**Lets play with some Mammoths instead!**]
+  ]
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/3o6Zte5Q11lxAu8Q5q" src="https://media.giphy.com/media/3o6Zte5Q11lxAu8Q5q/giphy.gif" width = "65%">
+</p>
+] 
+
+???
+JAMES
+
+---
+
+# Downloading files with `wget`
+
+We are going to download a FASTQ file from the ENA (European Nucleotide Archive). This should be pretty quick!
+
+> For non-squishy-dead-thing nerds: a FASTQ file is just a text file with DNA molecule sequences and extra metadata
+
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/mario-kart-lAIbbDbcXSZSU" src="https://media.giphy.com/media/lAIbbDbcXSZSU/giphy.gif" width="20%">
+</p>
+
+--
+
+```bash
+## Download!
+$ wget ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/001/ERR2020601/ERR2020601.fastq.gz
+
+## Then to check if the file is now in our working directory
+$ ls
+
+```
+???
+Notice how I have used comments to explain what the different sections of the code do!
+
+---
+
+# Organise yo' stuff!
+
+Use `mv` as it should be used, and move your newly downloaded file into your workshop folder.
+
+```bash
+$ mv ~/ERR2020601.fastq.gz ~/BareBonesBash
+```
+
+
+Then check to see if it moved!
+
+--
+
+```bash
+$ ls
+```
+
+--
+
+.left-column-33[
+
+You should now see that the fastq file is no longer in your home folder.
+]
+
+.right-column-66[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/fallontonight-dogs-disappear-poof-5ZYx8Zng64KBowFvLQ" src="https://media.giphy.com/media/5ZYx8Zng64KBowFvLQ/giphy.gif" width="50%">
+</p>
+]
+
+---
+
+# But where did it go?!
+
+Lets see if it went to were we told it to go...
+
+???
+
+We use `cd` to check into directory - 
+
+But How do we check what is in a directory?
+
+--
+
+```bash
+$ cd ~/BareBonesBash
+$ ls 
+```
+
+--
+
+```
+ERR2020601.fastq.gz
+```
+
+Good, the file arrived in `~/BareBonesBash/` safely!  But what is in it?
+
+<br/>
+
+<p align = "center">
+<img title="Source: https://giphy.com/gifs/reaction-confused-will-smith-y3QOvy7xxMwKI/" src="https://media.giphy.com/media/y3QOvy7xxMwKI/giphy.gif" width = "18%"> 
+<img title="Source: https://giphy.com/gifs/reaction-a5viI92PAF89q" src="http://giphygifs.s3.amazonaws.com/media/a5viI92PAF89q/giphy.gif" width = "21%"> 
+<img title="Source: https://giphy.com/gifs/good-friday-ya-MsWnkCVSXz73i" src="https://media.giphy.com/media/MsWnkCVSXz73i/giphy.gif" width = "26%"> 
+<img title="Source: https://giphy.com/gifs/animation-reaction-disney-AvxviAq9lVCuY" src="https://media.giphy.com/media/AvxviAq9lVCuY/giphy.gif" width = "12%"> 
+
+</p>
+
+
+---
+
+# Meow 
+
+.left-column[
+  - `cat` is short for "con**cat**enate".
+
+  - Used to print the 
+contents of a file to the screen.
+]
+
+.right-column[
+<p align = "center">
+<img title="Source: https://giphy.com/gifs/meow-descriptive-noise-x4YHSKRpYQhLq" src="https://media.giphy.com/media/x4YHSKRpYQhLq/giphy.gif" width = "90%"> 
+</p>
+]
+
+???
+
+Lets try this with our newly downloaded file.
+
+--
+
+
+.left-column[
+```bash
+$ cat ERR2020601.fastq.gz
+```
+]
+
+<br/>
+
+> **BONUS TIP TIME!** If you're anything like Thiseas, who gets triggered at slow 
+computer things, and prefer to have the computer do the work for you - try 
+typing a couple of characters then press the "TAB" key on your keyboard.
+
+
+--
+
+---
+
+# Oh...
+
+.left-column[
+- You probably had a bunch of junk printed to screen or nothing displayed 
+  - just press enter to cancel
+
+```
+��'��x��xI��-�����2��u�_SuY�9A�}W.��
+Zf��?���}H����9�Kɰ�
+����l�B��stݹlfDt������-L��|x:�MU
+tI����u�1������"d�H
+```
+  ]
+
+--
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/kQbMO5X7UA1C8" src="https://media.giphy.com/media/kQbMO5X7UA1C8/giphy.gif", width="80%">
+</p>
+> Looks like curiosity killed the `cat`!
+]
+
+--
+
+<br/>
+- That's because the FASTQ file is _compressed_ 
+  - As with almost all FASTQs 
+  - Also most large text files
+  - as indicated by the `.gz`
+
+
+---
+
+## Viewing the gz
+
+To view the _human readable_ contents of the file, we 
+can instead use `zcat`. Don't forget your auto-complete!
+
+--
+
+```bash
+$ zcat ERR2020601.fastq.gz
+
+```
+
+--
+
+```
+@ERR2020601.147099 F_AHSTEUER006:166:C5UJMANXX:8:2109:2222:68258/1
+TCTGCGTCCGTCATATCTATTGCCCAGTCACTAGTCACTAGTCA
++
+3:3AAEFGGGGGGGGGGGEGGCDGGGBGGGGGFGFGEGGGGGGG
+@ERR2020601.147100 F_AHSTEUER006:166:C5UJMANXX:8:1315:17303:82366/1
+TGGTCGCTGCCGCGAGCGGATTCCTGCTGA
++
+3B=@BECGGGGGGGGGGGGGGGGGGGGGGG
+```
+<br/>
+Much better, now we see DNA sequences! 
+
+--
+
+> **BONUS TIP TIME!** try pressing `ctrl+l`, which will clear your terminal of 
+> all the junk that was printed to your screen. This does NOT delete those lines, 
+> it simply scrolls down for you. You can still find all your previous work if
+> you scroll up.
+
+---
+
+## Yeah, but what EXACTLY is compression?
+
+.left-column[
+- Compression is a way of saving hard-disk space
+  - finds common patterns and replace with a smaller (repeated)-value
+  - later translated back (decompression)
+]
+
+???
+THISEAS
+
+--
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/via-exhaust-intake-1rb6ylm4QCUaA
+" src="https://media.giphy.com/media/1rb6ylm4QCUaA/giphy.gif" width="50%">
+<p>
+]
+
+--
+
+For example - take a time machine back to 2001, when having one of 
+these...
+
+--
+
+.left-column[
+<p align="center">
+  <img title="Source: https://everymac.com/systems/apple/ipod/specs/ipod.html" src="https://everymac.com/images/cpu_pictures/apple_ipod.jpg" width="40%">
+</p>
+]
+
+.right-column[
+...made you instantly popular and better geared than James Bond 
+
+.small[_\[tech-savvy Pierce Brosnan, not the trigger-happy Daniel Craig]_]
+]
+
+---
+
+# Muzak!
+
+.left-column-66[
+This iPod had a space of 5GB
+ - Average uncompressed album: 640MB
+ - Fits: 7.8125 Albums  
+ - Songs per Album: 20  .small[\[_because Thiseas just listens to Disney soundtracks..._\]]
+ - Total songs: 60
+]
+
+.right-column-33[
+<p align="center">
+  <img title="Source: https://everymac.com/systems/apple/ipod/specs/ipod.html" src="https://everymac.com/images/cpu_pictures/apple_ipod.jpg" width="60%">
+</p>
+]
+
+--
+
+_But I had 800 songs, and still had space_ - we hear you call?
+- Because of compression!
+- MP3 is a another type of compression specifically for music files
+
+---
+
+class: center,middle
+# Ok cool, but back to computers...
+
+---
+
+# Asking the computer for help (it loves helping people)
+
+How to find out how much space our FASTQ has? 
+  - Let's ask the computer to help us find a way! 
+
+First - how to find out what a program does? Ask `whatis`!
+
+```bash
+$ whatis man
+```
+
+--
+
+```
+man (1)              - an interface to the on-line reference manuals
+```
+
+.left-column-33[
+
+<br/>
+<br/>
+Wait... what is this? MANUALS!? OMG!?
+
+
+]
+
+.right-column-66[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/baby-story-reading-8dYmJ6Buo3lYY" src="https://media.giphy.com/media/8dYmJ6Buo3lYY/giphy.gif" width="50%">
+</p>
+]
+
+---
+
+Now we can read what zcat does!
+
+```bash
+$ man zcat
+
+```
+
+--
+
+```
+GZIP(1)                     General Commands Manual                    GZIP(1)
+
+NAME
+       gzip, gunzip, zcat - compress or expand files
+
+SYNOPSIS
+       gzip [ -acdfhklLnNrtvV19 ] [--rsyncable] [-S suffix] [ name ...  ]
+       gunzip [ -acfhklLnNrtvV ] [-S suffix] [ name ...  ]
+       zcat [ -fhLV ] [ name ...  ]
+
+DESCRIPTION
+       Gzip  reduces  the  size  of  the  named  files using Lempel-Ziv coding
+       (LZ77).  Whenever possible, each file  is  replaced  by  one  with  the
+       extension .gz, while keeping the same ownership modes, access and modi‐
+       fication times.  (The default extension is -gz for VMS,  z  for  MSDOS,
+       OS/2  FAT, Windows NT FAT and Atari.)  If no files are specified, or if
+       a file name is "-", the standard input is compressed  to  the  standard
+       output.  Gzip will only attempt to compress regular files.  In particu‐
+       lar, it will ignore symbolic links.
+
+```
+
+- To navigate:
+  - Scroll up and down with arrow keys
+  - Quit press `q` on your keyboard
+
+Scroll until you see `OPTIONS` - what does `--list` do?
+
+---
+
+# Oooooooh
+
+The option `--list`/`-l` lists 
+  - the size of a file in both compressed and uncompressed form
+  -as well as the compression ratio (how effective the 
+compression was). 
+
+--
+
+**Most programmes you will use DO have a `man` page, making this command 
+extremely useful.**.
+
+--
+
+Lets try our new found knowledge!
+
+```bash
+$ gzip -l ERR2020601.fastq.gz
+
+```
+--
+```
+         compressed        uncompressed  ratio uncompressed_name
+             217232              864983  74.9% ERR2020601.fastq
+```
+<br/>
+
+Not bad! Our file 25.1% the size of the uncompressed file would.
+
+---
+
+class: center,middle
+# The Lord of the Pipes: One command to do them all.
+
+???
+JAMES
+
+--
+
+### Piping
+
+---
+
+# Ceci n'est pas une pipe
+
+After that tangent, let's get back to our regularly scheduled program(ming)!
+
+
+
+--
+
+Now we will get familiar with the most important functionality of bash: 
+  - the concept of .huge[`|`] (a.k.a the "pipe")
+
+<p align="center">
+  <img title="Made with EZGif.com" src="../docs/.gifs/Boromir.gif" > 
+</p>
+<p align="center">
+  <img title="Source: https://tinynin.wordpress.com/2012/01/08/marioportal-warp-pipe/" src="https://tinynin.files.wordpress.com/2012/01/warppipe-copy.gif" width = "30%" >
+</p>
+
+---
+
+# Pass the parcel
+
+- A pipe passes the output of one command and gives it as input to the next. 
+
+--
+
+- It allows us to connect **multiple commands together**, 
+  - One after the other 
+  - Enables more complicated (and beautiful) actions on your files "on the fly". 
+
+--
+
+<br/>
+<br/>
+
+Lets try this out with new commands
+
+.left-column[
+- `head` 
+  - shows first 10 lines of a file
+- `tail` 
+  - shows the last 10 lines. 
+]
+.right-column[
+
+<p align="center">
+<iframe align="center" src='https://gfycat.com/ifr/MeekWarpedAsiandamselfly' frameborder='0' scrolling='no' allowfullscreen></iframe> 
+</p>
+]
+
+
+---
+
+# Tiene cabeza...
+
+We will now print the file to screen with `zcat`
+  - But pipe the output of`zcat` into `head`
+  - This will stop the print vomit 
+
+> Don't forget your auto-complete with the tab key!
+
+```bash
+$ zcat ERR2020601.fastq.gz | head
+
+```
+
+--
+
+<br/>
+
+
+We can also display more lines with the `-n` flag (short for "**n**umber of 
+lines"). To see the first 20 lines you would use 
+
+> **Bonus tip time** you can press up and down on your keyboard buttons to
+view previous commands!
+
+```bash
+$ zcat ERR2020601.fastq.gz | head -n 20
+
+```
+
+---
+
+# ...y tiene cola
+
+The same option exists for tail, note that but options are not universal! Not 
+every programme will use the same options!
+
+```bash
+$ zcat ERR2020601.fastq.gz | tail -n 4
+
+```
+
+--
+
+And you can also chain them altogether .small[_\[not unlike a human centipede!... No 
+gif here so we don't get fired]_]
+
+--
+
+```bash
+$ zcat ERR2020601.fastq.gz | head -n 20 | tail -n 4
+```
+
+The above command will print the whole file, but capture only the first 20 
+lines, before printing out the last 4 lines of these 20.
+
+<p align="center"><img title="Made with EZGif.com" src="../docs/.gifs/frodo.gif" width="30%" height="20%"></p>
+
+---
+
+# Slow down dude...
+
+But what if you wanted to view the whole file "at your own leisurely pace"
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/stroll-82abB3W2DknkY" src="https://media.giphy.com/media/82abB3W2DknkY/giphy.gif" width="20%">
+</p>
+
+We can use the tool `less`, 
+- Prints the file to screen in a controlled manner
+- Move up and down the output (per lines) with your `arrow keys`. 
+- Move up and down (per screen) with the `spacebar`.
+
+```bash
+$ zcat ERR2020601.fastq.gz | less
+
+```
+
+To quit the viewer: press "q" on your keyboard.
+
+---
+
+
+# Hold your horses... what does all this junk mean!?
+
+In practice, what was just printed on your screen is the record of a single DNA 
+molecule, which spans 4 lines of the FASTQ file. 
+
+--
+
+* The record begins with the read ID, preceded by an `@`, given by the sequencing machine
+
+--
+
+* The next line contains the actual DNA sequence of the read. 
+
+--
+
+* The third line is a separator line ('`+`'). 
+
+--
+
+* Finally, the fourth line of this record contains the base quality score for each position on the read, encoded a certain way.  (again something the sequencer)
+
+---
+
+# lol wut?
+
+.left-column[
+<br/>
+Don't worry if this makes no sense...
+]
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/reactionseditor-winona-ryder-26xBI73gWquCBBCDeY" src="https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif" width="50%">
+</p>
+
+]
+
+--
+
+The important thing is that there is a **repeated structure** in the file 
+
+.small[(in this case a collection of lines with the same structure, for each DNA molecule)]
+
+
+Why does this matter?
+
+--
+
+.left-column[
+## This means PATTERNS!
+]
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/WgO1QdDfTooxrEsfES" src="https://media.giphy.com/media/WgO1QdDfTooxrEsfES/giphy.gif" width="50%">
+</p>
+]
+
+---
+
+class: center,middle
+# The Lord of the Pipes: One command to do them all.
+
+### Word Count 
+
+.small[_\[no, not in your manuscript, don't panic!\]_]
+
+---
+
+
+# Counting
+
+.left-column[
+<br/>
+A first question a bioinformatician might have is how many DNA molecules are 
+in my file?
+]
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/l41YtZOb9EUABnuqA" src="https://media.giphy.com/media/l41YtZOb9EUABnuqA/giphy.gif" width="50%">
+</p>
+]
+
+--
+
+We can count certain attributes of a text file with `wc` 
+- which stands for "**w**ord **c**ount".
+
+--
+
+But we want lines! Give the option `-l`
+
+```bash
+$ zcat ERR2020601.fastq.gz | wc -l
+```
+
+```
+18880
+```
+
+> Example for non-geneticists: how many entries in a table do you have? 
+
+---
+
+# But DNA molecules FASTQ have four lines!
+
+How can we be lazy and avoiding doing _acutal maths_ .small[_\[eww!\]]_?
+
+--
+
+<br/>
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/WgO1QdDfTooxrEsfES" src="https://media.giphy.com/media/WgO1QdDfTooxrEsfES/giphy.gif" width="30%">
+</p>
+
+<br>
+
+<p align="center"><b>What is a common PATTERN in the file?</b></p>
+
+
+---
+
+# But DNA molecules FASTQ have four lines!
+
+> * The record begins with the read ID, preceded by an `@`, given by the sequencing machine
+
+--
+
+Lets count each line with a `@` in it!
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/season-16-the-simpsons-16x3-3orieUe6ejxSFxYCXe" src="https://media.giphy.com/media/3orieUe6ejxSFxYCXe/giphy.gif" width="50%">
+</p>
+
+
+---
+
+
+# Grep
+
+To search for a particular character or string in a text file we can use 
+
+`grep`
+
+
+This prints only lines in a file that match a certain pattern.
+
+--
+
+### For example
+
+```bash
+$ zcat ERR2020601.fastq.gz | grep @
+
+```
+
+Results in...
+
+--
+
+```
+@ERR2020601.147096 F_AHSTEUER006:166:C5UJMANXX:8:1215:14390:82061/1
+AB@BBGGGGGGGGGGGGGGGEFGGGGGGGGGGGGGFGGGGG>GGGGGGGGGGAFGGGGGGGGGGGG
+@ERR2020601.147097 F_AHSTEUER006:166:C5UJMANXX:8:1301:14633:50792/1
+@ERR2020601.147098 F_AHSTEUER006:166:C5UJMANXX:8:1210:12875:93069/1
+@ERR2020601.147099 F_AHSTEUER006:166:C5UJMANXX:8:2109:2222:68258/1
+@ERR2020601.147100 F_AHSTEUER006:166:C5UJMANXX:8:1315:17303:82366/1
+3B=@BECGGGGGGGGGGGGGGGGGGGGGGG
+```
+
+---
+
+# Close but no cigar...
+
+Unfortunately we seem to have picked up some other stuff because of the @ 
+characters in the sequence quality lines. 
+
+???
+not every line starts with "@ERR", which means we also picked up lines that happen to have a @ in the sequence quality line
+
+--
+
+We can therefore use a more specific _string_ to ensure we print stuff want.
+
+--
+
+In this case, each read ID begins with '@ERR'
+
+```bash
+$ zcat ERR2020601.fastq.gz | grep @ERR | less
+```
+
+--
+
+Scroll up and down - this looks better, doesn't it?!
+
+> Remember to press your q key to quit `less`!
+
+---
+
+## ding ding ding - Round TWO!
+
+Lets now try and count the number of read IDs, to find the number of DNA 
+molecules in our file
+
+```zcat
+$ zcat ERR2020601.fastq.gz | grep @ERR | wc -l
+
+```
+--
+```
+4720
+```
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/cheer-cheering-11sBLVxNs7v6WA" src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif">
+</p>
+
+> That's the right number, trust us ;)
+
+---
+
+class: center,middle
+# Now you're thinking with portals! 
+### Symlinks and their usefulness 
+
+???
+THISEAS 
+
+---
+
+class: centre
+
+## Symlinks stands for symbolic links.
+<div class="vertical-center">
+  <img title="Source: https://media.giphy.com/media/qXexawbjsqK88/giphy.gif" src="https://media.giphy.com/media/qXexawbjsqK88/giphy.gif" width="150%">
+</div>
+???
+You have probably seen these countless of times before! They are what windows calls "shortcuts", so your windows Desktop is probably full of em.
+
+---
+
+####Symlinks can be portals to faraway places!
+<p align="center"><img title="Source: https://ritorical.deviantart.com/art/Poor-messing-with-a-portal-gun-GIF-501341055" src="https://orig00.deviantart.net/784b/f/2014/354/a/3/poor_messing_with_a_portal_gun__gif__by_ritorical-d8ahh8f.gif" width="25%">
+<img title="Source: https://i.gifer.com/Me7i.gif" src="https://i.gifer.com/Me7i.gif" width="50%"></p>
+
+???
+Making a symlink to a distant folder can make it easy to travel there with cd!
+--
+
+#### Or multiple names for the same file or folder!
+<p align="center">
+  <img title="Source: https://media.giphy.com/media/z9qrawQhOARdC/giphy.gif" src="https://media.giphy.com/media/z9qrawQhOARdC/giphy.gif" width="65%">
+</p>
+
+???
+They are a great way to have a file or folder in two places at once without copying it over. 
+
+---
+
+# Making symlinks
+First create a new directory:
+```bash
+$ mkdir ~/BareBonesBash/FastQ.Portals
+$ cd ~/BareBonesBash/FastQ.Portals
+
+```
+--
+
+`ln` is short for "__l__i__n__k" <br>
+`-s` option for a __s__ymbolic link (i.e. a shortcut).
+
+```bash
+$ ln -s ~/BareBonesBash/ERR2020601.fastq.gz .
+$ ls
+```
+```
+ERR2020601.fastq.gz
+```
+
+> Always use an ABSOLUTE path with `ln`!
+
+???
+Always use an ABSOLUTE path for the source file
+
+Make sure you include the `.` in the `ln `command to indicate 'HERE'
+
+
+---
+
+# How do I know that is a symlink and not a file?
+
+Option `-l` for `ls`. Gives "__l__ong" information.
+
+```bash
+$ ls -l
+``` 
+```
+lrwxrwxrwx 1 thiseas teaching 19 Nov 16 19:52 ERR2020601.fastq.gz ->
+~/BareBonesBash/ERR2020601.fastq.gz
+```
+
+???
+This tells us that the symmlink ERR2020601.fastq.gz POINTS to ~/BareBonesBash/ERR2020601.fastq.gz
+
+--
+
+<br>
+
+--------
+
+<br>
+
+You can use the symlink just like the orginal file!
+```bash
+$ zcat ERR2020601.fastq.gz | head -n 20 | tail -n 4
+
+```
+???
+The command looks the same since we kept the file name, but it uses the symlink in the ~/BareBonesBash/FastQ.Portals directory, instead of the orginal file.
+
+---
+
+class: center,middle
+# Laziness 101: Minimising our work by maximising the work of the computer
+
+--
+
+### Text Editing in the Terminal
+
+???
+JAMES
+---
+
+# One sample ain't enough
+
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/reaction-FyKfqRxVbzciY" src="https://media.giphy.com/media/FyKfqRxVbzciY/giphy.gif">
+</p>
+
+Lets get 7 more!
+
+???
+
+One sample rarely gets you the high impact paper your supervisor lusts over anymore
+
+--
+
+But typing the same `wget` command over and over isn't being lazy!
+
+--
+
+Instead, we can supply `wget` a text file, with the link to each new FASTQ file.
+
+```bash
+$ wget -i <LIST_OF_URLS>.txt
+```
+---
+
+# Text editing
+
+.left-column-66[
+But how can we make this file? 
+]
+
+--
+
+.right-column-33[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/gameboy-nano-xfRgtflLgJtkY" src="https://media.giphy.com/media/xfRgtflLgJtkY/giphy.gif" width = "100%">
+</p>
+
+]
+
+
+
+.left-column-66[
+If you're absolutely insane you may look up `vim` 
+.small[_\[Thiseas' poison\]_]
+
+Or we can use `nano` which is much more user friendly.
+]
+
+--
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+- `nano` is a text editor
+  - Similar to `TextMate`, `gedit` or `notepad`
+  - But runs in your terminal
+  - Main difference: how you 'save', 'close' etc.
+  - These are controlled with special key combinations 
+      - e.g. ctrl + c to copy text in word
+
+
+---
+
+# Lets do eet!
+
+So open up the program with
+
+```bash
+$ nano
+```
+--
+
+- Try typing something!
+- Look at the bottom of the window
+  - These correspond to different commands (save, exit, etc.)
+  - `^` corresponds to your `ctrl` or `cmd` keys on your keyboard
+
+- Move around with your arrow keys.
+
+--
+
+- To save the contents of your file
+  1. Initiate exit with `ctrl + x`
+  2. You will be prompted to 'Save modified buffer'.
+  3. Press `y` on your keyboard to agree
+  4. Set the file name as `~/BareBonesBash/Ftp.Link.txt`
+  5. Press `enter` to save
+
+All done!
+
+---
+
+# Not ANOTHER typo!?
+
+Check that the file was successfully generated.
+
+```bash
+$ cd ~/BareBonesBash/
+$ ls
+
+```
+--
+
+Great! There is a file there! But OH NO! We want to have multiple _links_ not a Link!
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/the-legend-of-zelda-link-funny-RkymcOKhoCRTG" src="https://media.giphy.com/media/RkymcOKhoCRTG/giphy.gif" width="45%">
+  <img title="Source: https://giphy.com/gifs/link-the-legend-of-zelda-NVBR6cLvUjV9C" src="https://media3.giphy.com/media/NVBR6cLvUjV9C/giphy.gif" width="30%">
+</p>
+
+Lets remove that file, and start again. 
+
+---
+
+# Delete...
+
+.left-column[
+So far, we learnt `rmdir` to remove a directory. 
+
+To remove a file, we can instead use `rm` for – you guessed it! – **r**e**m**ove. 
+]
+
+--
+
+.right-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/trash-desktop-delete-pHWPC1N5IZGVTfRgsN" src="https://media.giphy.com/media/pHWPC1N5IZGVTfRgsN/giphy.gif">
+</p>
+]
+
+.left-column[
+
+```bash
+$ rm Ftp.Link.txt
+$ ls
+```
+<br/>
+
+And it's gone!
+]
+
+---
+
+# Anyway...
+
+Now we've fixed our typo 
+
+1. Open `nano` again
+2. Go to [https://tinyurl.com/BBB-FtpLinks](https://tinyurl.com/BBB-FtpLinks) in your .small[\[_real life_\]] internet browser
+3. Copy the text on the webpage
+4. .small[\[_back down the bash rabbit hole_\]] paste the text into `nano`
+
+> Note the `#`, this means the line is **commented out** as we've already downloaded this file!
+
+???
+This is an example of a programme that understands # as a comment in its input!
+
+--
+
+.left-column-66[
+So again to recap exiting and save a file in nano we do the following dance: 
+  1. Initiate exit with `ctrl + x`
+  2. You will be prompted to `Save modified buffer`.
+  3. Press `y` on your keyboard to agree
+  4. Set the file name as `~/BareBonesBash/Ftp.Links.txt`
+  5. Press `enter` to save
+]
+
+.right-column-33[
+  <p align="center">
+  <img title="Source: https://giphy.com/gifs/dancing-dance-star-wars-6fScAIQR0P0xW" src="https://media.giphy.com/media/6fScAIQR0P0xW/giphy.gif">
+</p>
+]
+
+---
+
+# Did it save?
+
+How can we check that the links saved correctly?
+
+--
+
+<p align = "center">
+<img title="Source: https://giphy.com/gifs/meow-descriptive-noise-x4YHSKRpYQhLq" src="https://media.giphy.com/media/x4YHSKRpYQhLq/giphy.gif" width = "50%"> 
+</p>
+
+
+```bash
+$ cat ~/BareBonesBash/Ftp.Links.txt
+
+```
+
+--
+
+```
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/009/ERR2020609/ERR2020609.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/001/ERR2020611/ERR2020611.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/007/ERR2020567/ERR2020567.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/005/ERR2020565/ERR2020565.fastq.gz
+#ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/001/ERR2020601/ERR2020601.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/003/ERR2020613/ERR2020613.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/008/ERR2020618/ERR2020618.fastq.gz
+ftp.sra.ebi.ac.uk/vol1/fastq/ERR202/007/ERR2020617/ERR2020617.fastq.gz
+```
+
+---
+
+# Zoom zoom zoom!
+
+Now to download all the files stored in the URLs. IN ONE GO! 
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/aliens-oAEoEC7vdf1QI" src="https://media.giphy.com/media/oAEoEC7vdf1QI/giphy.gif" width="30%">
+</p>
+
+--
+
+As before: 
+  - give a file to `wget` with URLs with the flag `-i`, for "**i**nput". 
+
+```bash
+$ cd ~/BareBonesBash
+$ wget -i ~/BareBonesBash/Ftp.Links.txt
+
+```
+
+<p align="center"><b> One at a time!</b> .small[_\[Last time we DDoS'd the ENA\]_ 😅] </p>
+
+---
+
+class: center,middle
+# Laziness 101: Minimising our work by maximising the work of the computer
+
+### What is a variable anyway?
+
+???
+THISEAS
+---
+
+# Tangent Nr. 2
+
+How not feel lonely - make the computer talk back to you with `echo`
+
+```bash
+$ echo Hello World!
+```
+
+--
+
+```
+Hello World!
+```
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/SpongeBobMovie-spongebob-squarepant-PnUatAYWMEMvmiwsyx" src="https://media.giphy.com/media/PnUatAYWMEMvmiwsyx/giphy.gif" width = "30%">
+</p>
+
+---
+
+# Home sweet home...
+
+A variable is a container
+  - Begins with `$` with no space between some characters
+  - The name of the variable stays the same, the contents _changes_
+
+--
+
+.left-column-33[
+Try `echo`ing HOME
+
+```bash
+$ echo HOME
+```
+]
+
+--
+
+.left-column-33[
+```
+HOME
+```
+]
+
+--
+
+.right-column-66[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/home-explosm-h4BLlvyUM2CVFK683U" src="https://media.giphy.com/media/h4BLlvyUM2CVFK683U/giphy.gif" width = "80%">
+</p>
+]
+
+--
+
+.left-column-33[
+Now try `echo`ing home as a variable 
+
+```bash
+$ echo $HOME
+```
+]
+
+--
+
+.left-column-33[
+```
+/home/james/
+```
+]
+
+---
+
+# Klaxon alert!
+
+- Variables as the one above are called **environment variables**
+
+--
+
+- Typically in `$ALL_CAPS`
+
+--
+
+- Defined by your default computer environment
+
+--
+
+- Should generally **NOT** be changed on a whim 
+
+.small[\[_even though the temptation might be a whim away. A whim away... A-whim-away..._\].]
+
+<p align="center"><img title="Source: http://en.webfail.com/e91115df851" src="http://cdn.webfail.com/upl/img/e91115df851/post2.jpg" width="50%"></p>
+
+---
+
+# Making your own
+
+.left-column[
+- To assign your own variable, 
+  - Write variable name
+  - Then the `=` symbol. 
+  - And the contents of the variable
+]
+
+--
+
+
+.left-column[
+
+- Any variable can be easily overwritten, 
+  - This is why it is so useful
+  - Change contents, not your code!
+
+]
+
+--
+
+<p align="center">
+  <img title="Source: http://visitgreece-gr.tumblr.com/" src="https://78.media.tumblr.com/04ac7d0699ac494a7ccb4fc9316bbc0a/tumblr_oo77m9RLgv1uwr1s7o1_500.gif" width="25%">
+</p>
+<p align="center"><i>And now for a trip...</i></p>
+
+---
+
+
+```bash
+$ GreekFood=4            #Here, 'GreekFood' is a number.
+$ echo "Greek food is $GreekFood people who want to know what heaven tastes like."
+```
+
+--
+
+```
+Greek food is 4 people who want to know what heaven tastes like.
+```
+
+--
+
+```bash
+$ GreekFood=delicious   #Now we overwrite that number with a word (or a "string" of characters).
+$ echo "Everyone says that Greek food is $GreekFood."
+```
+--
+
+```
+Everyone says that Greek food is delicious.
+
+```
+
+--
+
+```bash
+$ GreekFood="Greek wine" #We can overwrite 'GreekFood' again, but when there is a space in our string, we need quotations.
+$ echo "The only thing better than Greek food is $GreekFood!"
+```
+
+--
+
+```
+The only thing better than Greek food is Greek wine!
+```
+
+--
+
+```bash
+$ GreekFood=7 #And, of course, we can overwrite with a number again too.
+$ echo "I have been to Greece $GreekFood times already this year, for the food and wine!"
+```
+
+--
+
+```
+I have been to Greece 7 times already this year, for the food and wine!
+
+```
+
+---
+
+class: center,middle
+# Laziness 101: Minimising our work by maximising the work of the computer
+
+### Loop de Loop?
+
+---
+
+# I'm running out of bad titles...
+
+Back to being lazy 
+- How to make 7 symlinks, without writing the command 7 times?
+
+--
+
+We do this with a `for` loop.
+- for each element in a list, do something
+
+--
+
+.left-column[
+
+In pseudo-code
+
+```
+## Don't copy this, it will not work.
+for every scientist:
+  Order another pizza
+done
+```
+]
+
+.right-column[
+
+<p align="center">
+  <img title="Source: https://tenor.com/view/izza-oprah-eatwhatyouwant-gif-4149888" src="https://media1.tenor.com/images/5ef4336be26e478431f85b349ec6bd34/tenor.gif?itemid=4149888" width="60%">
+</p>
+]
+
+---
+
+# Enough pizza, back to mammoths!
+
+- Our loop:
+  - For a given list of files
+  - Do a symbolic link command for each one
+  - Stop when there are no more files
+
+--
+
+Lets first check this will work as we expect...
+
+```bash
+$ for fastq in ERR2020609.fastq.gz ERR2020611.fastq.gz ERR2020567.fastq.gz ERR2020565.fastq.gz ERR2020613.fastq.gz ERR2020618.fastq.gz ERR2020617.fastq.gz; do 
+>    echo "ln -s ~/BareBonesBash/$fastq ~/BareBonesBash/FastQ.Portals"
+> done
+```
+```
+ln -s ~/BareBonesBash/ERR2020565.fastq.gz ~/BareBonesBash/FastQ.Portals
+ln -s ~/BareBonesBash/ERR2020567.fastq.gz ~/BareBonesBash/FastQ.Portals
+ln -s ~/BareBonesBash/ERR2020601.fastq.gz ~/BareBonesBash/FastQ.Portals
+[...]
+```
+
+> This is a common and useful way of _debugging_ your code to identify mistakes!
+
+---
+
+# It's ALIVE!
+
+Now lets try this live byt removing the 'echo'!
+
+```bash
+$ for fastq in ERR2020609.fastq.gz ERR2020611.fastq.gz ERR2020567.fastq.gz ERR2020565.fastq.gz ERR2020613.fastq.gz ERR2020618.fastq.gz ERR2020617.fastq.gz; do 
+>    ln -s ~/BareBonesBash/$fastq ~/BareBonesBash/FastQ.Portals
+> done
+```
+???
+Notice how the prompt changes from `$` to `>`. This means that your command still expects more to be complete. in this case it is completed when `done` is encountered.
+
+In otherwords - `do` is a command in-itself. It still requires input, so untill you tell the command it is finished, it will keep waiting until you tell it what to do. 
+--
+
+**Bonus tip time!** `ls` will also accept a path to look into!
+
+```bash
+$ ls -l FastQ.Portals/
+
+```
+
+--
+
+```
+total 0
+lrwxrwxrwx 1 james james 47 Nov 16 16:25 ERR2020565.fastq.gz -> /home/james/BareBonesBash/ERR2020565.fastq.gz
+lrwxrwxrwx 1 james james 47 Nov 16 16:25 ERR2020567.fastq.gz -> /home/james/BareBonesBash/ERR2020567.fastq.gz
+lrwxrwxrwx 1 james james 47 Nov 16 16:25 ERR2020609.fastq.gz -> /home/james/BareBonesBash/ERR2020609.fastq.gz
+[...]
+
+```
+
+---
+
+## Hold up...!
+
+We're meant to be lazy! Not writing the name of each FASTQ file!
+
+--
+
+Instead we can use **wildcards** 
+ - "refers to a character that can be substituted for zero or more characters in a string". 
+ - In bash, the wildcard character is the asterisk (`*`) 
+.small[_\[Not to be confused with Asterix, James!)]_]. 
+
+<p align="center">
+  <img title="Source: https://www.garethjmsaunders.co.uk/2008/01/29/asterix-and-asterisk/" src="https://www.garethjmsaunders.co.uk/wp-content/uploads/2008/01/asterix_or_asterisk.gif" width="30%"><br /><i> [.small[Take note James...]] </i>
+</p>
+
+---
+
+# This means: SHORTCUTS!
+
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/mario-kart-shortcut-rainbow-road-1385h22r1k6sIU" src="https://media.giphy.com/media/1385h22r1k6sIU/giphy.gif" width="20%">
+</p>
+
+In the context of a loop, `*` tells bash to perform an action on all items in
+a directory!
+
+--
+
+```bash
+$ for fastq in ~/BareBonesBash/*; do
+>    ln -s $fastq ~/BareBonesBash/FastQ.Portals
+> done
+
+```
+--
+
+Don't want literally everything? Then specify all files beginning with ERR!
+
+```bash
+$ for fastq in ~/BareBonesBash/ERR*; do
+>    ln -s $fastq ~/BareBonesBash/FastQ.Portals
+> done
+
+```
+
+???
+
+In the context of a loop, a wildcard tells bash the loop to perform an action on ALL items in a directory, that match the given criterion. 
+
+If we want to create a symlink (with `ln -s`) for every item within the 
+`~/BareBonesBash` directory, and place that symlink within the 
+`~/BareBonesBash/FastQ.Portals` directory, we could use: 
+
+---
+
+# Combine with everything!
+
+A wildcard can be added anywhere! 
+
+Making the computer to do the hard work for you.
+
+.left-column-66[
+```bash
+$ for fastq in ~/BareBonesBash/ERR*.gz; do
+>    gzip -l $fastq
+> done
+
+```
+]
+
+.right-column-33[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/tinder-automation-tinderbot-3rgXByefj5zvCcodOM" src="https://media.giphy.com/media/3rgXByefj5zvCcodOM/giphy.gif" width="90%">
+</p>
+]
+
+--
+
+# Over to you
+
+Look inside `~/BareBonesBash/FastQ.Portals`
+  - Are only your FASTQ files inside?
+
+--
+
+**Try writing your own loop using `for`, `*`, and `rm` to remove ONLY the non-FASTQ files!**
+
+
+???
+
+If you need to be more specific with your loop, you can also use the wildcard
+with some other characters. 
+
+For example, `ERR*` would mean perform a command on every file that begins with 
+ERR, regardless of what comes after ERR. 
+
+Finally, we can use characters AFTER the wildcard as well, to only pick up 
+files that have a certain suffix as well as prefix (e.g. `ERR*.gz` will find 
+all files that begin with `ERR` and end with `.gz`, regardless of what (if 
+anything) comes between the two).
+
+
+As a final practice, have a look inside your `~/FastQ.Portals` directory. 
+
+You might notice that you have also symlinks to `FastQ.Portals` and `Ftp.Links.txt`
+as well as our FastQ files. 
+
+These came in our previous `ln -s` loop, as we 
+used the wildcard for _everything_ in `~/BareBonesBash`. 
+
+---
+
+class: center,middle
+
+# The road so far
+
+???
+JAMES
+---
+
+# Woohoo!
+
+Well done **you** for putting up with an inordinate amount of internet memes, gifs, terrible pop-culture, and video game references!
+
+<br/>
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/csi-miami-horatio-caine-xPGkOAdiIO3Is" src="https://media1.giphy.com/media/xPGkOAdiIO3Is/giphy.gif" width="30%"> 
+  <img title="Source: https://giphy.com/gifs/swag-80s-sunglasses-62PP2yEIAZF6g" src="https://media.giphy.com/media/62PP2yEIAZF6g/giphy-downsized.gif" width="40%">
+</p>
+<br/>
+--
+
+You should now feel more comfortable:
+  - How to move around using the Terminal, 
+  - Using basic commands to view, create, and manipulate files and directories.
+  - Understanding what a `for` loop is
+
+
+---
+
+# Accessing ~~Google~~ the hive-mind
+
+<br/>
+<p align="center">
+  <img title="Source: https://tenor.com/view/hitchhikers-guide-to-the-galaxy-leigh574-question-understand-wisdom-gif-12472040.gif" src="https://tenor.com/view/hitchhikers-guide-to-the-galaxy-leigh574-question-understand-wisdom-gif-12472040.gif" width="80%">
+</p>
+
+???
+THISEAS
+---
+
+# Knowing the question
+
+* ALWAYS include the name of the language in your query.
+
+.left-column[
+<p align="center" class="center">
+  <img src=".images/How_to_cat.png" width="100%">
+</p>
+]
+
+.right-column[
+<p align="center" class="center">
+  <img src=".images/How_to_cat_bash.png" width="100%">
+</p>
+]
+???
+It can make a HUGE difference! Also, you probably don't want to learn how to do it in a different language (yet).
+
+---
+
+# Knowing the question
+
+* ALWAYS include the name of the language in your query.
+
+* Broaden your question.
+<br>
+<br>
+
+----
+
+.left-column-33[
+"Hey Google! How to set __X__ to __4__ in bash?"
+]
+
+.right-column-33[
+"Hey Google! How to set a __variable__ to an __integer__ in bash?"
+]
+<br>
+<br>
+<br>
+<br>
+<br>
+
+----
+
+---
+
+# Knowing the question
+
+* ALWAYS include the name of the language in your query.
+
+* Broaden your question.
+
+* When you are more familiar, use fancy programmer lingo to make google think you know what you are talking about. .small[_[We still don't!]_]
+
+__All the cool hackers say:__
+ - "_string_" and not "_text_".
+ - "_float_" and not "_decimal_".
+ - Some of these terms can be language specific.
+
+---
+
+class: center,middle
+
+# The Cleanup Crew
+
+???
+JAMES
+
+---
+
+# Enter the janitor!
+
+Despite being lazy - you should ALWAYS keep your room tidy.
+
+- This stops losing files
+- Prevents getting lost in a maze of directories
+- Accidently permanently deleting a days worth of work .small[
+
+\[_don't ask how many times this has happened._\]]
+
+--
+
+.left-column[
+Lets remove:
+  - the  `~/BareBonesBash` directory 
+  - **all of its contents**. 
+
+```bash
+$ cd ~     # Don't delete a directory 
+         # while we are still in it! 
+$ rm -r ~/BareBonesBash
+```
+]
+
+--
+
+.right-column[
+<p align="center">
+  <img title="Source: https://i.imgur.com/lcxyE0D.gif" src="https://i.imgur.com/lcxyE0D.gif" width="80%">
+</p>
+]
+
+---
+
+# Thanks to...
+
+- Stephan Schiffels 
+  - for loaning us his cluster and the cool passwords
+- Aida Andrades Valuteña 
+  - for suggestions/ideas 
+  - telling us off.
+
+- [Google](https://google.com)
+  - Pretty much teaching all of this
+
+- [giphy](https://giphy.com/), [tenor](https://tenor.com)
+  - For procrastination
+
+- [fontawesome.com](https://fontawesome.com/) 
+  - for icons for making the logo
+
+???
+THISEAS
+---
+
+# Next time
+
+.left-column[
+<p align="center">
+  <img title="Source: https://giphy.com/gifs/kimmyschmidt-unbreakable-kimmy-schmidt-3o72FiJGth3gp4jhUA" src="https://media.giphy.com/media/3o72FiJGth3gp4jhUA/giphy.gif" width="70%">
+</p>
+
+
+
+<p align="center" >
+  <i>.small[[HAHAHAHA! jk.]]</i>
+</p>
+]
+
+.right-column[
+ETA: Febuary 2020
+* advanced echo
+* rev
+* cut
+* find
+* awk
+* sed
+* while loops
+* if statements
+
+]
+
+---
+
+# Homework
+
+If you want **ECTS points** (0.5 for both sessions)
+
+1. Make two directories - `data/` and `analysis/`
+2. Download a small text file (e.g. csv/tsv/txt) no more than 20MB into `data/`
+3. Make a symlink of your text file into `analysis/`
+4. Perform some analysis based on a pattern in the file (e.g. but not only `wc`)
+5. Google a NEW command for a second analysis we haven't taught you today
+
+> If you do not have Linux or Mac OSX, perform the following tasks on today's server!
+
+--
+
+Please document the procedure __step by step__ in a text file 
+  - Include **comments** describing **why** you did each step. 
+  - Include the search terms you used when searching for your new command.
+
+--
+
+Email this documentation file to us before **December 19th** with a file named 
+
+`<SURNAME>_<FIRSTNAME>-BBB1_<DATE>.txt`.
+
+???
+JAMES
+
+---
+
+# After the break
+
+- Quiz!
+  - www.kahoot.it
+
+- Questions?
+- Example problem solving from the live audience!
+
+???
+
+Set up thing: kahoot.it
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+      /*ratio: "16:9", from: https://github.com/gnab/remark/issues/86#issuecomment-36157045*/
+      slideNumberFormat: (current, total) => `
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: ${current/total*100}%">
+          </div>
+        </div>
+      `
+    });
+    </script>
+  </body>
+</html>
