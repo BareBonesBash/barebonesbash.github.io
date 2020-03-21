@@ -1,6 +1,12 @@
 # (Bespoke)BareBonesBash(BroughtByBlissfullyBaffledBioinformaticians)
-A basic Bash tutorial by [@jfy133](https://github.com/jfy133), [@TCLamnidis](https://github.com/TCLamnidis/) and [@aidaanva](https://github.com/aidaanva).
-<p align="center"><img title="Source: https://giphy.com/gifs/wwe-the-shield-dean-ambrose-seth-rollins-2ce2NqZPa04PZvT1Xn" src="https://media.giphy.com/media/2ce2NqZPa04PZvT1Xn/giphy.gif" width="40%"></p>
+Basic introductions to the command line by  
+
+
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[@TCLamnidis](https://github.com/TCLamnidis/) &nbsp; [@jfy133](https://github.com/jfy133) &nbsp;&nbsp; [@aidaanva](https://github.com/aidaanva).
+
+<p align="center">
+    <img src="_images/bbb_all.svg" width="30%">
+</p>
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><p align="center"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />All written content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
@@ -25,3 +31,7 @@ format of the same content to help other trainers.
 
 We currently have one session, and will soon be expanded to two for slightly
 more advanced topics. See the sidebar for each session.
+
+## Acknowledgments
+
+Thanks to [Zandra Fagernäs](https://twitter.com/ZandraSelina?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) for the portraits!

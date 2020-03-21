@@ -6,7 +6,8 @@
 
 * Gentle introductions to the command line and bash
 * gif-tastic!
-Scroll down for more information
+
+Scroll down for more information or jump straight to it:
 
 [Basic](bbb1/README.md)
 [Boosted](bbb2/README.md)
