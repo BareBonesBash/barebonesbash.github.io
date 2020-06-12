@@ -1,6 +1,6 @@
 # barebonesbash.github.io 
 
-Repository for the [barebonesbash](https://https://barebonesbash.github.io/) website.  
+Repository for the [barebonesbash](https://barebonesbash.github.io/) website.  
 Built with [Docsify](https://docsify.js.org).
 
 
