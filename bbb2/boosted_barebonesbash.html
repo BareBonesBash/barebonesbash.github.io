@@ -527,8 +527,9 @@ $ wget git.io/Boosted-BBB-meta
 - How to **move** a something e.g. file into a directory?
 
 ```bash
-$ mv Boosted-BBB-meta  boosted_barebonesbash
+$ mv Boosted-BBB-meta  boosted_barebonesbash/Boosted-BBB-meta.tsv
 ```
+> `mv` can both move and rename! It even does these simultaneously!
 
 ---
 
@@ -556,7 +557,7 @@ $ wget git.io/Boosted-BBB-meta
 - How to **move** a something e.g. file into a directory?
 
 ```bash
-$ mv Boosted-BBB-meta  boosted_barebonesbash
+$ mv Boosted-BBB-meta  boosted_barebonesbash/Boosted-BBB-meta.tsv
 ```
 
 .left-column[
@@ -587,10 +588,10 @@ $ ls -l
 - What's **inside** a (text) file?
 
 ```bash
-$ cat Boosted-BBB-meta
-$ head Boosted-BBB-meta
-$ tail Boosted-BBB-meta
-$ less Boosted-BBB-meta
+$ cat Boosted-BBB-meta.tsv
+$ head Boosted-BBB-meta.tsv
+$ tail Boosted-BBB-meta.tsv
+$ less Boosted-BBB-meta.tsv
 
 ```
 
@@ -600,7 +601,7 @@ $ less Boosted-BBB-meta
 - How to **search inside** a text file?
 
 ```bash
-$ cat Boosted-BBB-meta| grep 'dog' | wc -l
+$ cat Boosted-BBB-meta.tsv | grep 'dog' | wc -l
 
 ```
 
@@ -609,7 +610,7 @@ $ cat Boosted-BBB-meta| grep 'dog' | wc -l
 > Tip: Be _lazy_; No need for `cat`!
 
 ```bash
-$ grep 'dog' Boosted-BBB-meta | wc -l
+$ grep 'dog' Boosted-BBB-meta.tsv | wc -l
 
 ```
 
