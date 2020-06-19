@@ -516,10 +516,8 @@ Some people in homework had one `mkdir` command for each directory they made, th
 
 - How to **download** a file?
 
-**TODO: UPDATE LINK!!!**
-
 ```bash
-$ wget https://github.com/TCLamnidis/BareBonesBash/raw/master/data/NHM/data.csv
+$ wget git.io/Boosted-BBB-meta
 ```
 > Tip: If using a mac use 'curl -O' instead!
 
@@ -529,7 +527,7 @@ $ wget https://github.com/TCLamnidis/BareBonesBash/raw/master/data/NHM/data.csv
 - How to **move** a something e.g. file into a directory?
 
 ```bash
-$ mv data.csv  boosted_barebonesbash
+$ mv Boosted-BBB-meta  boosted_barebonesbash
 ```
 
 ---
@@ -545,7 +543,7 @@ $ mkdir boosted_barebonesbash
 ]
 
 .right-column[
-> **Tip:** One command, multiple directories!
+> **Tip:** You can specify multiple directories in one command!
 ]
 
 - How to **download** a file?
@@ -553,11 +551,12 @@ $ mkdir boosted_barebonesbash
 ```bash
 $ wget git.io/Boosted-BBB-meta
 ```
+> Tip: If using a mac use 'curl -O' instead!
 
 - How to **move** a something e.g. file into a directory?
 
 ```bash
-$ mv data.csv  boosted_barebonesbash
+$ mv Boosted-BBB-meta  boosted_barebonesbash
 ```
 
 .left-column[
@@ -588,32 +587,32 @@ $ ls -l
 - What's **inside** a (text) file?
 
 ```bash
-$ cat data.csv
-$ head data.csv
-$ tail data.csv
-$ less data.csv
+$ cat Boosted-BBB-meta
+$ head Boosted-BBB-meta
+$ tail Boosted-BBB-meta
+$ less Boosted-BBB-meta
 
 ```
 
 --
 
-.left-column[
 - How to **combine** tools?
+- How to **search inside** a text file?
 
 ```bash
-$ cat data.csv | grep '|' | wc -l
+$ cat Boosted-BBB-meta| grep 'dog' | wc -l
 
 ```
-]
+
 --
-.right-column[
-- **Tip** Be _lazy_; don't always need `cat`!
+
+> Tip: Be _lazy_; No need for `cat`!
 
 ```bash
-$ grep '|' data.csv | wc -l
+$ grep 'dog' Boosted-BBB-meta | wc -l
 
 ```
-]
+
 
 ???
 Remember we want to be lazy and efficient. While it is sometimes more 'readable', you don't need to cat every file into every program. Almost all programs accept a file by default.
@@ -622,26 +621,14 @@ The latter means 1) less typing and 2) less computational resources
 
 --
 
-.left-column-66[
-- How do we **search inside** a text file?
-]
-
-.right-column-33[
-<p align="center">
-  <img title="Source: https://giphy.com/gifs/netflix-orange-is-the-new-black-oitnb-l4FGndnGHA5oA8sX6" src="https://media.giphy.com/media/l4FGndnGHA5oA8sX6/giphy.gif"  width=70% >
-</p>
-]
-
---
-
-.left-column-66[
 - How do I **edit** a file?
+
 ```bash
 $ nano data.csv
 ```
 > To exit without saving any changes: ctrl + x
 
-]
+
 
 
 ---
