@@ -1365,73 +1365,142 @@ Technically, all the wildcards you have used are regex!
 # Regex Basics
 - `.` : match any character
 ```{bash}
-
+grep '.ear'
 ```
---
-
+```
+pear
+bear
+```
+---
+# Regex Basics
+- `.` : match any character
 - `[]`: match range of characters within []
-
---
-
-
+```{bash}
+grep 'p[iea]r' regex.txt
+```
+```
+pir
+per
+par
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
---
-
-
-
-
+```{bash}
+grep 'p[^iea]r' regex.txt
+```
+```
+pur
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
---
-
-
-
-
-
-- `+`: match 1 or more of the preceding items
---
-
-
-
-
-
-
-
-- `?`: match 0 or 1 of the preceding items
---
-
-
-
-
-
-
-
-
+```{bash}
+grep 'be*r' regex.txt
+```
+```
+beer
+br
+ber
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
+- `*`: match 0 or more of the preceding items
 - `\`: skip character
---
-
-
-
-
-
-
-
-
-
-
+```{bash}
+grep 'be\*r' regex.txt
+```
+```
+be*r
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
+- `*`: match 0 or more of the preceding items
+- `\`: skip character
+- `+`: match 1 or more of the preceding items
+```{bash}
+grep 'be\+r' regex.txt
+```
+```
+beer
+ber
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
+- `*`: match 0 or more of the preceding items
+- `\`: skip character
+- `+`: match 1 or more of the preceding items
+- `?`: match 0 or 1 of the preceding items
+```{bash}
+grep 'be\?r' regex.txt
+```
+```
+br
+ber
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
+- `*`: match 0 or more of the preceding items
+- `\`: skip character
+- `+`: match 1 or more of the preceding items
+- `?`: match 0 or 1 of the preceding items
 - `^`: beginning line
---
-
-
-
-
-
-
-
-
-
-
+```{bash}
+grep '^[rb]\+' regex.txt
+```
+```
+bear
+beer
+br
+ber
+be*r
+rear
+```
+---
+# Regex Basics
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
+- `*`: match 0 or more of the preceding items
+- `\`: skip character
+- `+`: match 1 or more of the preceding items
+- `?`: match 0 or 1 of the preceding items
+- `^`: beginning line
 - `$`: end of the line
-
+```{bash}
+grep 'r$' regex.txt
+```
+```
+pear
+pier
+pir
+per
+par
+pur
+bear
+beer
+br
+ber
+be*r
+rear
+```
 ???
 So if we want to match a specific set of characters, that always follow a `.` and precede the end of the line, which regex characters do we need?
 
