@@ -1363,14 +1363,26 @@ Technically, all the wildcards you have used are regex!
 
 ---
 # Regex Basics
+.left-column[
 - `.` : match any character
 ```{bash}
 grep '.ear'
 ```
-```
-pear
-bear
-```
+]
+.right-column[
+**pear**
+pier
+pir
+per
+par
+pur
+**bear**
+beer
+br
+ber
+be\*r
+**rear**
+]
 ---
 # Regex Basics
 - `.` : match any character
@@ -1379,9 +1391,20 @@ bear
 grep 'p[iea]r' regex.txt
 ```
 ```
-pir
-per
-par
+.right-column[
+pear
+pier
+**pir**
+**per**
+**par**
+pur
+bear
+beer
+br
+ber
+be\*r
+rear
+]
 ```
 ---
 # Regex Basics
