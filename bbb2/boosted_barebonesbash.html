@@ -1605,7 +1605,7 @@ Which Regex would you use to find all the files ending with .JPG??
 --
 
 ```bash
-$ find awesome_gif_collection/ -type f -name "*.JPG"
+$ find Boosted-BBB/ -type f -name "*.JPG"
 ```
 
 ???
@@ -1617,10 +1617,10 @@ So if we want to match a specific set of characters, that always follow a `.` an
 
 To convert all suffixes in the directory to lowercase characters:
 ```bash
-$ rename 's/\.GIF$/.gif/' *
+$ find Boosted-BBB/ -type f -name "*.JPG" | rename 's/\.JPG$/.jpg/'
 ```
 
-No for loop needed!
+No for loop needed (yay for pipes!)!
 
 The expression given to `rename` has three parts, separated by `/`
 
@@ -1651,8 +1651,8 @@ Optionally you can specify option after the final `/`. For e.g. putting a `g` th
 
 Ok, so we can now use find to see all the new and pretty filepaths:
 ```bash
-$ suffix="gif"
-$ find awesome_gif_collection/ -type f -name "*${suffix}"
+$ suffix="jpg"
+$ find Boosted-BBB/ -type f -name "*${suffix}"
 ```
 <p align="center">
   <img src="https://media.giphy.com/media/yJFeycRK2DB4c/giphy.gif
@@ -1755,8 +1755,8 @@ It is also possible to combine streams, but we won't get into that here.
 We can get a list of all the file names by redirecting the `stdout` of the `find` command.
 
 ```bash
-$ suffix="gif"
-$ find awesome_gif_collection/ -type f -name "*${suffix}" > File_names.txt
+$ suffix="jpg"
+$ find Boosted-BBB/ -type f -name "*${suffix}" > File_names.txt
 ```
 
 --
