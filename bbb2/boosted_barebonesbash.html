@@ -1292,14 +1292,15 @@ We can now rewrite this code:
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
->   mv $file $new_name
+>   echo $file $new_name
+>   # mv $file $new_name
 > done
 ```
 To this:
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
->   echo ${file%.*}
->   # mv ${file} ${file%.*}
+>   echo ${file%.*}.JPG
+>   # mv ${file} ${file%.*}.JPG
 > done
 ```
 
