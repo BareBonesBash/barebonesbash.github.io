@@ -1298,8 +1298,8 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 To this:
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
->   echo ${file%.*}.M3P
->   # mv ${file} ${file%.*}.M3P
+>   echo ${file%.*}
+>   # mv ${file} ${file%.*}
 > done
 ```
 
@@ -1320,28 +1320,28 @@ When you are satisfied that everything works, remove the comments to rename your
 ---
 
 # Almost done!
-We now have all the files named similarly, but some things are still a bit off. The file suffix `GIF` is conventionally written in lowercase characters (`gif`).
+We now have all the files named similarly, but some things are still a bit off. The file suffix `JPG` is conventionally written in lowercase characters (`jpg`).
 
 Let's change all filename suffixes to be in lowercase letters!
 
 --
 
-Can be done with parameter expansion, but we can use **reg**ular **ex**pressions to do without a for loop.
+Can be done with parameter expansion, but we can use **reg**ular **ex**pressions to do this without a for loop.
 
 ???
 Remember, a string is fancy computer lingo for a sequence of characters and/or numbers. i.e. text
 
 --
 
- - Regex are an important concept. You will find them in most programming languages.
+ - Regex is an important concept. You will find them in most programming languages.
 
  - Syntax can vary from language to language, but here's how they work in bash.
 
 ---
 
 # Concept: Regular expressions
-- Strings that define a search pattern
-- Used in 'Search' or 'Search/Replace' functions
+- Strings that define a 'search pattern'
+- Used in 'Search' or 'Search/Replace' functions e.g. in excel!
 - You have already used them!
 
 ???
@@ -1356,18 +1356,18 @@ grep '.ear' regex.txt
 ```
 ]
 .right-column-33[
-**pear**
-pier
-pir
-per
-par
-pur
-**bear**
-beer
-br
-ber
-be\*r
-**rear**
+**pear**  
+pier  
+pir  
+per  
+par  
+pur  
+**bear**  
+beer  
+br  
+ber  
+be\*r  
+**rear**  
 ]
 ---
 # Regex Basics
@@ -1379,18 +1379,18 @@ grep 'p[iea]r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-**pir**
-**per**
-**par**
-pur
-bear
-beer
-br
-ber
-be\*r
-rear
+pear  
+pier  
+**pir**  
+**per**  
+**par**  
+pur  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
 ]
 ---
 # Regex Basics
@@ -1403,18 +1403,18 @@ grep 'p[^iea]r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-**pur**
-bear
-beer
-br
-ber
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+**pur**  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
 ]
 ---
 # Regex Basics
@@ -1428,18 +1428,18 @@ grep 'be*r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-**beer**
-**br**
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+**br**  
+**ber**  
+be\*r  
+rear  
 ]
 ---
 # Regex Basics
@@ -1454,18 +1454,18 @@ grep 'be\*r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-br
-ber
-**be\*r**
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+br  
+ber  
+**be\*r**  
+rear  
 ]
 ---
 # Regex Basics
@@ -1481,18 +1481,18 @@ grep 'be\+r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-**beer**
-br
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+br  
+**ber**  
+be\*r  
+rear  
 ]
 ---
 # Regex Basics
@@ -1509,18 +1509,18 @@ grep 'be\?r' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-**br**
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+**br**  
+**ber**  
+be\*r  
+rear  
 ]
 ---
 # Regex Basics
@@ -1538,18 +1538,18 @@ grep '^[rb]\+' regex.txt
 ```
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-**bear**
-**beer**
-**br**
-**ber**
-**be\*r**
-**rear**
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**  
 ]
 ---
 # Regex Basics
@@ -1568,37 +1568,37 @@ grep 'r$' regex.txt
 ```
 ]
 .right-column-33[
-**pear**
-**pier**
-**pir**
-**per**
-**par**
-**pur**
-**bear**
-**beer**
-**br**
-**ber**
-**be\*r**
-**rear**
+**pear**  
+**pier**  
+**pir**  
+**per**  
+**par**  
+**pur**  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**  
 ]
 ---
 # Regex example
 ```
-fanta.JPG
-BydgoszczForest.JPG
-snore.JPG
-Bubobubo.JPG
-giacomo.JPG
-netsukeJapan.JPG
-nomnom.JPG
-pompeii.JPG
-AlopochenaegyptiacaArnhem.JPG
-exhibitRoyal.JPG
-stretch.JPG
-weimanarer.JPG
-excited.JPG
-licorne.JPG
-angry.JPG
+fanta.JPG  
+BydgoszczForest.JPG  
+snore.JPG  
+Bubobubo.JPG  
+giacomo.JPG  
+netsukeJapan.JPG  
+nomnom.JPG  
+pompeii.JPG  
+AlopochenaegyptiacaArnhem.JPG  
+exhibitRoyal.JPG  
+stretch.JPG  
+weimanarer.JPG  
+excited.JPG  
+licorne.JPG  
+angry.JPG  
 ```
 Which Regex will you use to find all the files ending with .JPG??
 --
