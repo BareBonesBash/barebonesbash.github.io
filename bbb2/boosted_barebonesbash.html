@@ -1299,7 +1299,7 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 To this:
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
->   echo ${file%.*}.JPG
+>   echo ${file} ${file%.*}.JPG
 >   # mv ${file} ${file%.*}.JPG
 > done
 ```
