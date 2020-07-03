@@ -1350,13 +1350,13 @@ Technically, all the wildcards you have used are regex!
 
 ---
 # Regex Basics
-.left-column[
+.left-column-66[
 - `.` : match any character
 ```{bash}
 grep '.ear'
 ```
 ]
-.right-column[
+.right-column-33[
 **pear**  
 pier  
 pir  
@@ -1368,17 +1368,18 @@ beer
 br  
 ber  
 be\*r  
-**rear**  
+**rear**
 ]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 ```{bash}
 grep 'p[iea]r' regex.txt
 ```
-```
-.right-column[
+]
+.right-column-33[
 pear  
 pier  
 **pir**  
@@ -1392,20 +1393,33 @@ ber
 be\*r  
 rear  
 ]
-```
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 ```{bash}
 grep 'p[^iea]r' regex.txt
 ```
-```
-pur
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+**pur**  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1413,13 +1427,24 @@ pur
 ```{bash}
 grep 'be*r' regex.txt
 ```
-```
-beer
-br
-ber
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+**br**  
+**ber**  
+be\*r  
+rear  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1428,11 +1453,24 @@ ber
 ```{bash}
 grep 'be\*r' regex.txt
 ```
-```
-be*r
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+br  
+ber  
+**be\*r**  
+rear  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1442,12 +1480,24 @@ be*r
 ```{bash}
 grep 'be\+r' regex.txt
 ```
-```
-beer
-ber
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+br  
+**ber**  
+be\*r  
+rear  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1458,12 +1508,24 @@ ber
 ```{bash}
 grep 'be\?r' regex.txt
 ```
-```
-br
-ber
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+**br**  
+**ber**  
+be\*r  
+rear  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1475,16 +1537,24 @@ ber
 ```{bash}
 grep '^[rb]\+' regex.txt
 ```
-```
-bear
-beer
-br
-ber
-be*r
-rear
-```
+]
+.right-column-33[
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**  
+]
 ---
 # Regex Basics
+.left-column-66[
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1497,23 +1567,49 @@ rear
 ```{bash}
 grep 'r$' regex.txt
 ```
+]
+.right-column-33[
+**pear**  
+**pier**  
+**pir**  
+**per**  
+**par**  
+**pur**  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**
+]
+---
+# Regex example
 ```
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-br
-ber
-be*r
-rear
+fanta.JPG
+BydgoszczForest.JPG
+snore.JPG
+Bubobubo.JPG
+giacomo.JPG
+netsukeJapan.JPG
+nomnom.JPG
+pompeii.JPG
+AlopochenaegyptiacaArnhem.JPG
+exhibitRoyal.JPG
+stretch.JPG
+weimanarer.JPG
+excited.JPG
+licorne.JPG
+angry.JPG
 ```
+Which Regex will you use to find all the files ending with .JPG??
+--
+
+```bash
+$ find awesome_gif_collection/ -type f -name "*.JPG"
+```
+
 ???
 So if we want to match a specific set of characters, that always follow a `.` and precede the end of the line, which regex characters do we need?
-
 ---
 # `rename`
 
