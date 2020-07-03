@@ -1350,10 +1350,10 @@ Technically, all the wildcards you have used are regex!
 ---
 # Regex Basics
 .left-column-66[
-- `.` : match any character
 ```{bash}
 grep '.ear' regex.txt
 ```
+- `.` : match any character
 ]
 .right-column-33[
 **pear**  
@@ -1372,11 +1372,11 @@ be\*r
 ---
 # Regex Basics
 .left-column-66[
-- `.` : match any character
-- `[]`: match range of characters within []
 ```{bash}
 grep 'p[iea]r' regex.txt
 ```
+- `.` : match any character
+- `[]`: match range of characters within []
 ]
 .right-column-33[
 pear  
@@ -1395,12 +1395,12 @@ rear
 ---
 # Regex Basics
 .left-column-66[
-- `.` : match any character
-- `[]`: match range of characters within []
-- `[^]`: match range of characters except the ones in the bracket
 ```{bash}
 grep 'p[^iea]r' regex.txt
 ```
+- `.` : match any character
+- `[]`: match range of characters within []
+- `[^]`: match range of characters except the ones in the bracket
 ]
 .right-column-33[
 pear  
@@ -1419,13 +1419,13 @@ rear
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep 'be*r' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-```{bash}
-grep 'be*r' regex.txt
-```
 ]
 .right-column-33[
 pear  
@@ -1444,14 +1444,14 @@ rear
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep 'be\*r' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
 - `\`: skip character
-```{bash}
-grep 'be\*r' regex.txt
-```
 ]
 .right-column-33[
 pear  
@@ -1470,15 +1470,15 @@ rear
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep 'be\+r' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
 - `\`: skip character
 - `+`: match 1 or more of the preceding items
-```{bash}
-grep 'be\+r' regex.txt
-```
 ]
 .right-column-33[
 pear  
@@ -1497,6 +1497,9 @@ rear
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep 'be\?r' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1504,9 +1507,6 @@ rear
 - `\`: skip character
 - `+`: match 1 or more of the preceding items
 - `?`: match 0 or 1 of the preceding items
-```{bash}
-grep 'be\?r' regex.txt
-```
 ]
 .right-column-33[
 pear  
@@ -1525,6 +1525,9 @@ rear
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep '^[rb]\+' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1533,9 +1536,6 @@ rear
 - `+`: match 1 or more of the preceding items
 - `?`: match 0 or 1 of the preceding items
 - `^`: beginning line
-```{bash}
-grep '^[rb]\+' regex.txt
-```
 ]
 .right-column-33[
 pear  
@@ -1554,6 +1554,9 @@ pur
 ---
 # Regex Basics
 .left-column-66[
+```{bash}
+grep 'r$' regex.txt
+```
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1563,9 +1566,6 @@ pur
 - `?`: match 0 or 1 of the preceding items
 - `^`: beginning line
 - `$`: end of the line
-```{bash}
-grep 'r$' regex.txt
-```
 ]
 .right-column-33[
 **pear**  
@@ -1600,7 +1600,7 @@ excited.JPG
 licorne.JPG  
 angry.JPG  
 ```
-Which Regex will you use to find all the files ending with .JPG??
+Which Regex would you use to find all the files ending with .JPG??
 --
 
 ```bash
@@ -1636,12 +1636,14 @@ To interpret the `.` as a literal `.` and not "any character"
 
 --
 
- - Finally, we specify what we want to substitute matches with. `.gif`
+> Remember: to _escape_ a character (so read as an actual character, not as a regex), use `\` before it
+
+ - Finally, we specify what we want to substitute matches with, which is `.gif`
 
 ???
 The substitute string is NOT a regex, so we do not need to escape the `.`
 
-Optionally you can specify optiong after the final `/`. For e.g. putting a `g` there will lookfor multiple matches in each line instead.
+Optionally you can specify option after the final `/`. For e.g. putting a `g` there will lookfor multiple matches in each line instead.
 
 ---
 # Onwards!
