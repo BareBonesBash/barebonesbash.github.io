@@ -1295,12 +1295,11 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   mv $file $new_name
 > done
 ```
-**UPDATE FROM HERE**
 To this:
 ```bash
-$ for file in *GIF; do
->   echo ${file%_*}.GFI
->   # mv ${file} ${file%_*}.GFI
+$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+>   echo ${file%.*}.M3P
+>   # mv ${file} ${file%.*}.M3P
 > done
 ```
 
