@@ -601,7 +601,7 @@ $ less Boosted-BBB-meta.tsv
 - How to **search inside** a text file?
 
 ```bash
-$ cat Boosted-BBB-meta.tsv | grep 'dog' | wc -l
+$ cat Boosted-BBB-meta.tsv | grep 'fanta' | wc -l
 
 ```
 
@@ -610,7 +610,7 @@ $ cat Boosted-BBB-meta.tsv | grep 'dog' | wc -l
 > Tip: Be _lazy_; No need for `cat`!
 
 ```bash
-$ grep 'dog' Boosted-BBB-meta.tsv | wc -l
+$ grep 'fanta' Boosted-BBB-meta.tsv | wc -l
 
 ```
 
@@ -1085,13 +1085,14 @@ echo "aBcDeF 654321" | cut -d " " -f 2
 
 We could use these tools to collage the desired filenames like this:
 
+**Do not run this code!**
+
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
 >   mv $file $new_name
 > done
 ```
-**Do not run this code!**
 
 --
 
@@ -1343,9 +1344,16 @@ Remember, a string is fancy computer lingo for a sequence of characters and/or n
 ---
 
 # Concept: Regular expressions
-- Strings that define a 'search pattern'
+- Special strings and characters that define a 'search pattern'
 - Used in 'Search' or 'Search/Replace' functions e.g. in excel!
 - You have already used them!
+
+To prepare, download the following file
+
+```bash
+$ wget git.io/Boosted-BBB-regex
+$ mv Boosted-BBB-regex regex.txt
+```
 
 ???
 Technically, all the wildcards you have used are regex!
