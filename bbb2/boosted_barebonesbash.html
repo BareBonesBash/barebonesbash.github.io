@@ -1860,9 +1860,14 @@ First, we make the directory `images`. Then the `while` loop reads through the c
 
 # ENTER BETTER TITLE HERE
 
-Along with your gifs themselves, you also downloaded `Theme_list.txt`, which groups the gifs by their categories.
+As you remember from the beginning, we downloaded a metadata file, which 
+includes different metadata categories for each file.
 
-Have a look in the file!
+Lets look in the file!
+
+```bash
+cat Boosted-BBB-meta.tsv
+```
 
 ???
 You wanted to minimise the time you spend typing while on hunting for your best gifs, so you didn't type the category name, but codes A B C for each one.
@@ -1879,7 +1884,7 @@ You have the names of the gifs, and you have the categories of each too.
 You can use `paste` to paste the two lists together, and save the results!
 
 ```bash
-$ paste File_names.txt Theme_list.txt > Annotations.txt
+$ paste File_names.txt Boosted-BBB-meta.tsv > Annotations.txt
 ```
 ```
 DCIM00001   A
