@@ -1083,27 +1083,28 @@ echo "aBcDeF 654321" | cut -d " " -f 2
 
 # Cleaning up filenames
 
-We could use these tools to collage the desired filenames like this:
-
-**Do not run this code!**
+Using these tools, we can start cleaning up the desired filenames like this:
 
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
->   mv $file $new_name
+>   echo $i $new_name
+>   #mv $file $new_name
 > done
 ```
+Use `echo` to make a 'dry-run', and when you're happy with the proposed output 
+uncomment the `mv` command and re-run the for loop.
 
 --
 
-**This code is cumbersome to write, read and understand.**
-<p align="center"><img src="https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" title="Source: https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" width="50%">
+**BUT WAIT! This code is cumbersome to write, read and understand.**
+<p align="center"><img src="https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" title="Source: https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" width="40%">
 </p>
 
 
 ---
 
-# What just happened?
+# Wait, what just happened?
 
  - `$()` tells bash to run the commands within parentheses and interpret the output as a string, which is then assigned to the variable `new_name`
 
@@ -1145,7 +1146,8 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 
 It is a good idea to avoid clunky code like what you just saw.
 
-How to make this code simpler?
+How to make this code simpler? **Do not run this code!**
+
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
@@ -1289,7 +1291,7 @@ This parameter is more useful when dealing with **bash arrays** (i.e. lists of t
 
 ---
 # Writing pretty code
-We can now rewrite this code:
+We can now rewrite this code
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
@@ -1297,19 +1299,21 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   # mv $file $new_name
 > done
 ```
+
 To this:
+
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
->   echo ${file} ${file%.*}.JPG
->   # mv ${file} ${file%.*}.JPG
+>   echo ${file} ${file%.*}
+>   # mv ${file} ${file%.*}
 > done
 ```
 
-Try these to see that the result is the same!
+Try running both and check the result is the same! Is there a difference in runtime?
 
-Did you notice a difference in runtime?
+--
 
-> 0.051s versus 0.003s for echo
+> 0.051s versus 0.003s when running echo
 
 ???
 Notice that this time around, I added ".JPG" at the end of the new filenames manually, since our approach removes it.
@@ -1319,7 +1323,9 @@ It is much more efficient since parameter expansion is one command, instead of 4
 
 --
 
-When you are satisfied that everything works, remove the comments to rename your files.
+When you are satisfied it works, remove the comments to rename your files!
+
+> Note: This isn't to say rev/cut trick is not useful! The same concept can be used in other programming languages, whereas bash expansion is limited to bash.
 
 ---
 
@@ -1353,6 +1359,12 @@ To prepare, download the following file
 ```bash
 $ wget git.io/Boosted-BBB-regex
 $ mv Boosted-BBB-regex regex.txt
+```
+
+Let's also look at the contents.
+
+```bash
+cat regex.txt
 ```
 
 ???
@@ -1585,6 +1597,11 @@ grep 'r$' regex.txt
 - `?`: match 0 or 1 of the preceding items
 - `^`: beginning line
 - `$`: end of the line
+
+> This can be intimidating, however there are lots of resources on the internet
+> (reminder: Google _everything_!) to help, such as: [https://regex101.com/](https://regex101.com/).
+> Note that regex's can be slightly different per shell and language!
+
 ]
 .right-column-33[
 **pear**  
