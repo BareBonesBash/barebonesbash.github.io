@@ -1807,6 +1807,57 @@ You can `cat` the resulting file to see that everything worked.
 
 ---
 
+# Getting parts of a filepath
+
+Before moving on, there are two useful commands you should know. 
+
+`basename` will tell you the file name, while stripping the path to the file.
+```bash
+data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+```
+```
+bubobubo.JPG.MP3.TXT
+```
+
+--
+
+`dirname` does the opposite. It will tell you the path to the directory that a file is in, while omitting the name of the file.
+```bash
+data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+```
+```
+data/Boosted-BBB//Having/the/time/of/your/life
+```
+
+---
+
+# Reading from a file
+
+Ok, so you now have a file with all the paths to the images we need. But the folder structure is still a mess. It's time to read the contents of the file with a `while` loop!
+
+--
+
+A `while` loop is a special type of repeating code that keeps going until it is interrupted. When reading from a file, the end of the file (`EOF`) interrupts the loop.
+
+--
+
+We will also use `read`. This command takes the contents of the file and loads them into a specified variable. 
+
+--
+
+With these two commands we are ready to go!
+```bash
+mkdir images
+while read fname; do
+      echo "${fname}"
+      # mv ${fname} images/$(basename ${fname})
+done < File_names.txt
+```
+???
+First, we make the directory `images`. Then the `while` loop reads through the contents of each line in `File_names.txt`, `read` puts the contents of the line in the variable `fname` and then the code in the loop is executed. With the redirect after done we give the while loop `File_names.txt` as input.
+
+---
+
 # ENTER BETTER TITLE HERE
 
 Along with your gifs themselves, you also downloaded `Theme_list.txt`, which groups the gifs by their categories.
