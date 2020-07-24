@@ -2110,13 +2110,15 @@ The ultimate goal of anyone working on the command line is to make a program whi
 We can do this with a _script_.
 
 ---
+# What's a script?
 
-# Your first script!
+Similar to a play/movie script that tells actors what to do, a computer script is a file containing all the commands that you want the computer to perform in a given order
 
-So let's start writing your first script `sort_gifs.sh`! Open a text editor
+
+So let's start writing your first script `first_script.sh`! Open a text editor
 
 ```bash
-$ nano sort_gifs.sh
+$ nano first_script.sh
 ```
 
 ???
@@ -2151,6 +2153,66 @@ On the first line of your text editor window, type:
 
 # Your first script!
 
+For your first script we want the program to print "Hello world!"
+
+How did we told bash to print something in screen?
+--
+
+```bash
+#! /usr/bin/env bash
+
+echo "Hello world"
+```
+save the file.
+
+--
+
+That's it, you've done your first script 
+
+---
+# How do you run a script?
+
+To run a script you have to make the script executable. For that we use `chmod`:
+
+
+```bash
+$ chmod +x first_script.sh
+```
+
+--
+Now to run the script, we do:
+
+```bash
+$ ./first_script.sh
+```
+
+`Hello world!`
+
+---
+# Input Variables
+
+So now we want to change our script to instead of saying `Hello world` to say `Hello your_name`
+
+So our script looked like:
+
+```bash
+#! /usr/bin/env bash
+
+echo "Hello world"
+```
+
+We can use variables for the arguments passed to a script.
+
+Wait... what are arguments??
+
+It is a user suplied value that the script will use to perform the tasks
+
+---
+# Input Variables
+
+In Bash, the arguments passed are 
+
+---
 **TODO** REWRITE THIS SLIDE ONWARDS
 
 First, you want to set the directory for the script, so add this to the file:

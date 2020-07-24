@@ -22,7 +22,7 @@ done<File_names.txt
 
 sed -i -e 's/A//g' -e 's/B//g' -e 's/C//g'
 
-ls Common_folder | sort > File_names_sorted.txt
+ls Common_folder -1 | sort > File_names_sorted.txt
 sort ${metadata} | paste File_names_sorted.txt > metadata_with_paths.txt
 
 
