@@ -1953,7 +1953,7 @@ $ while read filepath; do
 
 ---
 
-# ENTER BETTER TITLE HERE
+# Pasting things side by side!
 
 As you remember from the beginning, we downloaded a metadata file, which 
 includes different metadata categories for each file.
@@ -1965,84 +1965,98 @@ cat Boosted-BBB-meta.tsv
 ```
 
 ???
-You wanted to minimise the time you spend typing while on hunting for your best gifs, so you didn't type the category name, but codes A B C for each one.
+You wanted to minimise the time you spend typing while on hunting for your best images, so you didn't type the category name, but codes A B C for each one.
 
 --
 
-Now we want to put together a list that states in which category each gif was is a part of.
+Now we want to put together a list that states in which category each image was is a part of. Try opening a few and see if you can work it out.
 
 ???
-You have the names of the gifs, and you have the categories of each too.
+In the metadata file, you have the names of the images, and you have the categories of each too.
 
 --
 
 You can use `paste` to paste the two lists together, and save the results!
 
 ```bash
-$ paste File_names.txt Boosted-BBB-meta.tsv > Annotations.txt
-```
-```
-DCIM00001   A
-DCIM00002   A
-...
-DCIM00039   C
-DCIM00040   C
+$ ls -1 images/* | paste - Boosted-BBB-meta.tsv # > Annotations.txt
 ```
 ???
+`ls -1` forces the output into a single column. `paste` accepts the stdin and puts it at the position of `-`.
+--
+```
+images/alopochenaegyptiacaArnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	Artwork
+images/bubobubo.jpg	bubobubo	C	Normal
+...
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	A	Normal
+```
+???
+Check that the file name matches the second column of each row. When u are satisfied, remove the `#` and save the output.
 You now have a meta-data sheet for each gif!
 
 ---
 
 # Editing text with `sed`
 
-To share these gifs with your internet friends, you need to properly specify the category names.
+To share these images with your internet friends, you need to properly specify the category names.
 
-During your gif hunting, you downloaded XX first, then XX, and finally to XX. Let's add these names in the `Annotations.txt`.
+Let's add the actual category names to the `Annotations.txt`.
 
 --
 
-You can use `sed`, short for **s**tream **ed**itor, with a regex to edit the contents of a datastream on-the-fly. **TODO**: Replace country with category
+You can use `sed`, short for **s**tream **ed**itor, with a regex to edit the contents of a datastream on-the-fly.
+
+
 
 ```bash
-$ sed 's/C/Greece/' Annotations.txt
+$ sed 's/A/dog/' Annotations.txt
 ```
 
 --
 .left-column-33[
 ```
-DGreeceIM00001    A
-DGreeceIM00002    A
+images/alopochenaegyptiacadogrnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	dogrtwork
+images/bubobubo.jpg	bubobubo	C	Normal
 ...
-DGreeceIM00039    C
-DGreeceIM00040    C
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	dog	Normal
 ```
 
 Uh-oh!]
+???
+Do you see what went wrong? Don't worry, your file has not been changed in any way.
+--
 .right-column-66[
-<p align="center"><img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="60%">
+<p align="center"><img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
 </p>]
 
 ???
 What happened here? How can we fix it?
 
-Pattern matches the first C in a line. Change pattern to `C$` to only match the last character of the line.
+Pattern matches the first A in a line with `dog`. We should make our regex more specific. We know the value we want is a column, and hence it is surrounded by TABs! Change pattern to `C$` to only match the last character of the line.
 
 ---
 
 # Editing text with `sed`
 
-**TODO**: Replace country with category
-
 ```bash
-$ sed 's/C$/Greece/' Annotations.txt
+$ sed 's/\tA\t/\tdog\t/' Annotations.txt
 ```
 ```
-DCIM00001   A
-DCIM00002   A
+images/alopochenaegyptiacaArnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	Artwork
+images/bubobubo.jpg	bubobubo	C	Normal
 ...
-DCIM00039   Greece
-DCIM00040   Greece
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	dog	Normal
 ```
+> On Macs, `sed` does not recognise `\t`.You will need to type in a tab character. 
 
 ???
 Much better!
@@ -2051,7 +2065,7 @@ Much better!
 
 Use `-e` to provide multiple regular **e**xpressions to `sed`.
 ```bash
-$ sed -e 's/A$/United Kingdom/' -e 's/B$/Spain/' -e 's/C$/Greece/' Annotations.txt
+$ sed -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tCat\t/' -e 's/\tC\t/\tBird\t/' Annotations.txt
 ```
 ???
 Check the results for any errors.
@@ -2062,7 +2076,7 @@ When you are happy with the results, it is time to save the edits.
 
 `sed` can edit a file **i**n place, with the `-i` option.
 ```bash
-$ sed -i -e 's/A$/United Kingdom/' -e 's/B$/Spain/' -e 's/C$/Greece/' Annotations.txt
+$ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tCat\t/' -e 's/\tC\t/\tBird\t/' Annotations.txt
 ```
 
 ---
