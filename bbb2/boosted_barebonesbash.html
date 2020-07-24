@@ -2067,13 +2067,114 @@ $ sed -i -e 's/A$/United Kingdom/' -e 's/B$/Spain/' -e 's/C$/Greece/' Annotation
 
 ---
 
-# OLD Housekeeping
+Now it is time for conditionals!
 
-Now that you have a good annotation for your images, let's sort them into different directories, one per gif category.
+---
+# Conditionals (`if`/`else`)
 
-To do this, we will need to introduce a two new concepts:
- - `while` loops
- - `if`/`else` conditionals
+Let you run code depending on specific conditions.
+
+The basic syntax is like this:
+```bash
+$ if [[ ${my_variable} == "banana" ]]; then
+>   echo "The monkey takes the banana and runs away happily."
+> else
+>   echo "The monkey doesn't want that!"
+> fi
+```
+
+???
+If the code above is run while `my_variable` is set to "banana", then the top code will execute, esle the bottom will.
+
+`then` is similar to `do` in for/while loops.
+
+`fi` (`if` flipped around), is the equivalent of `done` in for/while loops
+
+Notice the double brackets `[[]]`. Single brackets will often fail.
+
+Notice the double equals `==`. In programming this is used to mean "test for equality", rather than variable assignment.
+
+Finally, the spaces between brackets and their contents are necessary.
+
+--
+
+You can have sequential conditions too with `elif`, short for **el**se **if**.
+```bash
+$ if [[ ${my_variable} == "banana" ]]; then
+>   echo "The monkey takes the banana and runs away happily."
+> elif [[ ${my_variable} == "mango" ]]; then
+>   echo "The monkey takes the mango and eats it while staring at you."
+> else
+>   echo "The monkey doesn't want that!"
+> fi
+```
+
+---
+# Notes on conditionals
+
+ - `[[` behaves different to `[`. Usually, `[[` is what you want.
+ - You can evaluate mathematic equations with `((`
+
+--
+
+```bash
+$ if (( 5 - 2 == 3)); then
+>   echo "YES"
+> fi
+```
+```
+YES
+```
+
+---
+# Notes on conditionals
+
+ - `[[` behaves different to `[`. Usually, `[[` is what you want.
+ - You can evaluate mathematic equations with `((`
+ - `!` can be used as a "not".
+
+???
+Making a TRUE a FALSE and vice versa.
+
+--
+
+```bash
+$ if ! (( 5 - 2 == 3)); then
+>   echo "YES"
+> else
+>   echo "NO"
+> fi
+```
+```
+NO
+```
+???
+
+This works with square brackets as well.
+
+---
+# Notes on conditionals
+
+ - `[[` behaves different to `[`. Usually, `[[` is what you want.
+ - You can evaluate mathematic equations with `((`
+ - `!` can be used as a "not".
+ - Some options can be used to check if files exist, or is a variable has been set.
+
+--
+
+```bash
+$ if [[ -f Annotations.txt ]]; then
+>   echo "File exists!"
+> fi
+$ if [[ -n ${banana} ]]; then
+>   echo "Variable is set!"
+> else
+>   echo "Varable is NOT set!"
+> fi```
+```
+File exists!
+Varable is NOT set!
+```
 
 ---
 
@@ -2275,121 +2376,6 @@ $ bash sort_pictures.sh
 ```
 ???
 You should now see the information printed in a nicer format, and the image names and countries of origins are now kept in separate variables.
-
---
-
-Now it is time for conditionals!
-
----
-# Conditionals (`if`/`else`)
-
-Let you run code depending on specific conditions.
-
-The basic syntax is like this:
-```bash
-$ if [[ ${my_variable} == "banana" ]]; then
->   echo "The monkey takes the banana and runs away happily."
-> else
->   echo "The monkey doesn't want that!"
-> fi
-```
-
-???
-If the code above is run while `my_variable` is set to "banana", then the top code will execute, esle the bottom will.
-
-`then` is similar to `do` in for/while loops.
-
-`fi` (`if` flipped around), is the equivalent of `done` in for/while loops
-
-Notice the double brackets `[[]]`. Single brackets will often fail.
-
-Notice the double equals `==`. In programming this is used to mean "test for equality", rather than variable assignment.
-
-Finally, the spaces between brackets and their contents are necessary.
-
---
-
-You can have sequential conditions too with `elif`, short for **el**se **if**.
-```bash
-$ if [[ ${my_variable} == "banana" ]]; then
->   echo "The monkey takes the banana and runs away happily."
-> elif [[ ${my_variable} == "mango" ]]; then
->   echo "The monkey takes the mango and eats it while staring at you."
-> else
->   echo "The monkey doesn't want that!"
-> fi
-```
-
----
-# Notes on conditionals
-
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
-
---
-
-```bash
-$ if (( 5 - 2 == 3)); then
->   echo "YES"
-> fi
-```
-```
-YES
-```
-
----
-# Notes on conditionals
-
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
- - `!` can be used as a "not".
-
-???
-Making a TRUE a FALSE and vice versa.
-
---
-
-```bash
-$ if ! (( 5 - 2 == 3)); then
->   echo "YES"
-> else
->   echo "NO"
-> fi
-```
-```
-NO
-```
-???
-
-This works with square brackets as well.
-
----
-# Notes on conditionals
-
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
- - `!` can be used as a "not".
- - Some options can be used to check if files exist, or is a variable has been set.
-
---
-
-```bash
-$ if [[ -f Annotations.txt ]]; then
->   echo "File exists!"
-> fi
-$ if [[ -n ${banana} ]]; then
->   echo "Variable is set!"
-> else
->   echo "Varable is NOT set!"
-> fi```
-```
-File exists!
-Varable is NOT set!
-```
-
---
-
-Now back to editing the script!
 
 ---
 # Your first script!
