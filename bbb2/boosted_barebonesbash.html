@@ -1837,7 +1837,7 @@ Ok, so you now have a file with all the paths to the images we need. But the fol
 
 --
 
-A `while` loop is a special type of repeating code that keeps going until it is interrupted. When reading from a file, the end of the file (`EOF`) interrupts the loop.
+A `while` loop is a special type of repeating code that keeps going until it is interrupted.
 
 --
 
@@ -1848,13 +1848,127 @@ We will also use `read`. This command takes the contents of the file and loads t
 With these two commands we are ready to go!
 ```bash
 mkdir images
-while read fname; do
-      echo "${fname}"
-      # mv ${fname} images/$(basename ${fname})
+while read filepath; do
+      echo "${filepath}"
+      # mv ${filepath} images/$(basename ${filepath})
 done < File_names.txt
 ```
+
+When you're ready, uncomment the `mv` command to move each file from the 
+original location into the new location! 
+
+> Question: why do you have to use 'basename' for the target directory?
+
 ???
 First, we make the directory `images`. Then the `while` loop reads through the contents of each line in `File_names.txt`, `read` puts the contents of the line in the variable `fname` and then the code in the loop is executed. With the redirect after done we give the while loop `File_names.txt` as input.
+
+---
+
+# Concept: While Loops
+
+We have previously introduced the concept of a loop.
+
+**From Basic_BBB**
+
+```bash
+for file in file1 file2 file3 file4; do
+  echo "${file}"
+done
+```
+
+For loops repeat a set of code for a set of items, by changing the value of a variable in each iteration.
+
+---
+
+# Concept: While loops - to infinity and beyond!
+ - For loops are finite, they go throw your list and stop
+ - A while loop keeps going until the statement is false
+```bash
+$ while [statment]; do     #means while statement is true do
+>   [whatever you want to do]
+> done
+```
+--
+An easy example:
+
+.left-column[
+```bash
+$ n = 3
+$ while n > 0; do
+>   echo $n
+>   n = $n - s1
+> done
+```
+]
+.right-column[
+```
+3
+2
+1
+```
+]
+
+???
+use while to move files out of the gifs horrible folder mess?
+
+---
+# While loop infinite?
+Didn't you say while loop are infinite?
+.left-column[
+```bash
+$ n = 3
+$ while n < 5; do
+>   echo $n
+>   n = $n - 1
+> done
+```
+]
+.right-column[
+Gif of infinite loop
+]
+--
+
+- Always include a stop
+
+---
+
+# While read line
+
+A common way to use the while loop is:
+```bash
+$ cat file.txt
+```
+```
+Mmm
+Tasty
+Gifs
+```
+--
+.left-column[
+```bash
+$ while read line; do
+>   echo ${line}
+> done < file.txt
+```
+```
+Mmm
+Tasty
+Gifs
+```
+]
+
+???
+
+This approach lets you save the contents of a line in a variable, that you can then use in your scripting.
+
+The input file is given to the loop after `done`, using a **redirect**.
+
+The `read` function will stop once the file has been completely read, which kills the while loop. That's our exit plan!
+
+We will be using this for our first script!
+
+---
+
 
 ---
 
@@ -1972,114 +2086,13 @@ $ sed -i -e 's/A$/United Kingdom/' -e 's/B$/Spain/' -e 's/C$/Greece/' Annotation
 
 ---
 
-# Housekeeping
+# OLD Housekeeping
 
 Now that you have a good annotation for your images, let's sort them into different directories, one per gif category.
 
 To do this, we will need to introduce a two new concepts:
  - `while` loops
  - `if`/`else` conditionals
-
---
-
-####From Basic_BBB:
-
-```bash
-for file in file1 file2 file3 file4; do
-  echo "${file}"
-done
-```
-
-For loops repeat a set of code for a set of items, by changing the value of a variable in each iteration.
-
----
-
-# While loop: to infinity and beyond!
- - For loops are finite, they go throw your list and stop
- - A while loop keeps going until the statement is false
-```bash
-$ while [statment]; do     #means while statement is true do
->   [whatever you want to do]
-> done
-```
---
-An easy example:
-
-.left-column[
-```bash
-$ n = 3
-$ while n > 0; do
->   echo $n
->   n = $n - s1
-> done
-```
-]
-.right-column[
-```
-3
-2
-1
-```
-]
-
-???
-use while to move files out of the gifs horrible folder mess?
-
----
-# While loop infinite?
-Didn't you say while loop are infinite?
-.left-column[
-```bash
-$ n = 3
-$ while n < 5; do
->   echo $n
->   n = $n - 1
-> done
-```
-]
-.right-column[
-Gif of infinite loop
-]
---
-
-- Always include a stop
-
----
-
-# While read line
-
-A common way to use the while loop is:
-```bash
-$ cat file.txt
-```
-```
-Mmm
-Tasty
-Gifs
-```
---
-.left-column[
-```bash
-$ while read line; do
->   echo ${line}
-> done < file.txt
-```
-```
-Mmm
-Tasty
-Gifs
-```
-]
-
-???
-
-This approach lets you save the contents of a line in a variable, that you can then use in your scripting.
-
-The input file is given to the loop after `done`, using a **redirect**.
-
-The `read` function will stop once the file has been completely read, which kills the while loop. That's our exit plan!
-
-We will be using this for our first script!
 
 ---
 
