@@ -769,12 +769,12 @@ OK! Recap done! LETS'A GO!
 - Where is my stuff??
 - Concept: Datastreams and redirects
 - Concept: Quotes matter!
-- While loop: to infinity and beyond!
 - How to rename stuff
 - Concept: Bash expansion
 - Concept: Regular expressions
+- While loop: to infinity and beyond!
 - Conditionals: IF/ELSE
-- Modifying files: SED, PASTE, AWK
+- Modifying files: SED, PASTE
 ]
 
 ---
@@ -947,11 +947,8 @@ What has changed here? Run the second command.]
 </p>
 ]
 
-
-
 ???
 This time the command finds the files! What in tarnation is going on!?
-
 
 ---
 
@@ -1657,6 +1654,8 @@ To convert all suffixes in the directory to lowercase characters:
 $ find Boosted-BBB/ -type f -name "*.JPG" | rename 's/\.JPG$/.jpg/'
 ```
 
+> Check with `find` whether the names are now as you expect!
+
 No for loop needed (yay for pipes!)!
 
 The expression given to `rename` has three parts, separated by `/`
@@ -1665,7 +1664,7 @@ The expression given to `rename` has three parts, separated by `/`
 
 --
 
- - Second, we define the regex to query. `\.GIF$`
+ - Second, we define the regex to query. `\.JPG$`
 
 ???
 Why do we need the `\` before the `.`?
@@ -1676,12 +1675,12 @@ To interpret the `.` as a literal `.` and not "any character"
 
 > Remember: to _escape_ a character (so read as an actual character, not as a regex), use `\` before it
 
- - Finally, we specify what we want to substitute matches with, which is `.gif`
+ - Finally, we specify what we want to substitute matches with, which is `.jpg`
 
 ???
 The substitute string is NOT a regex, so we do not need to escape the `.`
 
-Optionally you can specify option after the final `/`. For e.g. putting a `g` there will lookfor multiple matches in each line instead.
+Optionally you can specify option after the final `/`. For e.g. putting a `j` there will lookfor multiple matches in each line instead.
 
 ---
 # Onwards!
@@ -1847,17 +1846,17 @@ We will also use `read`. This command takes the contents of the file and loads t
 
 With these two commands we are ready to go!
 ```bash
-mkdir images
-while read filepath; do
-      echo "${filepath}"
-      # mv ${filepath} images/$(basename ${filepath})
-done < File_names.txt
+$ mkdir images
+$ while read filepath; do
+>      echo "${filepath}" images/$(basename ${filepath})
+>      # mv ${filepath} images/$(basename ${filepath})
+> done < File_names.txt
 ```
 
 When you're ready, uncomment the `mv` command to move each file from the 
 original location into the new location! 
 
-> Question: why do you have to use 'basename' for the target directory?
+> Question: in this context, why do you have to use 'basename' for the target directory?
 
 ???
 First, we make the directory `images`. Then the `while` loop reads through the contents of each line in `File_names.txt`, `read` puts the contents of the line in the variable `fname` and then the code in the loop is executed. With the redirect after done we give the while loop `File_names.txt` as input.
@@ -1871,18 +1870,18 @@ We have previously introduced the concept of a loop.
 **From Basic_BBB**
 
 ```bash
-for file in file1 file2 file3 file4; do
-  echo "${file}"
-done
+$ for file in file1 file2 file3 file4; do
+>   echo "${file}"
+> done
 ```
 
 For loops repeat a set of code for a set of items, by changing the value of a variable in each iteration.
 
 ---
 
-# Concept: While loops - to infinity and beyond!
+# Concept: While Loops
  - For loops are finite, they go throw your list and stop
- - A while loop keeps going until the statement is false
+ - A while loop keeps going until a statement is false
 ```bash
 $ while [statment]; do     #means while statement is true do
 >   [whatever you want to do]
@@ -1912,7 +1911,7 @@ $ while n > 0; do
 use while to move files out of the gifs horrible folder mess?
 
 ---
-# While loop infinite?
+# Concept: While Loops
 Didn't you say while loop are infinite?
 .left-column[
 ```bash
@@ -1924,48 +1923,30 @@ $ while n < 5; do
 ```
 ]
 .right-column[
-Gif of infinite loop
+<p align="center"><img src="https://media.giphy.com/media/U2BASTIsaw8WQ/source.gif" title="Source: https://giphy.com/gifs/elevator-berlin-lift-U2BASTIsaw8WQ" width="90%">
+</p>
 ]
 --
 
-- Always include a stop
+- Always include a stop!
+  - i.e. ensure your condition will eventually become 'false'! 
 
----
-
-# While read line
-
-A common way to use the while loop is:
-```bash
-$ cat file.txt
-```
-```
-Mmm
-Tasty
-Gifs
-```
 --
-.left-column[
+
+.left-column-66[
+Following our example from the beginning...
+
 ```bash
-$ while read line; do
->   echo ${line}
-> done < file.txt
-```
-```
-Mmm
-Tasty
-Gifs
+$ while read filepath; do
+>      echo "${filepath}" images/$(basename ${filepath})
+>      # mv ${filepath} images/$(basename ${filepath})
+> done < File_names.txt
 ```
 ]
 
-???
-
-This approach lets you save the contents of a line in a variable, that you can then use in your scripting.
-
-The input file is given to the loop after `done`, using a **redirect**.
-
-The `read` function will stop once the file has been completely read, which kills the while loop. That's our exit plan!
-
-We will be using this for our first script!
+.right-column-33[
+  ...our 'stop' condition is when there are no more lines or '`EOF`'
+]
 
 ---
 
