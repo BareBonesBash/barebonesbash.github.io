@@ -2329,8 +2329,9 @@ Now to run the script, we do:
 ```bash
 $ bash ./first_script.sh
 ```
-
-`Hello world!`
+```
+Hello world!
+```
 
 ---
 # Input Variables
@@ -2356,11 +2357,11 @@ It is a user suplied value that the script will use to perform the tasks
 
 In Bash, the arguments passed on the command line can be called `$1`,`$2`, `$3`...
 
-`$1` is the first argument
+`${1}` is the first argument
 
-`$2` is the second argument
+`${2}` is the second argument
 
-`$3` is the third argument
+`${3}` is the third argument
 
 and so on.
 
@@ -2385,7 +2386,7 @@ So we will change our script to:
 ```bash
 #! /usr/bin/env bash
 
-name=$1
+name=${1}
 
 echo "Hello ${name}"
 ```
@@ -2393,13 +2394,15 @@ echo "Hello ${name}"
 To run it now we need an argument, so when we run:
 
 ```bash
-$ sh ./first_script.sh Aida
+$ bash ./first_script.sh Aida
 ```
 
-`Hello Aida`
+```
+Hello Aida
+```
 
 ---
-#Good practises when writing code
+#Good practices when writing code
 
 There is a few good practices when writing code that should be followed to ensure that anyone can understand your code.
 
@@ -2408,12 +2411,14 @@ There is a few good practices when writing code that should be followed to ensur
 ```bash
 #! /usr/bin/env bash
 
-name=$1
+name=${1}
 
 #Printing Hello and the specified variable into screen
 echo "Hello ${name}"
 ```
+
 - Give variables informative names
+- Try to have all bash variables in `${}`. This helps distinguish them visually and ensures all variables are interpreted correctly.
 - Keep the code simple: try to simply your code instead of having 1,000 lines
 
 ---
@@ -2425,14 +2430,15 @@ echo "Hello ${name}"
 ```bash
 #! /usr/bin/env bash
 
-name=$1
+name=${1}
 
-if [[ ${name} == "--help" | ${name} == "-h" ]]; then
+if [[ ${name} == "--help" || ${name} == "-h" ]]; then
   #Print help message
   echo "This script print Hello <your_name> into screen. \n To run it type: sh ./first_script.sh <your_name>"
 else
   #Printing Hello and the specified variable into screen
   echo "Hello ${name}"
+ fi
 ```
 
 ---
@@ -2448,19 +2454,28 @@ else
  - Write the first step -> try it -> write next step -> try it -> repeat until the end
  - Simplify your code
 
+- Explain your code to someone else. Going through the logic of it will often make the problem obvious.
+ - This is called the Rubber ducky approach, as many programmers have a rubber duck that they explain their code to.
+
 ---
 #Time to practice!
 
 Your task now will be generate a script to perform the image sorting that we have show you in this presentation.
 
+BUT: This time you will need to make a subdirectory within each of the categories with the secondary description of the images!
+> That is column 3 of the metadata file. (Artwork, Baby, Funny, Historical, Normal)
+
 For this, please make a new directory and download the data again:
 
 ```bash
-$ mkdir Boosted-BBB-scripting
-$ cd Boosted-BBB-scripting
+$ mkdir ~/Boosted-BBB-scripting
+$ cd ~/Boosted-BBB-scripting
 
+## Get images zip and metadata file
+$ wget git.io/Boosted-BBB-images
 $ wget git.io/Boosted-BBB-meta
 ```
+> Mac users should use `curl -L`
 
 You are set up to start now!
 
