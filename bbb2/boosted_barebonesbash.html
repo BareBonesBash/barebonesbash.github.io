@@ -2175,6 +2175,7 @@ NO
 This works with square brackets as well.
 
 ---
+
 # Notes on conditionals
 
  - `[[` behaves different to `[`. Usually, `[[` is what you want.
@@ -2205,33 +2206,30 @@ Varable is NOT set!
 
 We now want to create a directory for each country, and move the pictures from that country in it.
 
-Let's add some conditionals!
+Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
 
 ```bash
-cd ~/boosted_barebonesbash/awesome_gif_collection/
+cd ~/boosted_barebonesbash/
 
 while read line; do
   image_name=$(echo "${line}" | cut -f1)
-  country_taken=$(echo "${line}" | cut -f2)
-
-  ## Make a new directory for each country, if one doesn't exist.
-  mkdir -p ${country_name}
-
-  ## If country_name matches one of the three countries, move the image.
-  if [[ ${country_name} == "United Kingdom" ]]; then
-    mv ${image_name} United\ Kingdom/
-  elif [[ ${country_name} == "Spain" ]]; then
-    mv ${image_name} Spain/
-  elif [[ ${country_name} == "Greece" ]]; then
-    mv ${image_name} Greece/
+  animal=$(echo "${line}" | cut -f3)
+  
+  echo "$animal"
+  
+  ## Make a new directory for each animal, if one doesn't exist.
+  mkdir -p images/${animal}
+  
+  ## If animal matches one of the three, move the image.
+  if [[ ${animal} == "cat" ]]; then
+    mv ${image_name} images/cat/
+  elif [[ ${animal} == "dog" ]]; then
+    mv ${image_name} images/dog/
+  elif [[ ${animal} == "bird" ]]; then
+    mv ${image_name} images/bird/
   fi
-done < Annotations.txt
-```
 
---
-Save changes, and rerun the script.
-```bash
-$ bash sort_pictures.sh
+done < Annotations.txt
 ```
 
 ---
@@ -2243,7 +2241,7 @@ This time, we didn't have anything printed on the screen.
 Let's see if everything moved as we wanted.
 
 ```bash
-$ find ~/boosted_barebonesbash/awesome_gif_collection/ -type f -name "*jpg"
+$ find ~/boosted_barebonesbash/images/ -type f -name "*jpg"
 ```
 
 Good! Everything moved into the subfolders!
@@ -2329,7 +2327,7 @@ That's it, you've done your first script
 Now to run the script, we do:
 
 ```bash
-$ sh ./first_script.sh
+$ bash ./first_script.sh
 ```
 
 `Hello world!`
@@ -2556,18 +2554,6 @@ done < Annotations.txt
 ---
 # Your first script!
 
----
-# Housekeeping
-
-This time, we didn't have anything printed on the screen.
-
-Let's see if everything moved as we wanted.
-
-```bash
-$ find ~/boosted_barebonesbash/awesome_gif_collection/ -type f -name "*jpg"
-```
-
-Good! Everything moved into the subfolders!
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
