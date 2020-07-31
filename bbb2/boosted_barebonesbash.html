@@ -1089,7 +1089,7 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   #mv $file $new_name
 > done
 ```
-Use `echo` to make a 'dry-run', and when you're happy with the proposed output 
+Use `echo` to make a 'dry-run', and when you're happy with the proposed output
 uncomment the `mv` command and re-run the for loop.
 
 --
@@ -1376,18 +1376,18 @@ grep '.ear' regex.txt
 - `.` : match any character
 ]
 .right-column-33[
-**pear**  
-pier  
-pir  
-per  
-par  
-pur  
-**bear**  
-beer  
-br  
-ber  
-be\*r  
-**rear**  
+**pear**
+pier
+pir
+per
+par
+pur
+**bear**
+beer
+br
+ber
+be\*r
+**rear**
 ]
 
 ---
@@ -1400,18 +1400,18 @@ grep 'p[iea]r' regex.txt
 - `[]`: match range of characters within []
 ]
 .right-column-33[
-pear  
-pier  
-**pir**  
-**per**  
-**par**  
-pur  
-bear  
-beer  
-br  
-ber  
-be\*r  
-rear  
+pear
+pier
+**pir**
+**per**
+**par**
+pur
+bear
+beer
+br
+ber
+be\*r
+rear
 ]
 
 ---
@@ -1425,18 +1425,18 @@ grep 'p[^iea]r' regex.txt
 - `[^]`: match range of characters except the ones in the bracket
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-**pur**  
-bear  
-beer  
-br  
-ber  
-be\*r  
-rear  
+pear
+pier
+pir
+per
+par
+**pur**
+bear
+beer
+br
+ber
+be\*r
+rear
 ]
 
 ---
@@ -1451,18 +1451,18 @@ grep 'be*r' regex.txt
 - `*`: match 0 or more of the preceding items
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-pur  
-bear  
-**beer**  
-**br**  
-**ber**  
-be\*r  
-rear  
+pear
+pier
+pir
+per
+par
+pur
+bear
+**beer**
+**br**
+**ber**
+be\*r
+rear
 ]
 
 ---
@@ -1478,18 +1478,18 @@ grep 'be\*r' regex.txt
 - `\`: skip character
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-pur  
-bear  
-beer  
-br  
-ber  
-**be\*r**  
-rear  
+pear
+pier
+pir
+per
+par
+pur
+bear
+beer
+br
+ber
+**be\*r**
+rear
 ]
 
 ---
@@ -1506,18 +1506,18 @@ grep 'be\+r' regex.txt
 - `+`: match 1 or more of the preceding items
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-pur  
-bear  
-**beer**  
-br  
-**ber**  
-be\*r  
-rear  
+pear
+pier
+pir
+per
+par
+pur
+bear
+**beer**
+br
+**ber**
+be\*r
+rear
 ]
 
 ---
@@ -1535,18 +1535,18 @@ grep 'be\?r' regex.txt
 - `?`: match 0 or 1 of the preceding items
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-pur  
-bear  
-beer  
-**br**  
-**ber**  
-be\*r  
-rear  
+pear
+pier
+pir
+per
+par
+pur
+bear
+beer
+**br**
+**ber**
+be\*r
+rear
 ]
 
 ---
@@ -1565,18 +1565,18 @@ grep '^[rb]\+' regex.txt
 - `^`: beginning line
 ]
 .right-column-33[
-pear  
-pier  
-pir  
-per  
-par  
-pur  
-**bear**  
-**beer**  
-**br**  
-**ber**  
-**be\*r**  
-**rear**  
+pear
+pier
+pir
+per
+par
+pur
+**bear**
+**beer**
+**br**
+**ber**
+**be\*r**
+**rear**
 ]
 
 ---
@@ -1601,38 +1601,38 @@ grep 'r$' regex.txt
 
 ]
 .right-column-33[
-**pear**  
-**pier**  
-**pir**  
-**per**  
-**par**  
-**pur**  
-**bear**  
-**beer**  
-**br**  
-**ber**  
-**be\*r**  
-**rear**  
+**pear**
+**pier**
+**pir**
+**per**
+**par**
+**pur**
+**bear**
+**beer**
+**br**
+**ber**
+**be\*r**
+**rear**
 ]
 
 ---
 # Regex example
 ```
-fanta.JPG  
-BydgoszczForest.JPG  
-snore.JPG  
-Bubobubo.JPG  
-giacomo.JPG  
-netsukeJapan.JPG  
-nomnom.JPG  
-pompeii.JPG  
-AlopochenaegyptiacaArnhem.JPG  
-exhibitRoyal.JPG  
-stretch.JPG  
-weimanarer.JPG  
-excited.JPG  
-licorne.JPG  
-angry.JPG  
+fanta.JPG
+BydgoszczForest.JPG
+snore.JPG
+Bubobubo.JPG
+giacomo.JPG
+netsukeJapan.JPG
+nomnom.JPG
+pompeii.JPG
+AlopochenaegyptiacaArnhem.JPG
+exhibitRoyal.JPG
+stretch.JPG
+weimanarer.JPG
+excited.JPG
+licorne.JPG
+angry.JPG
 ```
 Which Regex would you use to find all the files ending with .JPG??
 --
@@ -1808,7 +1808,7 @@ You can `cat` the resulting file to see that everything worked.
 
 # Getting parts of a filepath
 
-Before moving on, there are two useful commands you should know. 
+Before moving on, there are two useful commands you should know.
 
 `basename` will tell you the file name, while stripping the path to the file.
 ```bash
@@ -1840,7 +1840,7 @@ A `while` loop is a special type of repeating code that keeps going until it is 
 
 --
 
-We will also use `read`. This command takes the contents of the file and loads them into a specified variable. 
+We will also use `read`. This command takes the contents of the file and loads them into a specified variable.
 
 --
 
@@ -1853,8 +1853,8 @@ $ while read filepath; do
 > done < File_names.txt
 ```
 
-When you're ready, uncomment the `mv` command to move each file from the 
-original location into the new location! 
+When you're ready, uncomment the `mv` command to move each file from the
+original location into the new location!
 
 > Question: in this context, why do you have to use 'basename' for the target directory?
 
@@ -1929,7 +1929,7 @@ $ while n < 5; do
 --
 
 - Always include a stop!
-  - i.e. ensure your condition will eventually become 'false'! 
+  - i.e. ensure your condition will eventually become 'false'!
 
 --
 
@@ -1952,7 +1952,7 @@ $ while read filepath; do
 
 # Pasting things side by side!
 
-As you remember from the beginning, we downloaded a metadata file, which 
+As you remember from the beginning, we downloaded a metadata file, which
 includes different metadata categories for each file.
 
 Lets look in the file!
@@ -2053,7 +2053,7 @@ images/snore.jpg	snore	B	Normal
 images/stretch.jpg	stretch	B	Funny
 images/weimanarer.jpg	weimanarer	dog	Normal
 ```
-> On Macs, `sed` does not recognise `\t`.You will need to type in a tab character. 
+> On Macs, `sed` does not recognise `\t`.You will need to type in a tab character.
 
 ???
 Much better!
@@ -2267,13 +2267,13 @@ This will open a nano viewer window in your terminal.
 
 # Your first script!
 
-The first thing you almost always need to do with any script is to specify which language the script is using, is with a 'shebang'
+The first thing you almost always need to do with any script is to specify which language the script is using. This is done with a 'shebang'
 
 <p align="center"><img src="https://media.giphy.com/media/3o6Mbi2vzeke98ApAA/giphy.gif" title="Source: https://giphy.com/gifs/season-14-the-simpsons-14x5-3o6Mbi2vzeke98ApAA
 " width="30%">
 </p>
 
-This consists of a `#!` to indicate it's a shebang, then a path to a list that *unix stores locations of all programs in.
+It consists of a `#!` to indicate it's a shebang, then a path to a list that *unix stores locations of all programs in.
 
 On the first line of your text editor window, type:
 
@@ -2299,7 +2299,7 @@ save the file.
 
 --
 
-That's it, you've done your first script 
+That's it, you've done your first script
 
 ---
 # How do you run a script?
@@ -2315,7 +2315,7 @@ $ chmod +x first_script.sh
 Now to run the script, we do:
 
 ```bash
-$ ./first_script.sh
+$ sh ./first_script.sh
 ```
 
 `Hello world!`
@@ -2323,7 +2323,7 @@ $ ./first_script.sh
 ---
 # Input Variables
 
-So now we want to change our script to instead of saying `Hello world` to say `Hello your_name`
+So now we want to change our script to instead of saying `Hello world`, it say `Hello <your_name>`
 
 So our script looked like:
 
@@ -2342,7 +2342,49 @@ It is a user suplied value that the script will use to perform the tasks
 ---
 # Input Variables
 
-In Bash, the arguments passed are 
+In Bash, the arguments passed on the command line can be called `$1`,`$2`, `$3`...
+
+`$1` is the first argument
+
+`$2` is the second argument
+
+`$3` is the third argument
+
+and so on.
+
+
+Let's go back to our script and changing the printing message
+
+---
+# Input Variables
+
+So our script looked like:
+
+```bash
+#! /usr/bin/env bash
+
+echo "Hello world"
+```
+
+now we want to pass an argument to print `Hello <your_name>`
+
+So we will change our script to:
+
+```bash
+#! /usr/bin/env bash
+
+name=$1
+
+echo "Hello ${name}"
+```
+
+To run it now we need an argument, so when we run:
+
+```bash
+$ sh ./first_script.sh Aida
+```
+
+`Hello Aida`
 
 ---
 **TODO** REWRITE THIS SLIDE ONWARDS
