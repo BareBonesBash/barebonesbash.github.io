@@ -2271,12 +2271,12 @@ cd ~/boosted_barebonesbash/
 while read line; do
   image_name=$(echo "${line}" | cut -f1)
   animal=$(echo "${line}" | cut -f3)
-  
+
   echo "$animal"
-  
+
   ## Make a new directory for each animal, if one doesn't exist.
   mkdir -p images/${animal}
-  
+
   ## If animal matches one of the three, move the image.
   if [[ ${animal} == "cat" ]]; then
     mv ${image_name} images/cat/
@@ -2495,111 +2495,44 @@ else
 
 ---
 #Debugging your code
----
-**TODO** REWRITE THIS SLIDE ONWARDS
 
-First, you want to set the directory for the script, so add this to the file:
-<br>
-<br>
-<br>
-```bash
-cd ~/boosted_barebonesbash/awesome_gif_collection/
-```
+- Try your code outside the script
 
----
-# Your first script!
+- Add print statements to check the variables/commands are rendering properly
 
-Then you want to use a while loop to read the contents of your annotation file.
-
-To test this works as intended, we will simply `echo` the line.
-
-```bash
-cd ~/boosted_barebonesbash/awesome_gif_collection/
-
-while read line; do
-  echo "${line}"
-done < Annotations.txt
-```
-
---
-
-Close `nano` while saving changes:
-  1. Initiate exit with `ctrl + x`
-  2. You will be prompted to 'Save modified buffer'.
-  3. Press `y` on your keyboard to agree
-  4. Press Enter
-
+- Write the script by its functional parts. How to do this?
+ - Think what you want your script to do
+ - Write/Draw the steps to do
+ - Write the first step -> try it -> write next step -> try it -> repeat until the end
+ - Simplify your code
 
 ---
-# Your first script!
+#Time to practice!
 
-You can run your script like this:
+Your task now will be generate a script to perform the image sorting that we have show you in this presentation.
+
+For this, please make a new directory and download the data again:
+
 ```bash
-$ bash sort_pictures.sh
+$ mkdir Boosted-BBB-scripting
+$ cd Boosted-BBB-scripting
+
+$ wget git.io/Boosted-BBB-meta
 ```
 
-You should see the contents of `Annotations.txt` on your screen.
-
-???
-We've achieved what `cat` does, but in a more complicated way, but we know our while loop works properly.
-
-Code should always be tested **as it is being written**. Never assume you won't make errors!
-
---
-
-Now we can open the file again, and continue editing!
-```bash
-$ nano sort_pictures.sh
-```
+You are set up to start now!
 
 ---
-# Your first script!
+#Things to keep in mind
 
-The text of each line in the file is kept in the `line` variable.
+- Code for the same task can be written in multiple ways: choose the one you understand
 
-Let's extract the image name and country as two separate variables.
+- For the reason mention above, some code is more efficient -> a.k.a runs faster
 
-```bash
-cd ~/boosted_barebonesbash/awesome_gif_collection/
-
-while read line; do
-  image_name=$(echo "${line}" | cut -f1)
-  country_taken=$(echo "${line}" | cut -f2)
-  echo "${image_name} was taken in ${country_taken}"
-done < Annotations.txt
-```
-
---
-
-Once again, time to save changes, and rerun the script to see if we succeeded.
-```bash
-$ bash sort_pictures.sh
-```
-???
-You should now see the information printed in a nicer format, and the image names and countries of origins are now kept in separate variables.
+- Practice makes perfect: the more you do it, the more you learn
 
 ---
-# Your first script!
-
-Here's what we had before.
-<br>
-<br>
-<br>
-<br>
-
-```bash
-cd ~/boosted_barebonesbash/awesome_gif_collection/
-
-while read line; do
-  image_name=$(echo "${line}" | cut -f1)
-  country_taken=$(echo "${line}" | cut -f2)
-
-  echo "${image_name} was taken in ${country_taken}"
-done < Annotations.txt
-```
-
----
-# Your first script!
+# Our Proposed script!
 
 
     </textarea>
