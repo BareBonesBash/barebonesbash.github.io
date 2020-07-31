@@ -2080,16 +2080,13 @@ $ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Anno
 
 # Cleanin' up my closet
 
-Now we've got our newly organised metadata file. Lets actually organise our
-files to be in the more descriptive folder names!
+Lets actually organise our files to be in the more descriptive folder names based on our metadata file!
 
-For this, we need to use `conditionals`. This is basically comparing two things,
-and if they are the same something happens, if they are different they do
+For this, we need to use `conditionals`. This is a comparison of two things,
+and if they are the same something happens, if they are different, do
 something else.
 
-The most basic conditional is an `if` `else` statement.
-
-The basic syntax is like this:
+The most basic conditional is an `if else` statement. The basic syntax is like this:
 ```bash
 $ if [[ ${my_variable} == "banana" ]]; then
 >   echo "The monkey takes the banana and runs away happily."
@@ -2127,8 +2124,15 @@ $ if [[ ${my_variable} == "banana" ]]; then
 ---
 # Notes on conditionals
 
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
+- `[[` behaves different to `[`. Usually, `[[` is what you want
+
+--
+
+> Long story, trust us.
+
+--
+
+- You can evaluate mathematic equations with `((`
 
 --
 
@@ -2144,9 +2148,12 @@ YES
 ---
 # Notes on conditionals
 
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
- - `!` can be used as a "not".
+- `[[` behaves different to `[`. Usually, `[[` is what you want.
+
+> Long story, trust us.
+
+- You can evaluate mathematic equations with `((`
+- `!` can be used as a "not".
 
 ???
 Making a TRUE a FALSE and vice versa.
@@ -2181,6 +2188,7 @@ This works with square brackets as well.
 $ if [[ -f Annotations.txt ]]; then
 >   echo "File exists!"
 > fi
+
 $ if [[ -n ${banana} ]]; then
 >   echo "Variable is set!"
 > else
