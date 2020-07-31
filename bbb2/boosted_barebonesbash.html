@@ -2324,18 +2324,10 @@ That's it, you've done your first script
 ---
 # How do you run a script?
 
-To run a script you have to make the script executable. For that we use `chmod`:
-
-
-```bash
-$ chmod +x first_script.sh
-```
-
---
 Now to run the script, we do:
 
 ```bash
-$ sh ./first_script.sh
+$ bash ./first_script.sh
 ```
 
 `Hello world!`
@@ -2406,6 +2398,45 @@ $ sh ./first_script.sh Aida
 
 `Hello Aida`
 
+---
+#Good practises when writing code
+
+There is a few good practices when writing code that should be followed to ensure that anyone can understand your code.
+
+- Comment your code: add a short description of the steps. So in our first_script.sh, we should include:
+
+```bash
+#! /usr/bin/env bash
+
+name=$1
+
+#Printing Hello and the specified variable into screen
+echo "Hello ${name}"
+```
+- Give variables informative names
+- Keep the code simple: try to simply your code instead of having 1,000 lines
+
+---
+#Recommended practice when writing code
+
+
+- Add a help message. In our basic script, we could add the following
+
+```bash
+#! /usr/bin/env bash
+
+name=$1
+
+if [[ ${name} == "--help" | ${name} == "-h" ]]; then
+  #Print help message
+  echo "This script print Hello <your_name> into screen. \n To run it type: sh ./first_script.sh <your_name>"
+else
+  #Printing Hello and the specified variable into screen
+  echo "Hello ${name}"
+```
+
+---
+#Debugging your code
 ---
 **TODO** REWRITE THIS SLIDE ONWARDS
 
@@ -2512,18 +2543,6 @@ done < Annotations.txt
 ---
 # Your first script!
 
----
-# Housekeeping
-
-This time, we didn't have anything printed on the screen.
-
-Let's see if everything moved as we wanted.
-
-```bash
-$ find ~/boosted_barebonesbash/awesome_gif_collection/ -type f -name "*jpg"
-```
-
-Good! Everything moved into the subfolders!
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
