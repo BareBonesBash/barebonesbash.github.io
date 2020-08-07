@@ -359,7 +359,7 @@ class: center middle
 # Preparation!
 
 ---
-
+exclude: true
 # Materials
 
 - A long-form walkthrough, and these slides, are all freely avaliable avaliable at:
@@ -433,7 +433,11 @@ class: middle, center
 To write multi-line code in one: replace a newline with a `;`
 
 ???
-in Bash ALWAYS MIND THE $ Only copy after the $ so you dont paste the command prompt too. $ is also important when dealing with variables, which you will see later today.
+in Bash ALWAYS MIND THE `$`! Only copy after the `$` so you dont paste the command prompt too. `$` is also important when dealing with variables, which you saw a bit last time and will see more of today.
+
+In this presentation we will use `$` at the start of a line of code to show where the command prompt would be.
+
+We will use `>` to denote the subsequent lines of a multi-line code command.
 
 ---
 
@@ -494,7 +498,7 @@ Some people in homework had one `mkdir` command for each directory they made, th
 ```bash
 $ wget git.io/Boosted-BBB-meta
 ```
-> Tip: If using a mac use 'curl -O' instead!
+> Tip: If using a mac use 'curl -LO' instead!
 
 
 --
@@ -527,7 +531,7 @@ $ mkdir boosted_barebonesbash
 ```bash
 $ wget git.io/Boosted-BBB-meta
 ```
-> Tip: If using a mac use 'curl -O' instead!
+> Tip: If using a mac use 'curl -LO' instead!
 
 - How to **move** a something e.g. file into a directory?
 
@@ -569,6 +573,8 @@ $ tail Boosted-BBB-meta.tsv
 $ less Boosted-BBB-meta.tsv
 
 ```
+???
+Remeber, `less` opens a viewer window. exit that by pressing `q`
 
 --
 
@@ -579,7 +585,10 @@ $ less Boosted-BBB-meta.tsv
 $ cat Boosted-BBB-meta.tsv | grep 'fanta' | wc -l
 
 ```
+???
+Combine tools with `|`. You will learn a bit more about how that works today.
 
+`grep` will look for lines containing the string `'fanta'`.
 --
 
 > Tip: Be _lazy_; No need for `cat`!
@@ -794,7 +803,7 @@ $ find Boosted-BBB/  # Don't run yet!
 <br/>
 <br/>
 
-> **Question** What is the difference between `~/` and `/home/james`?
+> **Question** What is the difference between `Boosted-BBB/` and `/home/james/boosted_barebonesbash/Boosted-BBB/`?
 
 ---
 
@@ -895,7 +904,7 @@ This time the command finds the files! What in 'tarnation is going on!?
 
 # Where is my stuff??
 
-We are looking for all files with the suffix `GIF`.
+We are looking for all files with the suffix `JPG`.
 
 Let's first set the suffix we want to a variable, so we can easily change it in the future.
 
@@ -1060,57 +1069,56 @@ Using these tools, we can start cleaning up the desired filenames like this:
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
->   echo $i $new_name
+>   echo $file $new_name
 >   #mv $file $new_name
 > done
 ```
 Use `echo` to make a 'dry-run', and when you're happy with the proposed output
-uncomment the `mv` command and re-run the for loop.
+uncomment the `mv` command and re-run the `for` loop.
 
 --
 
 **BUT WAIT! This code is cumbersome to write, read and understand.**
 <p align="center"><img src="https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" title="Source: https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" width="40%">
 </p>
-
+???
+So let's take a step-by-step look at what just happened.
 
 ---
 
 # Wait, what just happened?
 
- - `$()` tells bash to run the commands within parentheses and interpret the output as a string, which is then assigned to the variable `new_name`
-
- We start out with a filepath:
-
- ```
- ~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3.TXT
- ```
+`$()` tells bash to run the commands within parentheses and interpret the output as a string, which is then assigned to the variable `new_name`
 
 --
 
- - the filename is `rev`ersed:
-
- ```
- TXT.3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~
- ```
+#####We start out with a filepath:
+```
+~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3.TXT
+```
 
 --
 
- - the string is `cut` at each `-d`elimiter `.`, and everything after the first delimiter is kept (`-f`ields `2-999`):
+#####We `rev`erse the filename:
+```
+TXT.3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~
+```
 
- ```
- 3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~
- ```
 --
 
- - the output is `rev`ersed back:
-
- ```
- ~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3
- ```
+#####We `cut` the string at each `-d`elimiter (`.`), and keep everything after the first delimiter (`-f`ields `2-999`):
+```
+    3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~
+```
 --
 
- - the file is then renamed to this new filename with `mv`
+#####We `rev`erse what is left back to its original orientation:
+```
+~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3
+```
+--
+
+#####We then rename the file to the new filename with `mv`.
 
 
 ---
@@ -1123,7 +1131,8 @@ How to make this code simpler? **Do not run this code!**
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
->   mv $file $new_name
+>   echo $file $new_name
+>   # mv $file $new_name
 > done
 ```
 
@@ -1166,7 +1175,7 @@ $ echo ${foo}
 ]
 
 ???
-This is actually what bash does behind the scenes when we type $Var thus far.
+This is actually what bash did behind-the-scenes when we typed `$Var` thus far.
 It is a good idea to put all variables in `{}` so thre is never any confusion as to which is the variable name.
 
 --
@@ -1270,6 +1279,11 @@ This parameter is more useful when dealing with **bash arrays** (i.e. lists of t
 " width="40%">
 </p>
 
+???
+We will not be talking about bash arrays further, but they are basically indexed/numbered lists of stuff.
+
+That means you can, for example, ask for the 5th item in a bash array and get only that one. Look em up if that sounds useful to you! **[Rule 2]**
+
 ---
 # Writing pretty code
 We can now rewrite this code
@@ -1314,7 +1328,7 @@ It is much more efficient since parameter expansion is one command, instead of 4
 
 --
 
-When sure it works, remove the comments to rename!
+When sure it works, remove the comment to rename!
 
 ---
 
@@ -1349,12 +1363,18 @@ Remember, a string is fancy computer lingo for a sequence of characters and/or n
 - Used in 'Search' or 'Search/Replace' functions e.g. in excel!
 - You have already used them!
 
+--
+
 To prepare, download the following file
 
 ```bash
 $ wget git.io/Boosted-BBB-regex
 $ mv Boosted-BBB-regex regex.txt
 ```
+???
+As usual, Mac users should use `curl -LO`
+
+--
 
 Let's also look at the contents.
 
@@ -1364,6 +1384,25 @@ cat regex.txt
 
 ???
 Technically, all the wildcards you have used are regex!
+
+---
+# Regex Basics
+.right-column-33[
+pear
+pier
+pir
+per
+par
+pur
+bear
+beer
+br
+ber
+be\*r
+rear
+]
+???
+When you `cat regex.txt`, you should see the following printed on your screen. 
 
 ---
 # Regex Basics
@@ -1485,7 +1524,7 @@ grep 'be\*r' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
+- `\`: do not interpret next character
 ]
 .right-column-33[
 pear
@@ -1501,6 +1540,10 @@ ber
 **be\*r**
 rear
 ]
+???
+Normally, `*` would be interpreted to `match 0 or more of the preceding items`. 
+
+But because we have "escaped" interpretation with `\`, it is treated as an asterisk character (*).
 
 ---
 # Regex Basics
@@ -1512,8 +1555,8 @@ grep 'be\+r' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
-- `+`: match 1 or more of the preceding items
+- `\`: do not interpret next character
+- `\+`: match 1 or more of the preceding items
 
 <p align="center">
   <img src="https://media.giphy.com/media/RqbkeCZGgipSo/giphy.gif" title="Source: https://giphy.com/gifs/dreaming-the-simpsons-RqbkeCZGgipSo" width="50%">
@@ -1546,8 +1589,8 @@ grep 'be\?r' regex.txt
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
 - `\`: skip character
-- `+`: match 1 or more of the preceding items
-- `?`: match 0 or 1 of the preceding items
+- `\+`: match 1 or more of the preceding items
+- `\?`: match 0 or 1 of the preceding items
 ]
 .right-column-33[
 pear
@@ -1577,7 +1620,7 @@ grep '^[rb]\+' regex.txt
 - `\`: skip character
 - `+`: match 1 or more of the preceding items
 - `?`: match 0 or 1 of the preceding items
-- `^`: beginning line
+- `^`: the beginning of the line
 
 <p align="center">
   <img src="https://media.giphy.com/media/J0ySNzZ5APILC/giphy.gif" title="Source: https://giphy.com/gifs/man-weekend-the-J0ySNzZ5APILC/links" width="50%">
@@ -1612,8 +1655,8 @@ grep 'r$' regex.txt
 - `\`: skip character
 - `+`: match 1 or more of the preceding items
 - `?`: match 0 or 1 of the preceding items
-- `^`: beginning line
-- `$`: end of the line
+- `^`: the beginning of the line
+- `$`: the end of the line
 
 > This can be intimidating, however there are lots of resources on the internet
 > (reminder: Google _everything_!) to help, such as: [https://regex101.com/](https://regex101.com/).
@@ -1658,7 +1701,7 @@ Which Regex would you use to find all the files ending with .JPG??
 --
 
 ```bash
-$ find Boosted-BBB/ -type f -name "*.JPG"
+$ find Boosted-BBB/ -type f -name '*.JPG'
 ```
 
 ???
@@ -1671,16 +1714,19 @@ So if we want to match a specific set of characters, that always follow a `.` an
 
 To convert all suffixes in the directory to lowercase characters:
 ```bash
-$ find Boosted-BBB/ -type f -name "*.JPG" | rename 's/\.JPG$/.jpg/'
+$ find Boosted-BBB/ -type f -name '*.JPG' | rename 's/\.JPG$/.jpg/'
 ```
 
 > Check with `find` whether the names are now as you expect!
+
+???
+By default, Macs do NOT have `rename` installed.
 
 --
 
 .left-column[
 
-No for loop needed (yay for pipes!)!
+No `for` loop needed (yay for pipes!)!
 
 The expression given to `rename` has three parts, separated by `/`
 ]
@@ -1844,7 +1890,7 @@ Before moving on, there are two useful commands you should know.
 
 `basename` will tell you the file name, while stripping the path to the file.
 ```bash
-data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+$ basename data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
 ```
 ```
 bubobubo.JPG.MP3.TXT
@@ -1854,7 +1900,7 @@ bubobubo.JPG.MP3.TXT
 
 `dirname` does the opposite. It will tell you the path to the directory that a file is in, while omitting the name of the file.
 ```bash
-data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+$ dirname data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
 ```
 ```
 data/Boosted-BBB//Having/the/time/of/your/life
@@ -1880,8 +1926,8 @@ With these two commands we are ready to go!
 ```bash
 $ mkdir images
 $ while read filepath; do
->      echo "${filepath}" images/$(basename ${filepath})
->      # mv ${filepath} images/$(basename ${filepath})
+>   echo "${filepath}" images/$(basename ${filepath})
+>   # mv ${filepath} images/$(basename ${filepath})
 > done < File_names.txt
 ```
 
@@ -1891,13 +1937,17 @@ original location into the new location!
 > Question: in this context, why do you have to use 'basename' for the target directory?
 
 ???
-First, we make the directory `images`. Then the `while` loop reads through the contents of each line in `File_names.txt`, `read` puts the contents of the line in the variable `fname` and then the code in the loop is executed. With the redirect after done we give the while loop `File_names.txt` as input.
+First, we make the directory `images`, then the `while` loop reads through the contents of each line in `File_names.txt`.
+
+`read` puts the contents of the line in the variable `fname` and then the code in the loop is executed. 
+
+With the redirect after `done` we give the while loop `File_names.txt` as input.
 
 ---
 
 # Concept: While Loops
 
-We have previously introduced the concept of a loop.
+We have previously introduced the concept of a loop, and already used a few today.
 
 **From Basic_BBB**
 
@@ -1912,8 +1962,10 @@ For loops repeat a set of code for a set of items, by changing the value of a va
 ---
 
 # Concept: While Loops
- - For loops are finite, they go throw your list and stop
- - A while loop keeps going until a statement is false
+
+`For` loops are finite, they go through your list and stop when they run out of things.
+
+Instead, a `while` loop keeps going until a statement is false.
 ```bash
 $ while [statment]; do     #means while statement is true do
 >   [whatever you want to do]
@@ -1970,15 +2022,18 @@ Following our example from the beginning...
 
 ```bash
 $ while read filepath; do
->      echo "${filepath}" images/$(basename ${filepath})
->      # mv ${filepath} images/$(basename ${filepath})
+>   echo "${filepath}" images/$(basename ${filepath})
+>   # mv ${filepath} images/$(basename ${filepath})
 > done < File_names.txt
 ```
 ]
 
 .right-column-33[
-  ...our 'stop' condition is when there are no more lines or '`EOF`'
+  ...the condition `read filepath` becomes false when there are no more lines in the file `File_names.txt` (i.e. '`EOF`')
 ]
+
+???
+Programmer lingo: `EOF` means end of file! 
 
 ---
 
@@ -1990,7 +2045,7 @@ includes different metadata categories for each file.
 Lets look in the file!
 
 ```bash
-cat Boosted-BBB-meta.tsv
+$ cat Boosted-BBB-meta.tsv
 ```
 
 ???
@@ -1998,7 +2053,7 @@ You wanted to minimise the time you spend typing while on hunting for your best 
 
 --
 
-Now we want to put together a list that states in which category each image was is a part of. Try opening a few and see if you can work it out.
+Now we want to put together a list that states in which category each image was is a part of.
 
 ???
 In the metadata file, you have the names of the images, and you have the categories of each too.
@@ -2011,7 +2066,7 @@ You can use `paste` to paste the two lists together, and save the results!
 $ ls -1 images/* | paste - Boosted-BBB-meta.tsv # > Annotations.txt
 ```
 ???
-`ls -1` forces the output into a single column. `paste` accepts the stdin and puts it at the position of `-`.
+`ls -1` forces the output into a single column. `paste` accepts the `stdin` and puts it at the position of `-`.
 --
 ```
 images/alopochenaegyptiacaArnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
@@ -2023,8 +2078,9 @@ images/stretch.jpg	stretch	B	Funny
 images/weimanarer.jpg	weimanarer	A	Normal
 ```
 ???
-Check that the file name matches the second column of each row. When u are satisfied, remove the `#` and save the output.
-You now have a meta-data sheet for each gif!
+Check that the file name matches the second column of each row. When u are satisfied, remove the `#` and save the output into `Annotations.txt`.
+
+You now have a meta-data sheet for each jpg!
 
 ---
 
@@ -2056,7 +2112,7 @@ images/stretch.jpg	stretch	B	Funny
 images/weimanarer.jpg	weimanarer	dog	Normal
 ```
 
-Uh-oh!]
+**Uh-oh!**]
 ???
 Do you see what went wrong? Don't worry, your file has not been changed in any way.
 --
@@ -2067,7 +2123,9 @@ Do you see what went wrong? Don't worry, your file has not been changed in any w
 ???
 What happened here? How can we fix it?
 
-Pattern matches the first A in a line with `dog`. We should make our regex more specific. We know the value we want is a column, and hence it is surrounded by TABs! Change pattern to `C$` to only match the last character of the line.
+Pattern matches the first A in a line with `dog`. We should make our regex more specific.
+We know the value we want is a column, and hence it is surrounded by TABs! 
+Change pattern to 's/\tA\t/\tdog\t/' to only match a single character column.
 
 ---
 
@@ -2090,6 +2148,7 @@ images/weimanarer.jpg	weimanarer	dog	Normal
 ???
 Much better!
 
+Ensure your replacement also has tabs!
 --
 
 Use `-e` to provide multiple regular **e**xpressions to `sed`.
@@ -2107,6 +2166,8 @@ When you are happy with the results, it is time to save the edits.
 ```bash
 $ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Annotations.txt
 ```
+???
+On Mac, the `-i` option needs an argument so replace it with `-i ''`
 
 ---
 
@@ -2114,21 +2175,25 @@ $ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Anno
 
 Lets actually organise our files to be in the more descriptive folder names based on our metadata file!
 
+--
+
 For this, we need to use `conditionals`. This is a comparison of two things,
-and if they are the same something happens, if they are different, do
-something else.
+and if they are the same something happens, if they are different,
+something else happens.
+
+--
 
 The most basic conditional is an `if else` statement. The basic syntax is like this:
 ```bash
 $ if [[ ${my_variable} == "banana" ]]; then
 >   echo "The monkey takes the banana and runs away happily."
 > else
->   echo "The monkey doesn't want that!"
+>   echo "The monkey doesn't want that."
 > fi
 ```
 
 ???
-If the code above is run while `my_variable` is set to "banana", then the top code will execute, esle the bottom will.
+If the code above is run while `my_variable` is set to "banana", then the top code will execute, else the bottom will.
 
 `then` is similar to `do` in for/while loops.
 
@@ -2149,9 +2214,18 @@ $ if [[ ${my_variable} == "banana" ]]; then
 > elif [[ ${my_variable} == "mango" ]]; then
 >   echo "The monkey takes the mango and eats it while staring at you."
 > else
->   echo "The monkey doesn't want that!"
+>   echo "The monkey doesn't want that."
 > fi
 ```
+
+???
+Can you guess what would happen here depending on the contents of `my_variable`?
+
+my_variable="banana"
+
+my_variable="mango"
+
+my_variable="pear"
 
 ---
 # Notes on conditionals
@@ -2188,7 +2262,7 @@ YES
 - `!` can be used as a "not".
 
 ???
-Making a TRUE a FALSE and vice versa.
+Turning a TRUE into FALSE and vice versa.
 
 --
 
@@ -2204,100 +2278,193 @@ NO
 ```
 ???
 
-This works with square brackets as well.
+`!` can act as a "not" with square brackets as well.
 
 ---
 
 # Notes on conditionals
 
- - `[[` behaves different to `[`. Usually, `[[` is what you want.
- - You can evaluate mathematic equations with `((`
- - `!` can be used as a "not".
- - Some options can be used to check if files exist, or is a variable has been set.
+- `[[` behaves different to `[`. Usually, `[[` is what you want.
+
+> Long story, trust us.
+
+- You can evaluate mathematic equations with `((`
+- `!` can be used as a "not".
+ - Some options can be used to check if files exist, or is a variable has non-zero length.
 
 --
 
 ```bash
 $ if [[ -f Annotations.txt ]]; then
->   echo "File exists!"
+>   echo "File exists."
 > fi
 
 $ if [[ -n ${banana} ]]; then
->   echo "Variable is set!"
+>   echo "Variable is set."
 > else
->   echo "Varable is NOT set!"
-> fi```
+>   echo "Varable is NOT set."
+> fi
 ```
-File exists!
-Varable is NOT set!
+```
+File exists.
+Varable is NOT set.
 ```
 
 ---
 
-## Leeroy Jenkins!
+## Sorting the images by category
 
-We now want to create a directory for each country, and move the pictures from that country in it.
+We now want to create a directory for each category, and move the images of that category into it.
+
+--
+
+Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
+
+--
+
+```bash
+$ cd ~/boosted_barebonesbash/
+
+## Parse the annotations file into variables
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+> 
+>   echo "${image_name}    ${animal}"
+> 
+> done < Annotations.txt
+```
+```
+images/alopochenaegyptiacaArnhem.jpg    bird
+images/angry.jpg    cat
+images/bubobubo.jpg    bird
+images/bydgoszczForest.jpg    bird
+[...]
+images/pompeii.jpg    dog
+images/snore.jpg    cat
+images/stretch.jpg    cat
+images/weimanarer.jpg    dog
+```
+
+---
+
+## Sorting the images by category
+
+We now want to create a directory for each category, and move the images of that category into it.
 
 Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
 
 ```bash
-cd ~/boosted_barebonesbash/
+$ cd ~/boosted_barebonesbash/
 
-while read line; do
-  image_name=$(echo "${line}" | cut -f1)
-  animal=$(echo "${line}" | cut -f3)
+## Parse the annotations file into variables
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+>  
+>   # echo "${image_name}    ${animal}"
+>  
+>   ## Make a new directory for each animal, if one doesn't exist.
+>   mkdir -p images/${animal}
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+> done < Annotations.txt
+```
 
-  echo "$animal"
+---
 
-  ## Make a new directory for each animal, if one doesn't exist.
-  mkdir -p images/${animal}
+## Sorting the images by category
 
-  ## If animal matches one of the three, move the image.
-  if [[ ${animal} == "cat" ]]; then
-    mv ${image_name} images/cat/
-  elif [[ ${animal} == "dog" ]]; then
-    mv ${image_name} images/dog/
-  elif [[ ${animal} == "bird" ]]; then
-    mv ${image_name} images/bird/
-  fi
+We now want to create a directory for each category, and move the images of that category into it.
 
-done < Annotations.txt
+Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
+
+```bash
+$ cd ~/boosted_barebonesbash/
+
+## Parse the annotations file into variables
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+> 
+>   # echo "${image_name}    ${animal}"
+> 
+>   ## Make a new directory for each animal, if one doesn't exist.
+>   mkdir -p images/${animal}
+> 
+>   ## If animal matches one of the three, move the image.
+>   if [[ ${animal} == "cat" ]]; then
+>     mv ${image_name} images/cat/
+>   elif [[ ${animal} == "dog" ]]; then
+>     mv ${image_name} images/dog/
+>   elif [[ ${animal} == "bird" ]]; then
+>     mv ${image_name} images/bird/
+>   fi
+> 
+> done < Annotations.txt
 ```
 
 ---
 
 # Housekeeping
 
-This time, we didn't have anything printed on the screen.
-
-Let's see if everything moved as we wanted.
+Let's see if everything moved where we wanted.
 
 ```bash
 $ find ~/boosted_barebonesbash/images/ -type f -name "*jpg"
 ```
-
-Good! Everything moved into the subfolders!
+--
+```
+/Users/lamnidis/boosted_barebonesbash/images//cat/snore.jpg
+/Users/lamnidis/boosted_barebonesbash/images//cat/giacomo.jpg
+/Users/lamnidis/boosted_barebonesbash/images//cat/excited.jpg
+/Users/lamnidis/boosted_barebonesbash/images//cat/angry.jpg
+/Users/lamnidis/boosted_barebonesbash/images//cat/stretch.jpg
+/Users/lamnidis/boosted_barebonesbash/images//dog/licorne.jpg
+/Users/lamnidis/boosted_barebonesbash/images//dog/fanta.jpg
+/Users/lamnidis/boosted_barebonesbash/images//dog/weimanarer.jpg
+/Users/lamnidis/boosted_barebonesbash/images//dog/pompeii.jpg
+/Users/lamnidis/boosted_barebonesbash/images//dog/nomnom.jpg
+/Users/lamnidis/boosted_barebonesbash/images//bird/alopochenaegyptiacaArnhem.jpg
+/Users/lamnidis/boosted_barebonesbash/images//bird/bubobubo.jpg
+/Users/lamnidis/boosted_barebonesbash/images//bird/netsukeJapan.jpg
+/Users/lamnidis/boosted_barebonesbash/images//bird/bydgoszczForest.jpg
+/Users/lamnidis/boosted_barebonesbash/images//bird/exhibitRoyal.jpg
+```
+Good! Everything moved into the correct subfolder!
 
 ---
 
-# But I have to do this on a daily basis?
+# I have to do this every day!
 
-Now, we are already being lazy getting the computer to loop through each file.
+We are already being lazy by getting the computer to loop through each file.
 
-But we are downloading tasty gifs EVERYDAY? Do we really wanna do it very time?!
+But what do you do if you have to do the same thing EVERYDAY? 
+
+Do you really wanna write all the commands every time?!
 
 <p align="center"><img src="https://media.giphy.com/media/iE4lKpKqwe7QIQCPjG/giphy.gif" title="Source: https://giphy.com/gifs/memecandy-iE4lKpKqwe7QIQCPjG" width="30%">
 </p>
 
-The ultimate goal of anyone working on the command line is to make a program which means you type a single command and it does it for you.
+--
 
-We can do this with a _script_.
+The ultimate goal of anyone working on the command line is to make a program which you can run with a single command and it does all the work for you.
+
+That program is called a **_script_**.
 
 ---
 
 # What's a script?
 
-Similar to a play/movie script that tells actors what to do, a computer script is a file containing all the commands that you want the computer to perform in a given order
+Similar to a play/movie script that tells actors what to do and the sequence in which they should do it, a computer script is a file containing all the commands that you want the computer to perform in a given order.
 
 
 So let's start writing your first script `first_script.sh`! Open a text editor
@@ -2333,6 +2500,13 @@ On the first line of your text editor window, type:
 ```bash
 #! /usr/bin/env bash
 ```
+???
+In most cases, your shebang will be that exact path plus the language you are using.
+e.g.
+
+`#! /usr/bin/env bash`
+
+`#! /usr/bin/env python`
 
 ---
 
@@ -2352,7 +2526,7 @@ save the file.
 
 --
 
-That's it, you've done your first script
+That's it! You've made your first script!
 
 ---
 # How do you run a script?
@@ -2362,8 +2536,9 @@ Now to run the script, we do:
 ```bash
 $ bash ./first_script.sh
 ```
+--
 ```
-Hello world!
+Hello world
 ```
 
 ---
@@ -2381,7 +2556,11 @@ echo "Hello world"
 
 We can use variables for the arguments passed to a script.
 
+--
+
 Wait... what are arguments??
+
+--
 
 It is a user suplied value that the script will use to perform the tasks
 
@@ -2392,29 +2571,62 @@ In Bash, the arguments passed on the command line can be called `$1`,`$2`, `$3`.
 
 `${1}` is the first argument
 
+--
+
 `${2}` is the second argument
+
+--
 
 `${3}` is the third argument
 
+--
+
 and so on.
 
+--
 
-Let's go back to our script and changing the printing message
+Let's go back to our script and change the printing message
 
 ---
 # Input Variables
 
-So our script looked like:
+This is our script from before:
 
 ```bash
 #! /usr/bin/env bash
 
+
+
 echo "Hello world"
 ```
 
-now we want to pass an argument to print `Hello <your_name>`
+--
 
-So we will change our script to:
+First, we want to pass our name to the script as an argument.
+
+---
+# Input Variables
+
+This is our script from before:
+
+```bash
+#! /usr/bin/env bash
+
+name=${1}
+
+echo "Hello world"
+```
+
+First, we want to pass our name to the script as an argument.
+
+--
+
+Then, we want to print out "Hello < name >" instead of "Hello World".
+
+---
+# Input Variables
+
+This is our script from before:
 
 ```bash
 #! /usr/bin/env bash
@@ -2424,41 +2636,61 @@ name=${1}
 echo "Hello ${name}"
 ```
 
-To run it now we need an argument, so when we run:
+First, we want to pass our name to the script as an argument.
 
+Then, we want to print out "Hello < name >" instead of "Hello World".
+
+--
+
+The script now needs an argument to run, so we will run:
 ```bash
 $ bash ./first_script.sh Aida
 ```
-
+--
 ```
 Hello Aida
 ```
 
 ---
-#Good practices when writing code
+# Best practices when coding
 
-There is a few good practices when writing code that should be followed to ensure that anyone can understand your code.
+There are a few best practices that you should follow when writing code, to ensure that anyone can understand your code.
+
+--
 
 - Comment your code: add a short description of the steps. So in our first_script.sh, we should include:
+
+--
 
 ```bash
 #! /usr/bin/env bash
 
+## Read name from positional arguments
 name=${1}
 
-#Printing Hello and the specified variable into screen
+## Printing Hello and the specified variable into screen
 echo "Hello ${name}"
 ```
 
-- Give variables informative names
+--
+
+- Give variables informative names.
+
+--
+
 - Try to have all bash variables in `${}`. This helps distinguish them visually and ensures all variables are interpreted correctly.
+
+--
+
 - Keep the code simple: try to simply your code instead of having 1,000 lines
+--
 
+  - Avoid duplicating code.
+  
 ---
-#Recommended practice when writing code
+# Recommended practice when writing code
 
-
-- Add a help message. In our basic script, we could add the following
+- Add a help message. In our basic script, we could add the following:
 
 ```bash
 #! /usr/bin/env bash
@@ -2466,37 +2698,68 @@ echo "Hello ${name}"
 name=${1}
 
 if [[ ${name} == "--help" || ${name} == "-h" ]]; then
-  #Print help message
-  echo "This script print Hello <your_name> into screen. \n To run it type: sh ./first_script.sh <your_name>"
+  ## Print help message
+  echo "This script print Hello <your_name> into screen."
+  echo "To run it type: bash ./first_script.sh <your_name>"
 else
-  #Printing Hello and the specified variable into screen
+  ## Printing Hello and the specified variable into screen
   echo "Hello ${name}"
  fi
 ```
+--
+You will often go back to old scripts and not remember the options and arguments they need.
+
+Having helptext will make it easier to remember.
 
 ---
-#Debugging your code
+# Debugging your code
 
 - Try your code outside the script
 
+--
+
 - Add print statements to check the variables/commands are rendering properly
 
-- Write the script by its functional parts. How to do this?
+--
+
+- Write the script by its functional parts. 
  - Think what you want your script to do
  - Write/Draw the steps to do
- - Write the first step -> try it -> write next step -> try it -> repeat until the end
+ - Write code for the first step -> try it -> write code for the next step -> try it -> repeat until the end
  - Simplify your code
+
+--
 
 - Explain your code to someone else. Going through the logic of it will often make the problem obvious.
  - This is called the Rubber ducky approach, as many programmers have a rubber duck that they explain their code to.
 
 ---
-#Time to practice!
+# Things to keep in mind
+
+- Code for the same task can be written in multiple ways
+
+  - Some code is more **efficient** -> a.k.a runs faster.
+  - Some code is more **readable**.
+--
+
+  - Some code is _both!_
+--
+
+  - Some code is neither...
+
+--
+
+- Practice makes perfect: the more you do it, the more you learn.
+
+---
+# Time to practice!
 
 Your task now will be generate a script to perform the image sorting that we have show you in this presentation.
 
-BUT: This time you will need to make a subdirectory within each of the categories with the secondary description of the images!
+**BUT:** This time you will need to make a subdirectory within each of the categories with the secondary description of the images!
 > That is column 3 of the metadata file. (Artwork, Baby, Funny, Historical, Normal)
+
+--
 
 For this, please make a new directory and download the data again:
 
@@ -2507,19 +2770,14 @@ $ cd ~/Boosted-BBB-scripting
 ## Get images zip and metadata file
 $ wget git.io/Boosted-BBB-images
 $ wget git.io/Boosted-BBB-meta
+
+## Unzip image folders and rename metadata file
+$ unzip Boosted-BBB-images
+$ mv Boosted-BBB-meta  ~/Boosted-BBB-scripting/Boosted-BBB-meta.tsv
 ```
-> Mac users should use `curl -L`
+> Mac users should use `curl -LO`
 
 You are set up to start now!
-
----
-#Things to keep in mind
-
-- Code for the same task can be written in multiple ways: choose the one you understand
-
-- For the reason mention above, some code is more efficient -> a.k.a runs faster
-
-- Practice makes perfect: the more you do it, the more you learn
 
 ---
 # Our Proposed script!
