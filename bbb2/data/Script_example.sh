@@ -23,9 +23,9 @@ find ${folder} -type f -name "*.${suffix}" | rename "s/\.${suffix}$/.jpg/"
 find ${folder} -type f -name "*.jpg" > File_names.txt
 
 #Write while loop to move files to a common folder. This could be done with a for loop too.
-mkdir Common_folder
+mkdir images
 while read line; do
-  mv ${line} Common_folder
+  mv ${line} images
 done < File_names.txt
 
 ## Edit the contents of the metadata file to get correct category names
@@ -33,7 +33,7 @@ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' ${meta
 
 ## Sort the file names in Common_filder and the lines of the metadata file, and paste the two files side by side.
 ## This creates a file with both the path and the metadata for each file, one file per line.
-ls Common_folder -1 | sort > File_names_sorted.txt
+ls images -1 | sort > File_names_sorted.txt
 sort ${metadata} | paste File_names_sorted.txt - >metadata_with_paths.txt
 
 ## Finally, read the metadata and sort your images into different (sub)directories
