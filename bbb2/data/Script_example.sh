@@ -49,8 +49,8 @@ while read line; do
   # echo ''
   
   ## Make the directory if it doesn't exist
-  mkdir -p Common_folder/${main_category}/${secondary_category}/
+  mkdir -p images/${main_category}/${secondary_category}/
   
   ## Move the image in its corresponding directory
-  mv Common_folder/${file_path} Common_folder/${main_category}/${secondary_category}/
+  mv images/${file_path} images/${main_category}/${secondary_category}/
 done < metadata_with_paths.txt
