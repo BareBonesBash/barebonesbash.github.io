@@ -16,7 +16,7 @@ for file in $(find ${folder} -type f -name "*${suffix}*"); do
   mv ${file} ${file%%.*}.${suffix}
 done
 
-## MAke the suffix JPG lowercase on all files. This step could be merged with the previous step too.
+## Make the suffix JPG lowercase on all files. This step could be merged with the previous step too.
 find ${folder} -type f -name "*.${suffix}" | rename "s/\.${suffix}$/.jpg/"
 
 ## Save the list of new filepaths in File_names.txt
