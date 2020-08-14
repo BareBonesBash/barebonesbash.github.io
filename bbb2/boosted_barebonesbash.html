@@ -1243,7 +1243,24 @@ $ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
 /home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
 ```
---
+
+<p align="center"><img src="https://media.giphy.com/media/b7sNm0aR2EOqI/giphy.gif" title="Source: https://giphy.com/gifs/teachers-b7sNm0aR2EOqI width="75%">
+</p>
+
+---
+
+# More parameters for expansion
+
+You can use two `/` to substitute parts of the variable:
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+$ echo ${foo}                    # No parameters
+$ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
+```
+```
+/home/thiseas/folder/subfolder/BBB.is.bae.txt
+/home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
+```
 
 Leaving the second `/` out replaces the pattern with "an empty string".
 ```bash
@@ -1951,9 +1968,19 @@ A `while` loop is a special type of repeating code that keeps going until it is 
 
 We will also use `read`. This command takes the contents of the file and loads them into a specified variable.
 
---
+<p align="center"><img src="https://media.giphy.com/media/WoWm8YzFQJg5i/source.gif" title="Source: https://giphy.com/gifs/cartoons-comics-sea-reading-WoWm8YzFQJg5i" width="35%">
+</p>
 
-With these two commands we are ready to go!
+---
+
+# Reading from a file
+
+Ok, so you now have a file with all the paths to the images we need. But the folder structure is still a mess. It's time to read the contents of the file with a `while` loop!
+
+A `while` loop is a special type of repeating code that keeps going until it is interrupted.
+
+We will also use `read`. This command takes the contents of the file and loads them into a specified variable.
+
 ```bash
 $ mkdir images
 $ while read filepath; do
@@ -2351,10 +2378,11 @@ Varable is NOT set.
   - `&&`: 'AND' - both must evaluate true 
   - `||`: 'OR' - at least one must evaluate true
 
+--
 
 ```bash
-LifeUniverseEverything=42; hitchhikers="awesome"
-
+LifeUniverseEverything=42
+hitchhikers="awesome"
 ## AND
 if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
   echo "Don't panic!"
@@ -2362,8 +2390,8 @@ fi
 ```
 --
 ```bash
-LifeUniverseEverything=41; hitchhikers="awesome"
-
+LifeUniverseEverything=41
+hitchhikers="awesome"
 ## OR
 if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
   echo "Still don't panic!"
