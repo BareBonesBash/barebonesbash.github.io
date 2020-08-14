@@ -2375,10 +2375,11 @@ Varable is NOT set.
   - `&&`: 'AND' - both must evaluate true 
   - `||`: 'OR' - at least one must evaluate true
 
+--
 
 ```bash
-LifeUniverseEverything=42; hitchhikers="awesome"
-
+LifeUniverseEverything=42
+hitchhikers="awesome"
 ## AND
 if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
   echo "Don't panic!"
@@ -2386,8 +2387,8 @@ fi
 ```
 --
 ```bash
-LifeUniverseEverything=41; hitchhikers="awesome"
-
+LifeUniverseEverything=41
+hitchhikers="awesome"
 ## OR
 if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
   echo "Still don't panic!"
