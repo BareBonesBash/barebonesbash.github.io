@@ -1411,7 +1411,7 @@ When you `cat regex.txt`, you should see the following printed on your screen.
 grep '.ear' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> Finds strings containing: any character + ear
 
 
 - `.` : match any character
@@ -1445,7 +1445,7 @@ be\*r
 grep 'p[iea]r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String starting with p+ one of i or e or a +r
 
 - `.` : match any character
 - `[]`: match range of characters within []
@@ -1472,7 +1472,7 @@ rear
 grep 'p[^iea]r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String starting with p+ any character except i, e or a+r
 
 - `.` : match any character
 - `[]`: match range of characters within []
@@ -1500,7 +1500,7 @@ rear
 grep 'be*r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String that starts with b+ zero or multiple 'e' +r
 
 - `.` : match any character
 - `[]`: match range of characters within []
@@ -1534,13 +1534,13 @@ rear
 grep 'be\*r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String 'be*r' 
 
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: do not interpret next character
+- `\`: do not interpret next character.
 ]
 .right-column-33[
 pear  
@@ -1568,13 +1568,13 @@ But because we have "escaped" interpretation with `\`, it is treated as an aster
 grep 'be\+r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String starting with b+ one or multiple 'e'+r
 
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: do not interpret next character
+- `\`: skip character
 - `\+`: match 1 or more of the preceding items
 
 <p align="center">
@@ -1604,7 +1604,7 @@ rear
 grep 'be\?r' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String starting with b+ zero or one 'e'+r
 
 - `.` : match any character
 - `[]`: match range of characters within []
@@ -1636,15 +1636,15 @@ rear
 grep '^[rb]\+' regex.txt
 ```
 
-> Plain-English Desc. of Regex
+> String at the beginning of the line starting with one or multiple of: r or b 
 
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
 - `\`: skip character
-- `+`: match 1 or more of the preceding items
-- `?`: match 0 or 1 of the preceding items
+- `\+`: match 1 or more of the preceding items
+- `\?`: match 0 or 1 of the preceding items
 - `^`: the beginning of the line
 
 <p align="center">
