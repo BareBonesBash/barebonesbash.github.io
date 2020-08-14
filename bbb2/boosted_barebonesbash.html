@@ -1388,18 +1388,18 @@ Technically, all the wildcards you have used are regex!
 ---
 # Regex Basics
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-br
-ber
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
 ]
 ???
 When you `cat regex.txt`, you should see the following printed on your screen. 
@@ -1410,6 +1410,10 @@ When you `cat regex.txt`, you should see the following printed on your screen.
 ```{bash}
 grep '.ear' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
+
 - `.` : match any character
 
 <p align="center">
@@ -1418,18 +1422,18 @@ grep '.ear' regex.txt
 
 ]
 .right-column-33[
-**pear**
-pier
-pir
-per
-par
-pur
-**bear**
-beer
-br
-ber
-be\*r
-**rear**
+**pear**  
+pier  
+pir  
+per  
+par  
+pur  
+**bear**  
+beer  
+br  
+ber  
+be\*r  
+**rear**  
 ]
 
 
@@ -1440,22 +1444,25 @@ be\*r
 ```{bash}
 grep 'p[iea]r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 ]
 .right-column-33[
-pear
-pier
-**pir**
-**per**
-**par**
-pur
-bear
-beer
-br
-ber
-be\*r
-rear
+pear  
+pier  
+**pir**  
+**per**  
+**par**  
+pur  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
 ]
 
 ---
@@ -1464,23 +1471,26 @@ rear
 ```{bash}
 grep 'p[^iea]r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-**pur**
-bear
-beer
-br
-ber
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+**pur**  
+bear  
+beer  
+br  
+ber  
+be\*r  
+rear  
 ]
 
 ---
@@ -1489,6 +1499,9 @@ rear
 ```{bash}
 grep 'be*r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1500,18 +1513,18 @@ grep 'be*r' regex.txt
 
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-**beer**
-**br**
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+**br**  
+**ber**  
+be\*r  
+rear  
 ]
 
 ---
@@ -1520,6 +1533,9 @@ rear
 ```{bash}
 grep 'be\*r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1527,18 +1543,18 @@ grep 'be\*r' regex.txt
 - `\`: do not interpret next character
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-br
-ber
-**be\*r**
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+br  
+ber  
+**be\*r**  
+rear  
 ]
 ???
 Normally, `*` would be interpreted to `match 0 or more of the preceding items`. 
@@ -1551,6 +1567,9 @@ But because we have "escaped" interpretation with `\`, it is treated as an aster
 ```{bash}
 grep 'be\+r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1564,18 +1583,18 @@ grep 'be\+r' regex.txt
 
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-**beer**
-br
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+**beer**  
+br  
+**ber**  
+be\*r  
+rear  
 ]
 
 ---
@@ -1584,6 +1603,9 @@ rear
 ```{bash}
 grep 'be\?r' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1593,18 +1615,18 @@ grep 'be\?r' regex.txt
 - `\?`: match 0 or 1 of the preceding items
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-bear
-beer
-**br**
-**ber**
-be\*r
-rear
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+bear  
+beer  
+**br**  
+**ber**  
+be\*r  
+rear  
 ]
 
 ---
@@ -1613,6 +1635,9 @@ rear
 ```{bash}
 grep '^[rb]\+' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1628,18 +1653,18 @@ grep '^[rb]\+' regex.txt
 
 ]
 .right-column-33[
-pear
-pier
-pir
-per
-par
-pur
-**bear**
-**beer**
-**br**
-**ber**
-**be\*r**
-**rear**
+pear  
+pier  
+pir  
+per  
+par  
+pur  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**  
 ]
 
 ---
@@ -1648,6 +1673,9 @@ pur
 ```{bash}
 grep 'r$' regex.txt
 ```
+
+> Plain-English Desc. of Regex
+
 - `.` : match any character
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
@@ -1664,18 +1692,18 @@ grep 'r$' regex.txt
 
 ]
 .right-column-33[
-**pear**
-**pier**
-**pir**
-**per**
-**par**
-**pur**
-**bear**
-**beer**
-**br**
-**ber**
-**be\*r**
-**rear**
+**pear**  
+**pier**  
+**pir**  
+**per**  
+**par**  
+**pur**  
+**bear**  
+**beer**  
+**br**  
+**ber**  
+**be\*r**  
+**rear**  
 ]
 
 ---
