@@ -1243,7 +1243,24 @@ $ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
 /home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
 ```
---
+
+<p align="center"><img src="https://media.giphy.com/media/b7sNm0aR2EOqI/giphy.gif" title="Source: https://giphy.com/gifs/teachers-b7sNm0aR2EOqI width="75%">
+</p>
+
+---
+
+# More parameters for expansion
+
+You can use two `/` to substitute parts of the variable:
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+$ echo ${foo}                    # No parameters
+$ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
+```
+```
+/home/thiseas/folder/subfolder/BBB.is.bae.txt
+/home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
+```
 
 Leaving the second `/` out replaces the pattern with "an empty string".
 ```bash
