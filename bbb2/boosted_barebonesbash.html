@@ -2206,8 +2206,7 @@ Lets actually organise our files to be in the more descriptive folder names base
 --
 
 For this, we need to use `conditionals`. This is a comparison of two things,
-and if they are the same something happens, if they are different,
-something else happens.
+and if they are the same something happens, if different, something else happens.
 
 --
 
@@ -2256,13 +2255,9 @@ my_variable="mango"
 my_variable="pear"
 
 ---
-# Notes on conditionals
+# Conditions of conditionals
 
-- `[[` behaves different to `[`. Usually, `[[` is what you want
-
---
-
-> Long story, trust us.
+- `[[` behaves different to `[`. Usually, `[[` is what you want [_Long story, trust us._]
 
 --
 
@@ -2270,6 +2265,7 @@ my_variable="pear"
 
 --
 
+.left-column[
 ```bash
 $ if (( 5 - 2 == 3)); then
 >   echo "YES"
@@ -2278,13 +2274,11 @@ $ if (( 5 - 2 == 3)); then
 ```
 YES
 ```
-
+]
 ---
-# Notes on conditionals
+# Conditions of conditionals
 
-- `[[` behaves different to `[`. Usually, `[[` is what you want.
-
-> Long story, trust us.
+- `[[` behaves different to `[`. Usually, `[[` is what you want. [_Long story, trust us._]
 
 - You can evaluate mathematic equations with `((`
 - `!` can be used as a "not".
@@ -2294,6 +2288,18 @@ Turning a TRUE into FALSE and vice versa.
 
 --
 
+.left-column[
+```bash
+$ if (( 5 - 2 == 3)); then
+>   echo "YES"
+> fi
+```
+```
+YES
+```
+]
+
+.right-column[
 ```bash
 $ if ! (( 5 - 2 == 3)); then
 >   echo "YES"
@@ -2304,21 +2310,17 @@ $ if ! (( 5 - 2 == 3)); then
 ```
 NO
 ```
+]
+
 ???
 
 `!` can act as a "not" with square brackets as well.
 
 ---
 
-# Notes on conditionals
+# Conditions of conditionals
 
-- `[[` behaves different to `[`. Usually, `[[` is what you want.
-
-> Long story, trust us.
-
-- You can evaluate mathematic equations with `((`
-- `!` can be used as a "not".
- - Some options can be used to check if files exist, or is a variable has non-zero length.
+- Some options can be used to check if files exist, or is a variable has non-zero length.
 
 --
 
@@ -2340,9 +2342,44 @@ Varable is NOT set.
 
 ---
 
+# Conditions of conditionals
+
+- You can even combine multiple conditionals
+  - `&&`: 'AND' - both must evaluate true 
+  - `||`: 'OR' - at least one must evaluate true
+
+
+```bash
+LifeUniverseEverything=42; hitchhikers="awesome"
+
+## AND
+if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
+  echo "Don't panic!"
+fi
+```
+--
+```bash
+LifeUniverseEverything=41; hitchhikers="awesome"
+
+## OR
+if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
+  echo "Still don't panic!"
+fi
+```
+
+.left-column[
+<p align="center"><img src="https://media.giphy.com/media/BVlWY2vMZgLG8/source.gif" title="Source: https://giphy.com/gifs/life-answer-42-BVlWY2vMZgLG8/" width="40%">
+</p>
+]
+
+.right-column[
+> Play around with the variables to get a feel!
+]
+---
+
 ## Sorting the images by category
 
-We now want to create a directory for each category, and move the images of that category into it.
+We now want to create a directory for each category, and move images into each.
 
 --
 
@@ -2378,7 +2415,7 @@ images/weimanarer.jpg    dog
 
 ## Sorting the images by category
 
-We now want to create a directory for each category, and move the images of that category into it.
+We now want to create a directory for each category, and move images into each.
 
 Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
 
@@ -2411,7 +2448,7 @@ $ while read line; do
 
 ## Sorting the images by category
 
-We now want to create a directory for each category, and move the images of that category into it.
+We now want to create a directory for each category, and move images into each.
 
 Let's add some conditionals! Before running, remember to try a _dry run_ with `echo`!
 
