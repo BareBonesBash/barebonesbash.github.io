@@ -1,5 +1,13 @@
 #/bin/bash
 
+if [[ ${1} == "-h" || ${1} == "--help" || ${1} == '' ]]; then
+  echo "This script will take the Boosted BBB images folder and the metadata file and fort these images into a set of categorical foldiers and subfoldiers according to the information in the metadata file." 
+  echo ''
+  echo "Usage:"
+  echo "    Script_example.sh <BBB-images-directory> <BBB-metadata.tsv>"
+  exit 0
+fi
+
 folder="${1}"
 metadata="${2}"
 suffix="JPG"
