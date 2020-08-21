@@ -1768,7 +1768,11 @@ grep 'r$' regex.txt
 https://www.rexegg.com/regex-quickstart.html: website describing regex characters and its variations with different languages
 
 ---
+
 # Regex example
+
+.left-column[
+
 ```
 fanta.JPG
 BydgoszczForest.JPG
@@ -1786,6 +1790,15 @@ excited.JPG
 licorne.JPG
 angry.JPG
 ```
+]
+
+.right-column[
+<p align="center">
+  <img src="https://media.giphy.com/media/ZEZxo0deqIEeFG7J31/source.gif" title="Source: https://giphy.com/gifs/ZEZxo0deqIEeFG7J31" width=50%>
+</p>
+
+]
+
 Which Regex would you use to find all the files ending with .JPG??
 --
 
@@ -2110,9 +2123,9 @@ $ while n < 5; do
 </p>
 ]
 --
-
+  
 - Always include a stop!
-  - i.e. ensure your condition will eventually become 'false'!
+  - i.e. ensure your condition will eventually become 'false'!  
 
 --
 
@@ -2216,8 +2229,10 @@ images/weimanarer.jpg	weimanarer	dog	Normal
 Do you see what went wrong? Don't worry, your file has not been changed in any way.
 --
 .right-column-66[
-<p align="center"><img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
-</p>]
+<p align="center">
+  <img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
+</p>
+]
 
 ???
 What happened here? How can we fix it?
@@ -2272,17 +2287,28 @@ On Mac, the `-i` option needs an argument so replace it with `-i ''`
 
 # Cleanin' up my closet
 
-Lets actually organise our files to be in the more descriptive folder names based on our metadata file!
+.left-column-66[
 
---
+Lets actually organise our into descriptive folders based our metadata file!
+
+]
+
+.right-column-33[
+
+<p align="center">
+  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="20%">
+</p>
+
+]
 
 For this, we need to use `conditionals`. This is a comparison of two things,
 and if they are the same something happens, if different, something else happens.
 
 --
 
-The most basic conditional is an `if else` statement. The basic syntax is like this:
+The most basic conditional is an `if else` statement.
 ```bash
+## The basic syntax is like this
 $ if [[ ${my_variable} == "banana" ]]; then
 >   echo "The monkey takes the banana and runs away happily."
 > else
@@ -2303,10 +2329,41 @@ Notice the double equals `==`. In programming this is used to mean "test for equ
 
 Finally, the spaces between brackets and their contents are necessary.
 
---
+---
 
-You can have sequential conditions too with `elif`, short for **el**se **if**.
+# Cleanin' up my closet
+
+.left-column-66[
+
+Lets actually organise our into descriptive folders based our metadata file!
+
+For this, we need to use `conditionals`. This is a comparison of two things,
+and if they are the same something happens, if different, something else happens.
+
+
+]
+
+.right-column-33[
+
+<p align="center">
+  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="20%">
+</p>
+
+]
+
+
+The most basic conditional is an `if else` statement.
+
 ```bash
+## The basic syntax is like this
+$ if [[ ${my_variable} == "banana" ]]; then
+>   echo "The monkey takes the banana and runs away happily."
+> else
+>   echo "The monkey doesn't want that."
+> fi
+
+## You can have sequential conditions too with `elif`, short for **el**se **if**.
+
 $ if [[ ${my_variable} == "banana" ]]; then
 >   echo "The monkey takes the banana and runs away happily."
 > elif [[ ${my_variable} == "mango" ]]; then
