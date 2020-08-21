@@ -1208,7 +1208,7 @@ $ echo ${foo%.*} # What will this do?
 --
 ```
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
-      thiseas/folder/subfolder/BBB.is.bae.txt
+ home/thiseas/folder/subfolder/BBB.is.bae.txt
 /home/thiseas/folder/subfolder/BBB.is.bae
 ```
 ???
@@ -1243,8 +1243,9 @@ $ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
 /home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
 ```
+--
 
-<p align="center"><img src="https://media.giphy.com/media/b7sNm0aR2EOqI/giphy.gif" title="Source: https://giphy.com/gifs/teachers-b7sNm0aR2EOqI width="75%">
+<p align="center"><img src="https://media.giphy.com/media/b7sNm0aR2EOqI/giphy.gif" title="Source: https://giphy.com/gifs/teachers-b7sNm0aR2EOqI" width="30%">
 </p>
 
 ---
@@ -1426,7 +1427,6 @@ Three regex special character 'categories'
 
 .left-column-66[
 - `[]`, `()`, (etc.): range, grouping, or 'capturing' matching regex within **brackets**  
-
 ]
 
 ---
@@ -1768,11 +1768,7 @@ grep 'r$' regex.txt
 https://www.rexegg.com/regex-quickstart.html: website describing regex characters and its variations with different languages
 
 ---
-
 # Regex example
-
-.left-column[
-
 ```
 fanta.JPG
 BydgoszczForest.JPG
@@ -1790,15 +1786,6 @@ excited.JPG
 licorne.JPG
 angry.JPG
 ```
-]
-
-.right-column[
-<p align="center">
-  <img src="https://media.giphy.com/media/ZEZxo0deqIEeFG7J31/source.gif" title="Source: https://giphy.com/gifs/ZEZxo0deqIEeFG7J31" width=50%>
-</p>
-
-]
-
 Which Regex would you use to find all the files ending with .JPG??
 --
 
@@ -2123,9 +2110,9 @@ $ while n < 5; do
 </p>
 ]
 --
-  
+
 - Always include a stop!
-  - i.e. ensure your condition will eventually become 'false'!  
+  - i.e. ensure your condition will eventually become 'false'!
 
 --
 
@@ -2229,10 +2216,8 @@ images/weimanarer.jpg	weimanarer	dog	Normal
 Do you see what went wrong? Don't worry, your file has not been changed in any way.
 --
 .right-column-66[
-<p align="center">
-  <img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
-</p>
-]
+<p align="center"><img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
+</p>]
 
 ???
 What happened here? How can we fix it?
@@ -2308,6 +2293,7 @@ The most basic conditional is an `if else` statement.
 
 The basic syntax is like this
 
+You can have sequential conditions too with `elif`, short for **el**se **if**.
 ```bash
 $ if [[ ${my_variable} == "banana" ]]; then
 >   echo "Monkey takes a banana and runs away happy."
