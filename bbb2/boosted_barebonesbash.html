@@ -1404,6 +1404,47 @@ Technically, all the wildcards you have used are regex!
 
 ---
 # Regex Basics
+
+.left-column-66[
+
+Three regex special character 'categories' 
+]
+
+--
+
+.left-column-66[
+- `.`, `*`, `^`, `$` (etc.): special characters that are translated to regex function **first** ('escaped' with `\` to find the literal symbol) 
+]
+
+--
+
+.left-column-66[
+- `\t`, `\w`, `\D` (etc.): **letter-based** special characters that must have `\` to be 'translated'  
+]
+
+--
+
+.left-column-66[
+- `[]`, `()`, (etc.): range, grouping, or 'capturing' matching regex within **brackets**  
+
+]
+
+---
+
+# Regex Basics
+
+.left-column-66[
+
+Three regex special character 'categories'  
+
+- `.`, `*`, `^`, `$` (etc.): special characters that are translated to regex function **first** ('escaped' with `\` to find the literal symbol) 
+
+- `\t`, `\w`, `\D` (etc.): **letter-based** special characters that must have `\` to be 'translated'  
+
+- `[]`, `()`, (etc.): range, grouping, or 'capturing' matching regex within **brackets**  
+
+]
+
 .right-column-33[
 pear  
 pier  
@@ -1698,8 +1739,8 @@ grep 'r$' regex.txt
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
 - `\`: skip character
-- `+`: match 1 or more of the preceding items
-- `?`: match 0 or 1 of the preceding items
+- `\+`: match 1 or more of the preceding items
+- `\?`: match 0 or 1 of the preceding items
 - `^`: the beginning of the line
 - `$`: the end of the line
 
