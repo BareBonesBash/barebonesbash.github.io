@@ -2287,91 +2287,47 @@ On Mac, the `-i` option needs an argument so replace it with `-i ''`
 
 # Cleanin' up my closet
 
-.left-column-66[
+.left-column-33[
 
 Lets actually organise our into descriptive folders based our metadata file!
 
-]
-
-.right-column-33[
-
 <p align="center">
-  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="20%">
+  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="60%">
 </p>
 
-]
 
 For this, we need to use `conditionals`. This is a comparison of two things,
 and if they are the same something happens, if different, something else happens.
+
+The most basic conditional is an `if else` statement.
+]
 
 --
 
-The most basic conditional is an `if else` statement.
+.right-column-66[
+
+The basic syntax is like this
+
 ```bash
-## The basic syntax is like this
 $ if [[ ${my_variable} == "banana" ]]; then
->   echo "The monkey takes the banana and runs away happily."
+>   echo "Monkey takes a banana and runs away happy."
 > else
->   echo "The monkey doesn't want that."
+>   echo "Monkey doesn't want that."
 > fi
 ```
 
-???
-If the code above is run while `my_variable` is set to "banana", then the top code will execute, else the bottom will.
-
-`then` is similar to `do` in for/while loops.
-
-`fi` (`if` flipped around), is the equivalent of `done` in for/while loops
-
-Notice the double brackets `[[]]`. Single brackets will often fail.
-
-Notice the double equals `==`. In programming this is used to mean "test for equality", rather than variable assignment.
-
-Finally, the spaces between brackets and their contents are necessary.
-
----
-
-# Cleanin' up my closet
-
-.left-column-66[
-
-Lets actually organise our into descriptive folders based our metadata file!
-
-For this, we need to use `conditionals`. This is a comparison of two things,
-and if they are the same something happens, if different, something else happens.
-
-
-]
-
-.right-column-33[
-
-<p align="center">
-  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="20%">
-</p>
-
-]
-
-
-The most basic conditional is an `if else` statement.
+You can have sequential conditions too with `elif`, short for **el**se **if**.
 
 ```bash
-## The basic syntax is like this
 $ if [[ ${my_variable} == "banana" ]]; then
->   echo "The monkey takes the banana and runs away happily."
-> else
->   echo "The monkey doesn't want that."
-> fi
-
-## You can have sequential conditions too with `elif`, short for **el**se **if**.
-
-$ if [[ ${my_variable} == "banana" ]]; then
->   echo "The monkey takes the banana and runs away happily."
+>   echo "Monkey takes a banana and runs away happy."
 > elif [[ ${my_variable} == "mango" ]]; then
->   echo "The monkey takes the mango and eats it while staring at you."
+>   echo "Monkey takes a mango and eats it while staring at you."
 > else
->   echo "The monkey doesn't want that."
+>   echo "Monkey doesn't want that."
 > fi
 ```
+]
 
 ???
 Can you guess what would happen here depending on the contents of `my_variable`?
