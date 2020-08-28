@@ -2073,9 +2073,15 @@ $ while [statment]; do     #means while statement is true do
 >   [whatever you want to do]
 > done
 ```
---
-An easy example:
 
+--
+
+An easy pseudocode example:
+
+???
+Pseudocode is code-like syntax, but a computer will NOT understand it. the code below won't work if you try to copy it over.
+
+--
 .left-column[
 ```bash
 $ n=3
@@ -2092,9 +2098,6 @@ $ while n > 0; do
 1
 ```
 ]
-
-???
-use while to move files out of the gifs horrible folder mess?
 
 ---
 # Concept: While Loops
@@ -2113,10 +2116,10 @@ $ while n < 5; do
 </p>
 ]
 --
-
+.left-column[
 - Always include a stop!
   - i.e. ensure your condition will eventually become 'false'!
-
+]
 --
 
 .left-column-66[
@@ -2427,18 +2430,18 @@ Varable is NOT set.
 LifeUniverseEverything=42
 hitchhikers="awesome"
 ## AND
-if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
-  echo "Don't panic!"
-fi
+$ if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
+>   echo "Don't panic!"
+> fi
 ```
 --
 ```bash
 LifeUniverseEverything=41
 hitchhikers="awesome"
 ## OR
-if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
-  echo "Still don't panic!"
-fi
+$ if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
+>   echo "Still don't panic!"
+> fi
 ```
 
 .left-column[
