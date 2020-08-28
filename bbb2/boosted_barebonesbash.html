@@ -1601,7 +1601,7 @@ grep 'be\*r' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: do not interpret next character.
+- `\`: do not interpret next character
 ]
 .right-column-33[
 pear  
@@ -1635,7 +1635,7 @@ grep 'be\+r' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
+- `\`: do not interpret next character
 - `\+`: match 1 or more of the preceding items
 
 <p align="center">
@@ -1671,7 +1671,7 @@ grep 'be\?r' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
+- `\`: do not interpret next character
 - `\+`: match 1 or more of the preceding items
 - `\?`: match 0 or 1 of the preceding items
 ]
@@ -1703,7 +1703,7 @@ grep '^[rb]\+' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
+- `\`: do not interpret next character
 - `\+`: match 1 or more of the preceding items
 - `\?`: match 0 or 1 of the preceding items
 - `^`: the beginning of the line
@@ -1741,7 +1741,7 @@ grep 'r$' regex.txt
 - `[]`: match range of characters within []
 - `[^]`: match range of characters except the ones in the bracket
 - `*`: match 0 or more of the preceding items
-- `\`: skip character
+- `\`: do not interpret next character
 - `\+`: match 1 or more of the preceding items
 - `\?`: match 0 or 1 of the preceding items
 - `^`: the beginning of the line
