@@ -1312,7 +1312,7 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   # mv $file $new_name
 > done
 ```
-
+--
 To this:
 
 ```bash
@@ -1338,8 +1338,6 @@ Result: **0.051s** versus **0.003s** when running echo!
   <img src="https://media.giphy.com/media/S9v6L1tFHk0pptZzCh/giphy.gif" title="Source: https://giphy.com/gifs/stickergiant-fast-zoom-on-my-way-S9v6L1tFHk0pptZzCh/links" width="50%">
 </p>
 ]
---
-Now you can run the second code block without commenting out `mv`.
 
 ???
 Notice that this time around, I added ".JPG" at the end of the new filenames manually, since our approach removes it.
@@ -1400,7 +1398,7 @@ As usual, Mac users should use `curl -LO`
 Let's also look at the contents.
 
 ```bash
-cat regex.txt
+$ cat regex.txt
 ```
 
 ???
@@ -1469,7 +1467,7 @@ When you `cat regex.txt`, you should see the following printed on your screen.
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep '.ear' regex.txt
+$ grep '.ear' regex.txt
 ```
 
 > Finds strings containing: any character + ear
@@ -1503,7 +1501,7 @@ be\*r
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'p[iea]r' regex.txt
+$ grep 'p[iea]r' regex.txt
 ```
 
 > String starting with p+ one of i or e or a +r
@@ -1530,7 +1528,7 @@ rear
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'p[^iea]r' regex.txt
+$ grep 'p[^iea]r' regex.txt
 ```
 
 > String starting with p+ any character except i, e or a+r
@@ -1558,7 +1556,7 @@ rear
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'be*r' regex.txt
+$ grep 'be*r' regex.txt
 ```
 
 > String that starts with b+ zero or multiple 'e' +r
@@ -1592,7 +1590,7 @@ rear
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'be\*r' regex.txt
+$ grep 'be\*r' regex.txt
 ```
 
 > String 'be*r' 
@@ -1626,7 +1624,7 @@ But because we have "escaped" interpretation with `\`, it is treated as an aster
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'be\+r' regex.txt
+$ grep 'be\+r' regex.txt
 ```
 
 > String starting with b+ one or multiple 'e'+r
@@ -1662,7 +1660,7 @@ rear
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'be\?r' regex.txt
+$ grep 'be\?r' regex.txt
 ```
 
 > String starting with b+ zero or one 'e'+r
@@ -1694,7 +1692,7 @@ rear
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep '^[rb]\+' regex.txt
+$ grep '^[rb]\+' regex.txt
 ```
 
 > Lines starting with one or multiple of: r or b 
@@ -1732,7 +1730,7 @@ pur
 # Regex Basics
 .left-column-66[
 ```{bash}
-grep 'r$' regex.txt
+$ grep 'r$' regex.txt
 ```
 
 > Lines ending with r
@@ -2059,7 +2057,7 @@ $ for file in file1 file2 file3 file4; do
 > done
 ```
 
-For loops repeat a set of code for a set of items, by changing the value of a variable in each iteration.
+`For` loops repeat a set of code for a set of items, by changing the value of a variable in each iteration.
 
 ---
 
@@ -2067,21 +2065,29 @@ For loops repeat a set of code for a set of items, by changing the value of a va
 
 `For` loops are finite, they go through your list and stop when they run out of things.
 
+--
+
 Instead, a `while` loop keeps going until a statement is false.
 ```bash
 $ while [statment]; do     #means while statement is true do
 >   [whatever you want to do]
 > done
 ```
---
-An easy example:
 
+--
+
+An easy pseudocode example:
+
+???
+Pseudocode is code-like syntax, but a computer will NOT understand it. the code below won't work if you try to copy it over.
+
+--
 .left-column[
 ```bash
-$ n = 3
+$ n=3
 $ while n > 0; do
 >   echo $n
->   n = $n - s1
+>   n=$n - 1
 > done
 ```
 ]
@@ -2093,18 +2099,15 @@ $ while n > 0; do
 ```
 ]
 
-???
-use while to move files out of the gifs horrible folder mess?
-
 ---
 # Concept: While Loops
 Didn't you say while loop are infinite?
 .left-column[
 ```bash
-$ n = 3
+$ n=3
 $ while n < 5; do
 >   echo $n
->   n = $n - 1
+>   n=$n - 1
 > done
 ```
 ]
@@ -2113,10 +2116,10 @@ $ while n < 5; do
 </p>
 ]
 --
-
+.left-column[
 - Always include a stop!
   - i.e. ensure your condition will eventually become 'false'!
-
+]
 --
 
 .left-column-66[
@@ -2427,18 +2430,18 @@ Varable is NOT set.
 LifeUniverseEverything=42
 hitchhikers="awesome"
 ## AND
-if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
-  echo "Don't panic!"
-fi
+$ if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
+>   echo "Don't panic!"
+> fi
 ```
 --
 ```bash
 LifeUniverseEverything=41
 hitchhikers="awesome"
 ## OR
-if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
-  echo "Still don't panic!"
-fi
+$ if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
+>   echo "Still don't panic!"
+> fi
 ```
 
 .left-column[
