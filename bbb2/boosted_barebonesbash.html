@@ -691,7 +691,7 @@ $ unzip Boosted-BBB-images
 
 - To remove unwanted files
 ```bash
-rm Boosted-BBB-images
+$ rm Boosted-BBB-images
 ```
 
 ]
@@ -874,7 +874,7 @@ We are looking for all files with the suffix `JPG`.
 Let's first set the suffix we want to a variable, so we can easily change it in the future.
 
 ```bash
-suffix="JPG"
+$ suffix="JPG"
 ```
 --
 
@@ -909,7 +909,7 @@ We are looking for all files with the suffix `JPG`.
 Let's first set the suffix we want to a variable, so we can easily change it in the future.
 
 ```bash
-suffix="JPG"
+$ suffix="JPG"
 ```
 
 We can now call on this variable in our search. Try the following command:
@@ -1042,7 +1042,7 @@ Reward to anyone who uses `whatis` or `man`
 Let's try this out!
 
 ```bash
-echo "aBcDeF 654321" | rev
+$ echo "aBcDeF 654321" | rev
 ```
 ```
 123456 FeDcBa
@@ -1054,7 +1054,7 @@ echo "aBcDeF 654321" | rev
  - `-f` specifies which **f**ield we wish to cut out (the second one).
 
 ```bash
-echo "aBcDeF 654321" | cut -d " " -f 2
+$ echo "aBcDeF 654321" | cut -d " " -f 2
 ```
 ```
 654321
@@ -1176,7 +1176,7 @@ $ echo ${foo}
 
 ???
 This is actually what bash did behind-the-scenes when we typed `$Var` thus far.
-It is a good idea to put all variables in `{}` so thre is never any confusion as to which is the variable name.
+It is a good idea to put all variables in `{}` so there is never any confusion as to which is the variable name.
 
 --
 
@@ -1304,7 +1304,7 @@ That means you can, for example, ask for the 5th item in a bash array and get on
 
 ---
 # Writing pretty code
-We can now rewrite this code
+We can now rewrite this code. **DO NOT RUN THIS CODE!**
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
@@ -1322,14 +1322,15 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 > done
 ```
 
-Try running both and check the result is the same! Is there a difference in runtime? 
+Try dry-running both and check the result is the same! Is there a difference in runtime? 
 
-> Note that Rev/cut is still useful in languages, Bash expansion is for bash!
+???
+Note that Rev/cut is still useful in languages, Bash expansion is for bash!
 
 --
 
 .left-column-66[
-Result: 0.051s versus 0.003s when running echo!
+Result: **0.051s** versus **0.003s** when running echo!
 ]
 
 .right-column-33[
@@ -1337,6 +1338,8 @@ Result: 0.051s versus 0.003s when running echo!
   <img src="https://media.giphy.com/media/S9v6L1tFHk0pptZzCh/giphy.gif" title="Source: https://giphy.com/gifs/stickergiant-fast-zoom-on-my-way-S9v6L1tFHk0pptZzCh/links" width="50%">
 </p>
 ]
+--
+Now you can run the second code block without commenting out `mv`.
 
 ???
 Notice that this time around, I added ".JPG" at the end of the new filenames manually, since our approach removes it.
