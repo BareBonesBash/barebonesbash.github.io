@@ -1347,7 +1347,7 @@ It is much more efficient since parameter expansion is one command, instead of 4
 
 --
 
-When sure it works, remove the comment to rename!
+When sure it works, remove the comment in the 2nd codeblock to rename!
 
 ---
 
@@ -2069,14 +2069,14 @@ $ for file in file1 file2 file3 file4; do
 
 Instead, a `while` loop keeps going until a statement is false.
 ```bash
-$ while [statment]; do     #means while statement is true do
+$ while [statement]; do     #means while statement is true do
 >   [whatever you want to do]
 > done
 ```
 
 --
 
-An easy pseudocode example:
+An easy **pseudocode** example:
 
 ???
 Pseudocode is code-like syntax, but a computer will NOT understand it. the code below won't work if you try to copy it over.
@@ -2101,7 +2101,7 @@ $ while n > 0; do
 
 ---
 # Concept: While Loops
-Didn't you say while loop are infinite?
+Didn't you say while loop are infinite? **Pseudocode**:
 .left-column[
 ```bash
 $ n=3
@@ -2119,6 +2119,7 @@ $ while n < 5; do
 .left-column[
 - Always include a stop!
   - i.e. ensure your condition will eventually become 'false'!
+- Emergencies: Ctrl + C (cancel the loop)
 ]
 --
 
@@ -2158,7 +2159,7 @@ You wanted to minimise the time you spend typing while on hunting for your best 
 
 --
 
-Now we want to put together a list that states in which category each image was is a part of.
+Now we can put together a list that states which category each image is part of.
 
 ???
 In the metadata file, you have the names of the images, and you have the categories of each too.
@@ -2182,6 +2183,8 @@ images/snore.jpg	snore	B	Normal
 images/stretch.jpg	stretch	B	Funny
 images/weimanarer.jpg	weimanarer	A	Normal
 ```
+
+>Disclamer: literally pastes columns, no matching done. Only works if both columns are in the corresponding order
 ???
 Check that the file name matches the second column of each row. When u are satisfied, remove the `#` and save the output into `Annotations.txt`.
 
