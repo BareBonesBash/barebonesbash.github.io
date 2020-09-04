@@ -2683,6 +2683,9 @@ $ bash ./first_script.sh
 Hello world
 ```
 
+<p align="center"><img src="https://media.giphy.com/media/PnUatAYWMEMvmiwsyx/source.gif" title="Source: https://giphy.com/gifs/SpongeBobMovie-spongebob-squarepant-PnUatAYWMEMvmiwsyx" width="30%">
+  </p>
+  
 ---
 # Input Variables
 
@@ -2726,6 +2729,9 @@ In Bash, the arguments passed on the command line can be called `$1`,`$2`, `$3`.
 and so on.
 
 --
+
+<p align="center"><img src="https://media.giphy.com/media/vSJyRUtORbQC4/source.gif" title="Source: https://giphy.com/gifs/friends-argument-vSJyRUtORbQC4" width="30%">
+</p>
 
 Let's go back to our script and change the printing message
 
@@ -2789,9 +2795,18 @@ The script now needs an argument to run, so we will run:
 $ bash ./first_script.sh Aida
 ```
 --
+
+.left-column[
 ```
 Hello Aida
 ```
+]
+
+.column-right[
+<p>
+  <img src=".images/bbb_aida.svg" width="10%">
+</p>
+]
 
 ---
 # Best practices when coding
@@ -2830,9 +2845,9 @@ echo "Hello ${name}"
   - Avoid duplicating code.
   
 ---
-# Recommended practice when writing code
+# Good coding practises
 
-- Add a help message. In our basic script, we could add the following:
+Add a help message. In our basic script, we could add the following:
 
 ```bash
 #! /usr/bin/env bash
@@ -2849,9 +2864,17 @@ else
  fi
 ```
 --
+
+.left-column[
 You will often go back to old scripts and not remember the options and arguments they need.
 
 Having helptext will make it easier to remember.
+]
+
+.right-column[
+<p align="center"><img src="https://media.giphy.com/media/phJ6eMRFYI6CQ/giphy.gif" title="Source: https://giphy.com/gifs/cat-fire-rescue-phJ6eMRFYI6CQ" width="40%">
+</p>
+]
 
 ---
 # Debugging your code
@@ -2860,7 +2883,7 @@ Having helptext will make it easier to remember.
 
 --
 
-- Add print statements to check the variables/commands are rendering properly
+- Add print statements to check the variables/commands render properly
 
 --
 
@@ -2872,8 +2895,17 @@ Having helptext will make it easier to remember.
 
 --
 
-- Explain your code to someone else. Going through the logic of it will often make the problem obvious.
- - This is called the Rubber ducky approach, as many programmers have a rubber duck that they explain their code to.
+.left-column[
+- Explain your code to someone else! Talking through the logic of it will often make the problem obvious.
+ - This is called the Rubber ducky approach, as many programmers have a rubber duck on their desk to explain their code to.
+]
+
+.right-column[
+<p align="center"><img src="https://media.giphy.com/media/aQrYT4WVN55aU/source.gif" title="Source: https://giphy.com/gifs/cheezburger-wtf-australia-aQrYT4WVN55aU" width="60%">
+</p>
+]
+
+
 
 ---
 # Things to keep in mind
@@ -2888,6 +2920,16 @@ Having helptext will make it easier to remember.
 --
 
   - Some code is neither...
+
+  .left-column[
+  <p align="center"><img src="https://media.giphy.com/media/3o7ZetIsjtbkgNE1I4/giphy.gif" title="Source: https://giphy.com/gifs/justin-g-run-away-fast-3o7ZetIsjtbkgNE1I4" width="80%">
+  </p>
+  ]
+  
+  .right-column[
+  <p align="center"><img src="https://media.giphy.com/media/8dYmJ6Buo3lYY/giphy.gif" title="Source: https://giphy.com/gifs/baby-story-reading-8dYmJ6Buo3lYY" width="80%">
+  </p>
+  ]
 
 --
 
