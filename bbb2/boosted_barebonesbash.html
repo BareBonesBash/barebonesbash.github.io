@@ -206,7 +206,7 @@ Aida Andrades Valtueña
 ]
 
 ???
-BOTH
+ALL
 
 ---
 
@@ -226,6 +226,9 @@ BOTH
   - Regular expressions (aka "Regex")
   - How to write a simple bash script
   - _Simple_ text modfication with `sed` (i.e. witchcraft)
+
+???
+THISEAS
 
 --
 
@@ -761,6 +764,9 @@ OK! Recap done! LETS'A GO!
 - Modifying files: SED, PASTE
 ]
 
+???
+JAMES
+
 ---
 
 # Where is my stuff??
@@ -944,6 +950,7 @@ In bash, there is a big difference between a single quote `'` and a double quote
  - Inside double quotes, contents are _interpreted_!
 
 ???
+AIDA
 That means that it will be read just like the rest of the code.
 
 --
@@ -1067,7 +1074,7 @@ $ echo "aBcDeF 654321" | cut -d " " -f 2
 Using these tools, we can start cleaning up the desired filenames like this:
 
 ```bash
-$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
 >   echo $file $new_name
 >   #mv $file $new_name
@@ -1129,7 +1136,7 @@ It is a good idea to avoid clunky code like what you just saw.
 How to make this code simpler? **Do not run this code!**
 
 ```bash
-$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
 >   echo $file $new_name
 >   # mv $file $new_name
@@ -1154,6 +1161,7 @@ Here's an example variable:
 $ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
 ```
 ???
+THISEAS
 The absolute file path to some imaginary file.
 
 --
@@ -1306,7 +1314,7 @@ That means you can, for example, ask for the 5th item in a bash array and get on
 # Writing pretty code
 We can now rewrite this code. **DO NOT RUN THIS CODE!**
 ```bash
-$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
 >   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
 >   echo $file $new_name
 >   # mv $file $new_name
@@ -1360,6 +1368,9 @@ Let's change all filename suffixes to be in lowercase letters!
 <p align="center">
   <img src="https://media.giphy.com/media/l3diMwu8XYh6sa6VG/giphy.gif" title="Source: https://giphy.com/gifs/laffmobbslafftracks-laff-mobbs-tracks-episode-108-l3diMwu8XYh6sa6VG" width="30%">
 </p>
+
+???
+AIDA
 
 --
 
@@ -1810,6 +1821,7 @@ $ find Boosted-BBB/ -type f -name '*.JPG' | rename 's/\.JPG$/.jpg/'
 > Check with `find` whether the names are now as you expect!
 
 ???
+JAMES  
 By default, Macs do NOT have `rename` installed.
 
 --
@@ -1874,6 +1886,7 @@ To do that, we need to keep track of all the file names. We can easily gather th
 Programs can take in and spit out data from different _streams_. By default there are 3 such data streams.
 
 ???
+THISEAS  
 Before we talk about redirects, you need to understand datastreams.
 
 --
@@ -1962,7 +1975,8 @@ We can get a list of all the file names by redirecting the `stdout` of the `find
 $ suffix="jpg"
 $ find Boosted-BBB/ -type f -name "*${suffix}" > File_names.txt
 ```
-
+???
+JAMES
 --
 
 This time, nothing was printed on your screen, because you redirected that output into a file.
@@ -2197,6 +2211,9 @@ You now have a meta-data sheet for each jpg!
 To share these images with your internet friends, you need to properly specify the category names.
 
 Let's add the actual category names to the `Annotations.txt`.
+
+???
+THISEAS
 
 --
 
@@ -2599,6 +2616,9 @@ Do you really wanna write all the commands every time?!
 <p align="center"><img src="https://media.giphy.com/media/iE4lKpKqwe7QIQCPjG/giphy.gif" title="Source: https://giphy.com/gifs/memecandy-iE4lKpKqwe7QIQCPjG" width="30%">
 </p>
 
+???
+AIDA
+
 --
 
 The ultimate goal of anyone working on the command line is to make a program which you can run with a single command and it does all the work for you.
@@ -2883,6 +2903,9 @@ Having helptext will make it easier to remember.
 # Debugging your code
 
 - Try your code outside the script
+
+???
+JAMES
 
 --
 
