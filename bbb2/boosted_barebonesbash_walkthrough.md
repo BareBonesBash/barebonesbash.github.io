@@ -19,6 +19,9 @@ The aim of this tutorial is to advance your knowledge gained from [Basic BareBon
 
 If you want to know what you will learn in this tutorial, or are already too scared to read the rest of this tutorial, you can look at this table as a quick reference. To understand actually what each command does, carry on reading below!
 
-| command | description | example | common flags or arguments |
-|---------|-------------|---------|---------------------------|
-|         |             |         |                           |
+| command    | description                                           | example                     | common flags or arguments                                          |
+|------------|-------------------------------------------------------|-----------------------------|--------------------------------------------------------------------|
+| `find`     | search for files or directories                       | `find -name 'pen'`          | -type f (search only for files)                                    | 
+| `"$var"`   | use double quotes to use contents of variable         | `$pen=apple && echo "$pen"` |                                                                    |
+| `rev`      | reverse a order of characters string in               | `rev 'pineapple'`           |                                                                    |
+| `cut`      | separate a line of a file into multiple pieces        | `cut -f ' ' -d`             | -f(ield, i.e piece to keep), -d(elimiter, which char. to split by) |
