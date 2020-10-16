@@ -2447,8 +2447,8 @@ Variable is NOT set.
 --
 
 ```bash
-LifeUniverseEverything=42
-hitchhikers="awesome"
+$ LifeUniverseEverything=42
+$ hitchhikers="awesome"
 ## AND
 $ if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
 >   echo "Don't panic!"
@@ -2456,8 +2456,8 @@ $ if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
 ```
 --
 ```bash
-LifeUniverseEverything=41
-hitchhikers="awesome"
+$ LifeUniverseEverything=41
+$ hitchhikers="awesome"
 ## OR
 $ if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
 >   echo "Still don't panic!"
@@ -2585,21 +2585,21 @@ $ find ~/boosted_barebonesbash/images/ -type f -name "*jpg"
 ```
 --
 ```
-/Users/lamnidis/boosted_barebonesbash/images//cat/snore.jpg
-/Users/lamnidis/boosted_barebonesbash/images//cat/giacomo.jpg
-/Users/lamnidis/boosted_barebonesbash/images//cat/excited.jpg
-/Users/lamnidis/boosted_barebonesbash/images//cat/angry.jpg
-/Users/lamnidis/boosted_barebonesbash/images//cat/stretch.jpg
-/Users/lamnidis/boosted_barebonesbash/images//dog/licorne.jpg
-/Users/lamnidis/boosted_barebonesbash/images//dog/fanta.jpg
-/Users/lamnidis/boosted_barebonesbash/images//dog/weimanarer.jpg
-/Users/lamnidis/boosted_barebonesbash/images//dog/pompeii.jpg
-/Users/lamnidis/boosted_barebonesbash/images//dog/nomnom.jpg
-/Users/lamnidis/boosted_barebonesbash/images//bird/alopochenaegyptiacaArnhem.jpg
-/Users/lamnidis/boosted_barebonesbash/images//bird/bubobubo.jpg
-/Users/lamnidis/boosted_barebonesbash/images//bird/netsukeJapan.jpg
-/Users/lamnidis/boosted_barebonesbash/images//bird/bydgoszczForest.jpg
-/Users/lamnidis/boosted_barebonesbash/images//bird/exhibitRoyal.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/snore.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/giacomo.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/excited.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/angry.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/stretch.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/licorne.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/fanta.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/weimanarer.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/pompeii.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/nomnom.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/alopochenaegyptiacaArnhem.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/bubobubo.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/netsukeJapan.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/bydgoszczForest.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/exhibitRoyal.jpg
 ```
 Good! Everything moved into the correct subfolder!
 
@@ -2735,7 +2735,7 @@ It is a user supplied value that the script will use to perform the tasks
 ---
 # Input Variables
 
-In Bash, the arguments passed on the command line can be called `${1}`,`${2}`, `${3}`...
+In Bash, the arguments passed on the command line can be called `${1}`,`${2}` ...
 
 `${1}` is the first argument
 
@@ -2879,7 +2879,7 @@ name=${1}
 
 if [[ ${name} == "--help" || ${name} == "-h" ]]; then
   ## Print help message
-  echo "This script print Hello <your_name> into screen."
+  echo "This script prints Hello <your_name> into screen."
   echo "To run it type: bash ./first_script.sh <your_name>"
 else
   ## Printing Hello and the specified variable into screen
@@ -2979,8 +2979,8 @@ For this, please make a new directory and download the data again:
 
 .left-column-66[
 ```bash
-$ mkdir ~/Boosted-BBB-scripting
-$ cd ~/Boosted-BBB-scripting
+$ mkdir ~/boosted_barebonesbash_scripting
+$ cd ~/boosted_barebonesbash_scripting
 
 ## Get images zip and metadata file
 $ wget git.io/Boosted-BBB-images # On Mac: `curl -LO`
@@ -2989,7 +2989,7 @@ $ wget git.io/Boosted-BBB-meta # On Mac: `curl -LO`
 ## Unzip image folders and rename metadata file
 $ unzip Boosted-BBB-images
 $ mv Boosted-BBB-meta  \
-~/Boosted-BBB-scripting/Boosted-BBB-meta.tsv
+~/boosted_barebonesbash_scripting/Boosted-BBB-meta.tsv
 ```
 ]
 
@@ -3047,7 +3047,7 @@ Lets remove:
 ```bash
 $ cd ~     # Don't delete a directory 
          # while we are still in it! 
-$ rm -r boosted_barebonesbash
+$ rm -r boosted_barebonesbash*
 ```
 ]
 
