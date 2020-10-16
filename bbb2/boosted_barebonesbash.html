@@ -225,7 +225,7 @@ ALL
   - How to write a conditional statement (if/else)
   - Regular expressions (aka "Regex")
   - How to write a simple bash script
-  - _Simple_ text modfication with `sed` (i.e. witchcraft)
+  - _Simple_ text modification with `sed` (i.e. witchcraft)
 
 ???
 THISEAS
@@ -365,7 +365,7 @@ class: center middle
 exclude: true
 # Materials
 
-- A long-form walkthrough, and these slides, are all freely avaliable avaliable at:
+- A long-form walkthrough, and these slides, are all freely available at:
 [https://barebonesbash.github.io/](https://barebonesbash.github.io/#/bbb2/README)
 
 Under the 'Boosted' section.
@@ -436,7 +436,7 @@ class: middle, center
 To write multi-line code in one: replace a newline with a `;`
 
 ???
-in Bash ALWAYS MIND THE `$`! Only copy after the `$` so you dont paste the command prompt too. `$` is also important when dealing with variables, which you saw a bit last time and will see more of today.
+in Bash ALWAYS MIND THE `$`! Only copy after the `$` so you don't paste the command prompt too. `$` is also important when dealing with variables, which you saw a bit last time and will see more of today.
 
 In this presentation we will use `$` at the start of a line of code to show where the command prompt would be.
 
@@ -577,7 +577,7 @@ $ less Boosted-BBB-meta.tsv
 
 ```
 ???
-Remeber, `less` opens a viewer window. exit that by pressing `q`
+Remember, `less` opens a viewer window. exit that by pressing `q`
 
 --
 
@@ -731,7 +731,7 @@ $ rm Boosted-BBB-images
 
 ???
 
-Based on common issues with 'homeworks' from in-person sessions of BBB
+Based on common issues with 'homework' from in-person sessions of BBB
 
 ---
 
@@ -1860,7 +1860,7 @@ To interpret the `.` as a literal `.` and not "any character"
 ???
 The substitute string is NOT a regex, so we do not need to escape the `.`
 
-Optionally you can specify option after the final `/`. For e.g. putting a `j` there will lookfor multiple matches in each line instead.
+Optionally you can specify option after the final `/`. For e.g. putting a `j` it will look for multiple matches in each line instead.
 
 ---
 # Onwards!
@@ -2198,7 +2198,7 @@ images/stretch.jpg	stretch	B	Funny
 images/weimanarer.jpg	weimanarer	A	Normal
 ```
 
->Disclamer: literally pastes columns, no matching done. Only works if both columns are in the corresponding order
+>Disclaimer: literally pastes columns, no matching done. Only works if both columns are in the corresponding order
 ???
 Check that the file name matches the second column of each row. When u are satisfied, remove the `#` and save the output into `Annotations.txt`.
 
@@ -2353,11 +2353,11 @@ my_variable="pear"
 ---
 # Conditions of conditionals
 
-- `[[` behaves different to `[`. Usually, `[[` is what you want [_Long story, trust us._]
+- `[[` behaves different to `[`. Usually, `[[` is what you want. [_Long story, trust us._]
 
 --
 
-- You can evaluate mathematic equations with `((`
+- You can evaluate mathematical equations with `((`
 
 --
 
@@ -2376,7 +2376,7 @@ YES
 
 - `[[` behaves different to `[`. Usually, `[[` is what you want. [_Long story, trust us._]
 
-- You can evaluate mathematic equations with `((`
+- You can evaluate mathematical equations with `((`
 - `!` can be used as a "not".
 
 ???
@@ -2428,12 +2428,12 @@ $ if [[ -f Annotations.txt ]]; then
 $ if [[ -n ${banana} ]]; then
 >   echo "Variable is set."
 > else
->   echo "Varable is NOT set."
+>   echo "Variable is NOT set."
 > fi
 ```
 ```
 File exists.
-Varable is NOT set.
+Variable is NOT set.
 ```
 
 ---
@@ -2730,7 +2730,7 @@ Wait... what are arguments??
 
 --
 
-It is a user suplied value that the script will use to perform the tasks
+It is a user supplied value that the script will use to perform the tasks
 
 ---
 # Input Variables
@@ -2891,7 +2891,7 @@ else
 .left-column[
 You will often go back to old scripts and not remember the options and arguments they need.
 
-Having helptext will make it easier to remember.
+Having help text will make it easier to remember.
 ]
 
 .right-column[
@@ -3016,7 +3016,7 @@ You are set up to start now!
 - `find` to locate files or directories
 - Difference between "\""" and "\''"
 - `rev`, `cut`, and bash expansion (`${}`) for manipulating strings
-- Regular expressions for wierd and wonderful pattern matching
+- Regular expressions for weird and wonderful pattern matching
 - `rename` for renaming files
 - Plumbing: standard in and out, pipes and re-directs
 - `basename`/`dirname` getting just filenames or directories from paths 
@@ -3033,7 +3033,7 @@ Despite being lazy - you should ALWAYS keep your room tidy.
 
 - This stops losing files
 - Prevents getting lost in a maze of directories
-- Accidently permanently deleting a days worth of work .small[
+- Accidentally permanently deleting a days worth of work .small[
 
 \[_don't ask how many times this has happened._\]]
 
@@ -3063,7 +3063,7 @@ $ rm -r boosted_barebonesbash
 # Thanks to...
 
 - Stephan Schiffels 
-  - for loaning us his cluster and the cool passwords
+  - for giving support and advice on cluster setup
 
 - [Google](https://google.com)
   - Pretty much teaching all of this
