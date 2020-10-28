@@ -832,7 +832,7 @@ $ find Boosted-BBB/ -type f # Don't run yet!
 
 # Where is my stuff??
 ```bash
-$ find Boosted-BBB/ -type f -name '*JPG*'  # Don't run yet!
+$ find Boosted-BBB/ -type f -name  # Don't run yet!
 ```
 - **First** part of the `find` command: _the place to look from_
   - e.g. `.` to indicate 'here'
@@ -1823,6 +1823,9 @@ $ find Boosted-BBB/ -type f -name '*.JPG' | rename 's/\.JPG$/.jpg/'
 ???
 JAMES  
 By default, Macs do NOT have `rename` installed.
+The substitution is written similarly to what it is used in parameter expansion 
+
+Notice that the syntax of this substitution is similar to the one used in parameter expansion! (except with an extra `/`)
 
 --
 
@@ -2868,7 +2871,7 @@ echo "Hello ${name}"
   - Avoid duplicating code.
   
 ---
-# Good coding practises
+# Good coding practices
 
 Add a help message. In our basic script, we could add the following:
 
@@ -2968,9 +2971,9 @@ JAMES
 ---
 # Time to practice!
 
-Your task now will be to generate a script to perform the image sorting that we have show you in this presentation __and email it to us__.
+Your task now will be to generate a script to perform the image sorting that we have shown you in this presentation __and email it to us__.
 
-**BUT:** This time you will need to make a subdirectory within each of the categories with the secondary description of the images!
+**BUT:** This time you will need to make __an extra subdirectory within each of the categories__ with the secondary description of the images!
 > That is column 3 of the metadata file. (Artwork, Baby, Funny, Historical, Normal)
 
 ???
