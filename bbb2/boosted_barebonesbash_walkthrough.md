@@ -56,21 +56,64 @@ If you want to know what you will learn in this tutorial, or are already too sca
 `^` | the beginning of the line | `grep '^[rb]\+' regex.txt`
 `$` | the end of the line | `grep 'r$' regex.txt`
 
+## Preparation
+
+Before we start, we need to get a few things onto your computer that we will be playing with today. All commands in this section have been introduced in _Basic_ BareBonesBash, so check there if anything is unfamiliar.
+
+Firstly, lets make a new directory 
+
+```bash
+$ mkdir boosted_barebonesbash
+```
+
+> here we assuming you're in to your home directory, but feel free to put it somewhere else. Just make sure you check all subsequent paths in the rest of the walkthrough!
+
+Now we download the first file, and rename it to something more informative
+
+```bash
+$ wget git.io/Boosted-BBB-meta
+$ mv Boosted-BBB-meta boosted_barebonesbash/Boosted-BBB-meta.tsv
+```
+
+> **Tip**:If using a mac use 'curl -LO' instead!
+
+We will now change into that directory and download a second file. This file is actually zipped, so we will also decompress this.
+
+```bash
+$ cd boosted_barebonesbash
+$ wget git.io/Boosted-BBB-images
+$ unzip Boosted-BBB-images
+
+## and remove the original zip archive
+$ rm Boosted-BBB-images
+```
+
 ## Where is my stuff??
-The first thing that you have to do is to know where the directories/files that you want to work with are. So, how can you search for files and directories hidden in layers and layers of (your very organised) directories?
+
+One of first things you want to do when working on the command line is to find out where the directories/files that you want to work with are. In these modern times, this can be hundreds or even thousands of files.
+
+<p align="center">
+  <img title="https://giphy.com/gifs/download-find-funsubstancea-XSJIE5xMWA9HO
+" src="https://media.giphy.com/media/XSJIE5xMWA9HO/giphy.gif">
+</p>
+
+So, how can you search for files and directories hidden in layers and layers of (your of course very organised ;)) directories?
 
 For this task, you can use the command `find`
 
 Let's see how this command works with an example:
 
-`find Boosted-BBB/ -type f -name '*JPG'`
+```bash
+$ find Boosted-BBB/ -type f -name '*JPG'
+```
 
-The **first** part of the `find` command indicates **the place from which to start looking**, in the example above the directory `Boosted-BBB`. You can also specify:
+The **first** part of the `find` command indicates **the place from which to start looking**, in the example above, this is the directory `Boosted-BBB`. You can also specify:
+
 - `.` to look in here (the current directory)
 - `~/` to look in your home directory
-- Absolute path (i.e.`/home/james`). Note: This will print the absolute path and the found file/directory, it is usefull when you want to use the output of `find`
+- Absolute path (i.e.`/home/james`). Note: This will print the absolute path and the found file/directory, it is useful when you want to use the output of `find` for other things
 
-*Keep in mind that it will look in the directory specified and all of its subdirectories unless indicated otherwise.*
+> Keep in mind that it will look in the directory specified and all of it's subdirectories unless indicated otherwise!
 
 The **second** part of the `find` command indicates **what type of things you are looking for**
 
@@ -79,73 +122,104 @@ The **second** part of the `find` command indicates **what type of things you ar
     - **f**ile
     - **d**irectory
 
-In the example we are looking for files (`-type f`)
+In the example above we are looking for files (`-type f`)
 
 The **third** part of the `find` command is **what to look in**
 
 - Use `-name` to say 'look in the *names* of things'
-    - After the flag you will indicate the 'strings' to search for
-    - You can use wildcards (\*) for maximum laziness! 
+
+**Finally**, we provide the actual string to look for.
 
 In the example above, we look for files that contain `JPG` in some part of their name (`'*JPG*'`).
+- You can use wildcards (\*) for maximum laziness! 
 
-Check what the output of the find command is by running it:
+Check what the output of the find command is by, running it:
 
-`find Boosted-BBB/ -type f -name '*JPG'`
+```bash
+$ find Boosted-BBB/ -type f -name '*JPG'
+```
 
-You can also store the string we are looking for in a variable, so you can change it for another easily in the future (This will be useful when creating scripts, which we will cover later in the session). To do so, let's store our string `JPG` in a variable:
+You can also store the string we are looking for in a variable instead! By doing this, you can change the string for another easily in the future (this will be useful when creating scripts, which we will cover later in the session), without having to modify the command itself. 
 
-`suffix="JPG"`
+To do so, let's store our string `JPG` in a variable:
+
+```bash
+$ suffix="JPG"
+```
 
 Let's try now to call the variable in our find command as:
 
-`find Boosted-BBB -type f -name '*$suffix'`
+```bash
+$ find Boosted-BBB -type f -name '*$suffix'
+```
 
-It did not find any of the files! But we know the files do exist. Let's try the following command:
+**BUT WAIT**! There was no output? It did not find any of the files!!?
 
-`find Boosted-BBB -type f -name "*$suffix"`
+But we know the files do exist (_trust us_)! Let's try the following command istead:
 
-Ta-da! It found your files, what is the difference between these commands??
+```
+find Boosted-BBB -type f -name "*$suffix"
+```
 
-That's right! The quotes!
+<p align="center">
+    <img src="https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" title="Source: https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" width="70%">
+</p>
+
+🎉 It found your files! What is the difference between these commands?
+
+That's right! The _quotes_!
 
 ## Concept: Quotes matter!
-Which quotes you use plays an important role in how bash understand the message within them:
+
+Which quotes you use plays an important role in how bash understands the message contained within them:
+
 * Single quotes: the content is passed on as it is written
-* Double quotes: the content is interpreted
+* Double quotes: the content is _interpreted_
 
 In some cases, the way you write the statments does not matter, as in the following example:
-```
-echo "I like Greek Food"
-echo 'I like Greek Food'
+
+```bash
+$ echo "I like Greek Food"
+$ echo 'I like Greek Food'
 ```
 This two statements will result in the same (universally true) printed message:
 
-`I like Greek Food`
-
-`I like Greek Food`
+```
+I like Greek Food
+I like Greek Food
+```
 
 Now let's consider the following example:
+
+```bash
+$ Arr=Banana
+$ echo 'Pirates say $Arr'
+$ echo "Minions say $Arr"
 ```
-Arr=Banana
-echo 'Pirates say $Arr'
-echo "Minions say $Arr"
-```
+
 Here, the results are different:
 
-`Pirates say $Arr`
+```
+Pirates say $Arr
+Minions say Banana
+```
 
-`Minions say Banana`
+<p align="center">
+    <div class="row">
+        <img src="https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/giphy.gif" title="Source: https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/" width="90%">
+        <img src="https://media.giphy.com/media/bh4jzePjmd9iE/giphy.gif" title="Source: https://media.giphy.com/media/bh4jzePjmd9iE/" width="90%">
+    </div>
+</p>
 
-As you can see in the case of single quotes, bash does not interpret the variable `$Arr` as Banana, since it is not being translated by the computer to the correct meaning. In the case of the double quotes, the program understands `$Arr` as a variable, and interprets it to mean the string `"Banana"`. 
+As you can see in the case of single quotes, bash does not interpret the variable `$Arr` as Banana, since it is not being translated by the computer to the correct meaning. In the case of the double quotes, the program understands `$Arr` as a variable, and interprets it to mean the string contained within it which is`"Banana"`. 
 
-Now let's continue with your files
+Now, let's continue with your files!
 
 ## Cleaning up the filenames
 
-So... you found your files, but it seems that wherever you got the files from has completely mangled the file names (What is with this weird file extention `.JPG.MP3.TXT`???)
+So... you found your files, but it seems that whoever ave you files has (👀) completely mangled the file names (_[What is with this weird file extention `.JPG.MP3.TXT`???]_]
 
-You know that these files are supposed to be images with the extension `.JPG`. So let's clean up the file names, and then you can sort them into categories. 
+You know that already that these files are supposed to be images with the extension `.JPG` (_[clearly]_). So let's clean up the file names, and then we can sort them into categories. 
 
 There are different ways to tackle this problem. First, we will show you an example that uses `cut` and `rev`.
 
@@ -154,126 +228,188 @@ Can you guess what these commands do?
 * `rev`: reverses a character string
 * `cut`: cuts a string into multiple pieces
 
+<div class="row">
+<p align="center">
+  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/mUGRVgAkamLZe/giphy.gif" title="Source: https://giphy.com/gifs/pony-mUGRVgAkamLZe" width="90%">
+</p>
+
+<p align="center">
+  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/2GdACZsbRnTmo/giphy.gif" title="Source: https://giphy.com/gifs/movie-photoset-2GdACZsbRnTmo" width="83%">
+</p>
+</div>
+
 Let's try them out!
-```
-echo "aBcDeF 654321" | rev
+
+```bash
+$ echo "aBcDeF 654321" | rev
 ```
 
-It results in:
+This results in:
 
-`123456 FeDcBa`
+```text
+123456 FeDcBa
+```
 
 Now let's see how `cut` work. This command needs some options to know how to deal with the string. Those are:
-* `-d` speficies the field *d*elimiter we are using. Here it is space (" ").
-* `-f` specifies which *f*ield we wish to cut out. We want to recover the numbers so this will be the second field.
+
+* `-d` specifies the field **d**elimiter we are using. Here it is space (" ").
+* `-f` specifies which **f**ield we wish to cut out. We want to recover the numbers, so this will be the second field.
+* 
 > For more options, check the `man` page!
 
 Let's write the command to obtain the number then:
 
+```bash
+$echo "aBcDeF 654321" | cut -d " " -f 2
 ```
-echo "aBcDeF 654321" | cut -d " " -f 2
-```
+
 And the result is:
 
-`654321`
-
-So let's combine them to clean up our file names. You will use a `for` loop to change all the file names you have found with the `find` command to the desired ending (filename containing only the `.JPG` extension)
-
-The `for` look will look like this:
-
 ```
-suffix=JPG
-for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
+654321
+```
+
+So let's combine these two tools to clean up our file names. 
+
+You will use a `for` loop to change all the file names you have found with the `find` command to the desired ending (filename containing only the `.JPG` extension)
+
+The `for` loop will look like this:
+
+```bash
+$ suffix=JPG
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
 >    new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
 >    echo $file $new_name
->    #mv $file $new_name
 > done
 ```
 
-You should use `echo` to make a 'dry-run', meaning that you can try your code without making any changes. When you are happy with the output from the echo command, uncomment the `mv` command and re-run the `for` loop to change the name of the file for the `$new_name`.
+> **Tip**: Remember that the `>` at the beginning of a code block 
+> indicates a multi-line command. You can replace these with `;` 
+> to write the whole loop on a single line
+ 
+You should use `echo` to make a 'dry-run', meaning that you can try your code without making any changes to files themselves. 
+
+When you are happy with the output from the echo command, you can replace `echo` with the `mv` command, and re-run the `for` loop to change the name of the file for the `$new_name`.
+
+```bash
+$ suffix=JPG
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
+>    new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
+>    mv $file $new_name
+> done
+```
+
+But hold up...
 
 **This code is cumbersome to write, read and understand.**
 
+<p align="center"><img src="https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" title="Source: https://tenor.com/view/what-confused-ugh-blackadder-rowan-atkinson-gif-11050590.gif" width="40%">
+</p>
+
 ### Wait, what just happened? 
-# Thiseas checked till here!!! 
 
 Let's break the code in parts to understand what is going on:
-* `for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do`: this starts the for loop. The `$()` tells bash to put the output of the `find` command as a list, that the `for` loop will look through. 
-* `new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)`: `$()` tells bash to run the commands within parenthesis and interpret the output as a string. The string is then assigned to the `new_name` variable
-    * `echo $file`: print the filepath:
+
+* `for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do`: this starts the for loop. The `$()` tells bash to use the _output_ of the `find` command as the list to loop through. 
+    * `new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)`: `$()` tells bash to run the commands within parenthesis and interpret the output as a string. The string is then assigned to the `new_name` variable
+        * `echo $file`: print the filepath
     
-    `~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3.TX`
+        `~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3.TXT`
     
-    * `rev`: it `rev`erse the file name:
-    `TXT.3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~`
-    * `cut -d "." -f 2-999`: it `cut` the string at each "." (the `-d`elimiter) and keeps everything adter the first delimiter (`-f`ields `2-999`):
- `3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~`
-    * `rev`: it `rev`erse to the original file name: 
-    `~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3`
-    * Finally, we rename the file to the new name with `mv`
+        * `rev`: **rev**erses the file name:
+        `TXT.3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~`
+        * `cut -d "." -f 2-999`: **cut**s the string at each "." (the `-d`elimiter) and keeps everything after the first delimiter (`-f`ields `2-999`):
+         `3PM.GPJ.atnaf/wol/era/sthgil/eht/dna/thgin/yadirF/BBB-detsooB/hsabsenoberab_detsoob/~`
+        * `rev`: **rev**erses to the original file name: 
+        `~/boosted_barebonesbash/Boosted-BBB/Friday/night/and/the/lights/are/low/fanta.JPG.MP3`
+    * `mv`: Finally, we rename the file to `new_name` with `mv`
+* `done`: complete the loop
     
 ### Writing pretty code
-The code we just saw was long and unnecessary. It is a good idea to avoid cluncky code. How can we then simply this code:
-```
-suffix=JPG
-for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
->    new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
->    echo $file $new_name
->    #mv $file $new_name
-> done
-```
-We can shortern it by employing bash **parameter expansion** (the magic!)
 
-## Parameter expansion: The basics
-Parameter expansion is a method in-build in bash that allows you to manipulate variables. Let's explore some examples.
+The code we just saw was long and unnecessary. It is a good idea to avoid clunky code, because often it can be slow but more importantly unreadable to yourself and others!
+
+
+To simplify this code we can instead use bash's **parameter expansion**! (It's magic!)
+
+<p align="center"><img src="https://tenor.com/view/fantastic-beasts-fantastic-beasts-and-where-to-find-them-strudel-magic-food-gif-7865320.gif" title="Source: https://tenor.com/view/fantastic-beasts-fantastic-beasts-and-where-to-find-them-strudel-magic-food-gif-7865320.gif" width="50%">
+</p>
+
+## Parameter expansion: Without the parameters
+
+Parameter expansion is a feature in bash that allows you to manipulate _variables_. Let's explore some examples!
+
 Given the variable:
 
-```
-foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
 ```
 
-You can expand a variable by using `${}`, as:
-```
-echo ${foo}
-```
-Will result into bash printing our variable:
-`
-/home/thiseas/folder/subfolder/BBB.is.bae.txt
-`
-### Some parameters for expansion
+You can expand the variable by using `${}`, like this:
 
-As mentioned, bash expansion allows for the manipulation of variables. For doing that, you can also add a parameter to expansions. Here are some examples:
-* `#string`: removed the string starting from the left side of the variable
+```bash
+$ echo ${foo}
+```
+"Expansion" of a variable is just "unpacking" of the variable to see its contents. So the code above will result into bash printing the variable's contents:
+
+```bash
+$ /home/thiseas/folder/subfolder/BBB.is.bae.txt
+```
+
+This expansion is implied whenever you omit the curly brackets (`$foo` instead of `${foo}`). However, it is still a good idea to include these curly brackets, as it helps to visually distinguish variable names in your code, and to remove any ambiguity as to which is the name of the variable you are trying to expand. 
+
+### Parameter expansion: _with_ parameters!
+
+By adding parameters inside the variable expansion curly brackets, it is also possible to change the way that the variable contents are expanded <ins>without changing the variable definition itself!</ins>. 
+
+Here are some examples:
+
+* `#string`: removes the string from the left side of the variable
+    ```bash
+    $ echo ${foo}
+    $ echo ${foo#/home/}
     ```
-    echo ${foo#/home/}
-    ```
-    `thiseas/folder/subfolder/BBB.is.bae.txt`
+    `
+    /home/thiseas/folder/subfolder/BBB.is.bae.txt
+    `
+    `
+    thiseas/folder/subfolder/BBB.is.bae.txt
+    `
     
 * `%string`: removes the string starting from the right side of the variable
+    ```bash
+    $ echo ${foo}
+    $ echo ${foo%.txt}
     ```
-    echo ${foo%.txt}
-    ```
-    `/home/thiseas/folder/subfolder/BBB.is.bae`
-You can use wildcards within this parameters as in the following examples:
-```
-foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+    `
+    /home/thiseas/folder/subfolder/BBB.is.bae.txt
+    `
+    `
+    /home/thiseas/folder/subfolder/BBB.is.bae
+    `
+    
+You can use wildcards within this parameterised expansions as below:
 
-echo ${foo}    # No parameters in this expansion
-echo ${foo#*/} # Removes everything before the first '/'
-echo ${foo%.*} # What will this do?
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+
+$ echo ${foo}    # No parameters in this expansion
+$ echo ${foo#*/} # Removes everything before the first '/'
+$ echo ${foo%.*} # Removes everything after the last '.'
 ```
 Results in:
-`
+
+```
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
 home/thiseas/folder/subfolder/BBB.is.bae.txt
 /home/thiseas/folder/subfolder/BBB.is.bae
-`
-
-Additionally, these expansions can be generalised as follows:
-
 ```
-echo ${foo##*/} # Removes everything before any '/'
-echo ${foo%%.*} # Removes everything after any '.'
+
+Additionally, to remove __all__ matches of the specified pattern, you can repeat the parameter specifier a second time (`##` or `%%`):
+
+```bash
+$ echo ${foo##*/} # Removes everything before any '/'
+$ echo ${foo%%.*} # Removes everything after any '.'
 ```
 
 `
@@ -285,67 +421,110 @@ BBB.is.bae.txt
 `
 
 ### More parameters for expansion
-Other than removing parts of the variable, we can also modify the variable:
-* `/string/string`: substitutes the first string by the second string in the variable
 
-```
-foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-echo ${foo}                    # No parameters
-echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
+Other than removing parts of the variable contents, parameters will allow you to substitute only parts of them as well!
+
+* `/pattern/string`: substitutes the first occurrence of the pattern in the variable contents by the given string
+
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+$ echo ${foo}                    # No parameters
+$ echo ${foo/BBB/BareBonesBash}  # Change "BBB" to "BareBonesBash"
 ```
 
 `
 /home/thiseas/folder/subfolder/BBB.is.bae.txt
+`
+
+`
 /home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
 `
 
-*  `/string/`: substitutes the string by an empty string
+<p align="center"><img src="https://media.giphy.com/media/8YpifFDs9Ux1VNQP1S/giphy.gif" title="Source: https://giphy.com/gifs/adweek-color-apple-8YpifFDs9Ux1VNQP1S/links" width="75%">
+</p>
 
-```
-echo ${foo/BBB}  # Remove BBB
+Omitting the string will remove the given pattern (i.e. replace it with an empty string).
+
+*  `/pattern/`: substitutes the string with an empty string
+
+```bash
+$ echo ${foo/BBB}  # Remove BBB
 ```
 `
 /home/thiseas/folder/subfolder/.is.bae.txt
 `
 
+As before, repeating the parameter specifier (`/`) will apply the substitution to __all__ matches of the pattern!
+
+```bash
+$ echo ${foo}
+$ echo ${foo//is/IS} ## Replace any occurance of 'is' to 'IS'
+$ echo ${foo//is} ## Remove all occurances of 'is'
+```
+`/home/thiseas/folder/subfolder/BBB.is.bae.txt`
+`/home/thISeas/folder/subfolder/BBB.IS.bae.txt`
+`/home/theas/folder/subfolder/BBB..bae.txt`
+
 ### The last parameter, I swear!
 
-Finally, you can check the length of a variable (how many characters the variable has) by using a # BEFORE the variable name.
+Finally, you can check the length of the variable contents (how many characters long they are) by using a `#` BEFORE the variable name.
 
-``` foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-echo ${#foo}  # The length of the variable contents
+```bash
+$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
+$ echo ${#foo}  # The length of the variable contents
 ```
 `45`
 
-So the filepath in foo is 45 characters long!
+So the filepath in `foo` is 45 characters long!
 
-This parameter will become more handy when when dealing with bash arrays (i.e. lists of things).
+<p align="center">
+  <img src="https://media.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif
+" title="Source: https://media.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif
+" width="40%">
+</p>
+
+This parameter will become more handy when when dealing with bash _arrays_ (i.e. lists of things), but these will not be introduced here.
+
+<!-- THISEAS UP TO HERE -->
 
 ## Writing pretty code
 We can now rewrite our complicated and convoluted code using `rev` and `cut`. DO NOT RUN THIS CODE!
 
+```bash
+$ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
+>   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
+>   echo $file $new_name
+> done
 ```
-for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
-   new_name=$(echo $file | rev | cut -d "." -f 2-999 | rev)
-   echo $file $new_name
-   # mv $file $new_name
-done
-```
+
 To this:
-```
-for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
-   echo ${file} ${file%.*}
-   # mv ${file} ${file%.*}
-done
+
+```bash
+$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+>   echo ${file} ${file%.*}
+> done
 ```
 
 Try running both codes using only the printing command `echo` before modifying the actual variable (dry-running) and check that the result is the same! Is there a difference in runtime?
 
 Result: 0.051s versus 0.003s when running `echo`!
 
-When you are sure it works, remove the comment in the 2nd codeblock to rename the files!
+<p align="center">
+  <img src="https://media.giphy.com/media/S9v6L1tFHk0pptZzCh/giphy.gif" title="Source: https://giphy.com/gifs/stickergiant-fast-zoom-on-my-way-S9v6L1tFHk0pptZzCh/links" width="50%">
+</p>
+
+When you are sure it works, again replace `echo` with `mv` in the 2nd codeblock to rename the files!
+
+```bash
+$ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
+>   mv ${file} ${file%.*}
+> done
+```
+
+<!-- JAMES UP TO HERE - CONTINUE READING/CODE BLCOK FIXING/GIF ADDING -->
 
 ## Almost done!
+
 We now have all the files named similarly, but some things are still a bit off. The file suffix JPG is conventionally written in lowercase characters (jpg).
 
 So, let's change all filename suffixes to be in lowercase letters!
