@@ -485,10 +485,8 @@ So the filepath in `foo` is 45 characters long!
 
 This parameter will become more handy when when dealing with bash _arrays_ (i.e. lists of things), but these will not be introduced here.
 
-<!-- THISEAS UP TO HERE -->
-
 ## Writing pretty code
-We can now rewrite our complicated and convoluted code using `rev` and `cut`. DO NOT RUN THIS CODE!
+We can now rewrite the code below:
 
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*$suffix*"); do
@@ -505,15 +503,17 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 > done
 ```
 
-Try running both codes using only the printing command `echo` before modifying the actual variable (dry-running) and check that the result is the same! Is there a difference in runtime?
+Try running both codes using only the printing command `echo` before modifying the actual variable (dry-running) and check that the result is the same! 
 
-Result: 0.051s versus 0.003s when running `echo`!
+Is there a difference in runtime?
+
+Using a command timer on both for loops above, I got the result: `0.051s` versus `0.003s` respectively! Parameter expansion is quicker because it does not rely on piping together 4 different commands.
 
 <p align="center">
   <img src="https://media.giphy.com/media/S9v6L1tFHk0pptZzCh/giphy.gif" title="Source: https://giphy.com/gifs/stickergiant-fast-zoom-on-my-way-S9v6L1tFHk0pptZzCh/links" width="50%">
 </p>
 
-When you are sure it works, again replace `echo` with `mv` in the 2nd codeblock to rename the files!
+When you are sure the filename `${file%.*}` is as intended, replace `echo` with `mv` in the 2nd codeblock to rename the files! The final code should look like this:
 
 ```bash
 $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
@@ -521,53 +521,444 @@ $ for file in $(find Boosted-BBB/ -type f -name "*JPG*"); do
 > done
 ```
 
-<!-- JAMES UP TO HERE - CONTINUE READING/CODE BLCOK FIXING/GIF ADDING -->
-
 ## Almost done!
 
-We now have all the files named similarly, but some things are still a bit off. The file suffix JPG is conventionally written in lowercase characters (jpg).
+We now have all the files named similarly, but some things are still a bit off. The file suffix `.JPG` is conventionally written in lowercase characters (i.e. `.jpg`).
 
 So, let's change all filename suffixes to be in lowercase letters!
 
-This operation can be done with parameter expansion, but we can use regular expressions to do this without a for loop.
+<p align="center">
+  <img src="https://media.giphy.com/media/l3diMwu8XYh6sa6VG/giphy.gif" title="Source: https://giphy.com/gifs/laffmobbslafftracks-laff-mobbs-tracks-episode-108-l3diMwu8XYh6sa6VG" width="30%">
+</p>
+
+While this operation could also be done with a parameter expansion substituting each filename one by one, we can be EVEN LAZIER and use something called **reg**ular **ex**pressions (a.k.a regex). This allows us to do this without a for loop.
+
+<p align="center">
+  <img src="https://media.giphy.com/media/kaNy16D5G7fyybuIZ4/giphy.gif" title="Source: https://giphy.com/gifs/cbs-ncisla-1110-ncisla1110-kaNy16D5G7fyybuIZ4" width="30%">
+</p>
 
 Regex is an important concept that you encounter in most programming languages.
 
-The actual syntax may vary from language to language, but the concept is the same. We will show here's how they work in bash.
+The actual way you write regex may vary from language to language, but the concept is essentially the same. In the following section, we will show here's how they work in bash!
 
 ## Concept: Regular expressions
-Regex are special strings and characters that define a 'search pattern'. They are normally used in 'Search' or 'Search/Replace' functions e.g. in excel! And: **You have already used them!**
+
+Regex are special strings and characters that define a 'search pattern'. 
+
+They are normally used in 'Search' or 'Search/Replace' functions e.g. in Excel! And: **You have already used them!** (sort of)
+
+<p align="center">
+  <img src="https://media.giphy.com/media/KWbmr5E1UdPUI/giphy.gif" title="Source: https://giphy.com/gifs/way-matt01ss-KWbmr5E1UdPUI/links" width="30%">
+</p>
 
 
-Three regex special character 'categories' that must be kept in mind:
+There are three regex special character 'categories' you should keep in mind:
 
-* `.`, `*`, `^`, `$` (etc.): special characters that are translated to regex function first. You can stop bash translating those by typing `\` before them, this will find the literal symbol)
-* `\t`, `\w`, `\D` (etc.): letter-based special characters that must have \ to be 'translated'
-* `[]`, `()`, (etc.): range, grouping, or 'capturing' matching regex within brackets
+* `.`, `*`, `^`, `$` (etc.): 
+    * special characters <br>These are translated to regex **by default**. They can be "escaped" with `\` when you wish to use the literal symbol instead.
+* `\t`, `\w`, `\D` (etc.): 
+    * letter-based special characters <br> These characters require `\` to be 'translated' (i.e. the opposite of special characters).
+* `[]`, `()`, (etc.): 
+    * range, grouping, or 'capturing' matching regex <br> These can be specified within different types of brackets
 
-We will showcase them by applying some search function in a file. For this, download the following file
+We will showcase them by applying some search function in a file. For this, you will need to download the file `regex.txt` using the code below.
+
+```bash
+$ wget git.io/Boosted-BBB-regex
+$ mv Boosted-BBB-regex regex.txt
 ```
-wget git.io/Boosted-BBB-regex
-mv Boosted-BBB-regex regex.txt
-```
-Let's also look at the contents.
+Let's also look at the contents of this file.
 
-```
-cat regex.txt
-```
-Now let's see which 'parameters' we can use to try to find different words using grep:
-
-* `.` : match any character. Let's find strings containing: "any character + ear"
-
-```
-grep '.ear' regex.txt
+```bash
+$ cat regex.txt
 ```
 
-* []: match range of characters within
-* [^]: match range of characters except the ones in the bracket
-* *: match 0 or more of the preceding items
-* \: do not interpret next character
-* \+: match 1 or more of the preceding items
-* \?: match 0 or 1 of the preceding items
-* ^: the beginning of the line
-* $: the end of the line
+Try to remember the contents of the file for the next few steps (or if you forget, re-run the command to remind yourself!)
+
+Now let's see which 'parameters' we can use to try to find different words using grep!
+
+#### 1. `.` : **matches any character.** 
+
+The code below:
+
+```bash
+$ grep '.ear' regex.txt
+```
+
+> Finds strings containing: any character + ear
+
+Prints:
+
+```
+pear
+bear
+rear
+```
+
+<p align="center">
+  <img src="https://media.giphy.com/media/zlqDsYtuoyR9e/giphy.gif" title="Source: https://media.giphy.com/media/zlqDsYtuoyR9e/giphy.gif" width="50%">
+</p>
+
+#### 2. `[]`: **match range of characters within the square brackets.**
+
+Try:
+
+```bash
+$ grep 'p[iea]r' regex.txt
+```
+
+> String starting with p+[one of: i, e, a]+r
+
+And you should see:
+
+```
+pir
+per
+par
+```
+
+#### 3. `[^]`: **match range of characters excluding the ones in the square brackets.**
+
+Run:
+
+```bash
+$ grep 'p[^iea]r' regex.txt
+```
+
+> String starting with p+[any except: i, e, a]+r
+
+And you should get:
+
+```
+pur
+```
+
+#### 4. `*`: **match 0 or more of the preceding items**
+
+```bash
+$ grep 'be*r' regex.txt
+```
+
+> String that starts with b+ zero or more 'e' +r
+
+You should get:
+
+```
+beer
+br
+ber
+```
+
+<p align="center">
+  <img src="https://media.giphy.com/media/Zw3oBUuOlDJ3W/giphy.gif" title="Source: https://giphy.com/gifs/beer-cheers-shaun-of-the-dead-Zw3oBUuOlDJ3W" width="50%">
+</p>
+
+#### 5. `\`: **do not interpret next character**
+
+```bash
+$ grep 'be\*r' regex.txt
+```
+
+> String 'be*r'
+
+Gives:
+
+```
+be*r
+```
+By escaping the asterisk, the regex looks for an *actual* asterisk character instead of matching 0 or more of the preceding items.
+
+#### 6. `\+`: **match 1 or more of the preceding items**
+
+```bash
+$ grep 'be\+r' regex.txt
+```
+
+> String starting with b+ one or multiple 'e'+r
+
+Matches:
+
+```
+beer
+ber
+```
+Notice the difference in the resulting matches between `\+` and `*`! `br` is NOT matched with `\+` because we arre looking for *at least one* `e`.
+
+<p align="center">
+  <img src="https://media.giphy.com/media/RqbkeCZGgipSo/giphy.gif" title="Source: https://giphy.com/gifs/dreaming-the-simpsons-RqbkeCZGgipSo" width="50%">
+</p>
+
+#### 7. `\?`: match 0 or 1 of the preceding items
+
+```bash
+$ grep 'be\?r' regex.txt
+```
+
+> String starting with b+ zero or one 'e' +r
+
+You should get:
+
+```
+br
+ber
+```
+Compare the matching results to those of `\+`. `beer` is no longer matched because it has two `e` characters and `\?` matches only up to one.
+
+<!-- Thiseas got up to here -->
+
+#### 8. `^`: the beginning of the line
+
+```bash
+$ grep '^[rb]\+' regex.txt
+```
+
+> Lines starting with one or multiple of: r or b
+
+You should get:
+
+```
+bear
+beer
+br
+ber
+be*r
+rear
+```
+
+<p align="center">
+  <img src="https://media.giphy.com/media/J0ySNzZ5APILC/giphy.gif" title="Source: https://giphy.com/gifs/man-weekend-the-J0ySNzZ5APILC/links" width="50%">
+</p>
+
+#### 9. `$`: the end of the line
+
+```bash
+$ grep 'r$' regex.txt
+```
+
+> Line ending with r
+
+```
+pear
+pier
+pir
+per
+par
+pur
+bear
+beer
+br
+ber
+be*r
+rear
+```
+
+> We know this can be intimidating, _[we are still scared ourselves!]_, however there are lots of resources on the internet to help
+> (reminder: Google _everything_!), such as: [regex101](https://regex101.com/) or [rexegg](https://www.rexegg.com/regex-quickstart.html): website describing regex characters and its variations with different languages
+): website describing regex characters and its variations with different languages
+
+
+> Remember that that regex's can be slightly different per shell and language!
+
+## Regex example!
+
+Now, going back to our list of files
+
+```
+fanta.JPG
+BydgoszczForest.JPG
+snore.JPG
+Bubobubo.JPG
+giacomo.JPG
+netsukeJapan.JPG
+nomnom.JPG
+pompeii.JPG
+AlopochenaegyptiacaArnhem.JPG
+exhibitRoyal.JPG
+stretch.JPG
+weimanarer.JPG
+excited.JPG
+licorne.JPG
+angry.JPG
+```
+
+What sort of regex would you use to find all files ending with `.JPG`?
+
+If we want to match a specific set of characters, that always follow a `.` and and then end of string?
+
+```bash
+$ find Boosted-BBB/ -type f -name '*.JPG'
+```
+
+Oooh look, we've done this before 😉.
+
+## `rename`
+
+So while we can find the files with regex, how do we actually rename them in the super-lazy and fast method we mentioned above?
+
+We can use a tool called `rename`!
+
+`rename` lets you apply a regex to the name of files to rename them!
+
+> Note: this is not always installed be default in some Unix operating systems, but is almost always easily installable via the corresponding package manager.
+
+To convert all suffixes in the directory to lowercase characters:
+
+```bash
+$ find Boosted-BBB/ -type f -name '*.JPG' | rename 's/\.JPG$/.jpg/'
+```
+
+You may note that substitution is written similar to what we used in parameter expansion (except with an extra `/`)!
+
+> Check with `find` whether the names are now as you expect!
+
+This 'one-liner' demonstrates that you don't need a for-loop to rename lots of files! Just pipe!
+
+<p align="center">
+    <img src="https://media1.tenor.com/images/16669249a63fd292abcdd549a33b1333/tenor.gif?itemid=10650902" title="Source: https://tenor.com/view/friends-phoebe-gif-10650902" width="50%">
+</p>
+
+
+To go into more detail what is exactly happening in the command above:
+
+
+1. We define we want to **s**ubstitute the regex matches for another string
+
+2. We define the regex to query. `\.JPG$`
+
+> Remember, we want to have the actual `.` character in the search string - therefore we _escape_ so it is not 'translated' by regex.
+
+3. Finally, we specify what we want to substitute any matches to the search string with, which in this case is `.jpg`
+
+## Onwards!
+
+Ok, so we can now again use find to see all the new and pretty and cleaned up filepaths:
+
+```bash
+$ suffix="jpg"
+$ find Boosted-BBB/ -type f -name "*${suffix}"
+```
+
+<p align="center">
+  <img src="https://media.giphy.com/media/yJFeycRK2DB4c/giphy.gif
+" title="Source: https://media.giphy.com/media/yJFeycRK2DB4c/giphy.gif
+" width="40%">
+</p>
+
+What next?
+
+<p align="center">
+  <img src="https://media.giphy.com/media/JPrw5LZ6Qa3D2Eus3K/giphy.gif
+" title="Source: https://giphy.com/gifs/SunnyBunniesOfficial-sunnybunnies-sunny-bunnies-sunnybunny-JPrw5LZ6Qa3D2Eus3K
+" width="40%">
+</p>
+
+Lets start sorting the pictures into categories, which we can later file under relevant folder names!
+
+To do that, we need to keep track of all the file names. We can easily gather this information using a **redirect**!
+
+## Concept: Datastreams!
+
+Programs can take in and spit out data from different _streams_. By default there are 3 such data streams.
+
+- `stdin`: the __st__ an __d__ ard __in__ put
+- `stdout`: the __st__ an __d__ ard  __out__ put
+- `stderr`: the __st__ an __d__ ard   __err__ or
+
+<p align="center">
+  <img src=".images/Datastreams.png" width="50%">
+</p>]
+
+<!-- image is stored in github repo so relative link won't work on hack.md -->
+
+_A program is like the human body; One way in, two ways out!_
+
+<p align="center"><img src="https://media.giphy.com/media/4kg8IIClzvLtC/giphy.gif" title="Source: https://media.giphy.com/media/4kg8IIClzvLtC/" width="40%">
+
+# Pipes revisited
+
+In the first session you learned about piping. Here's how that works!
+
+<img src=".images/Piping.png" width="100%">
+
+<!-- image is stored in github repo so relative link won't work on hack.md -->
+
+With a pipe, the `stdout` of one command becomes the `stdin` of the next!
+
+`stderr` is printed on your screen.
+
+# Concept: Redirects
+
+Much like streams in the real world, datastreams can be redirected.
+
+This way you can save the stdout of a program (or even the stderr) into a file to save for later!
+
+
+- `stdin` can be redirected with `<`.
+    - An arrow pointing TO your program name!
+
+- `stdout` can be redirected with `>`.
+    - An arrow pointing AWAY your program name!
+
+- `stderr` can be redirected with `2>`.
+    - Because it is the secondary output stream.
+
+It is also possible to combine streams, but we won't get into that here.
+
+<p align="center">
+    <img src="https://media.giphy.com/media/3o72EWUgbRNfLegO1W/giphy.gif" title="Source: https://media.giphy.com/media/3o72EWUgbRNfLegO1W/" width="80%">
+</p>
+
+# Let's redirect!
+
+We can get a list of all the file names by redirecting the `stdout` of the `find` command.
+
+```bash
+$ suffix="jpg"
+$ find Boosted-BBB/ -type f -name "*${suffix}" > File_names.txt
+```
+
+This time, nothing was printed on your screen. But don't panic, because you _redirected_ that output into the file specified after the `>`.
+
+You can `cat` the resulting file to see that everything worked!
+
+<p align="center"><img src="https://media.giphy.com/media/JqDeI2yjpSRgdh35oe/giphy.gif" title="Source: https://media.giphy.com/media/JqDeI2yjpSRgdh35oe/" width="35%">
+</p>
+
+# Getting parts of a file path
+
+Before moving on, there are two useful commands you should know.
+
+`basename` will tell you the file name, while _stripping the path_ to the file.
+```bash
+$ basename data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+```
+```
+bubobubo.JPG.MP3.TXT
+```
+
+
+`dirname`, on the otherhand, does the opposite. It will tell you the path to the directory that a file is in, while _omitting the name_ of the file.
+```bash
+$ dirname data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
+```
+```
+data/Boosted-BBB//Having/the/time/of/your/life
+```
+
+# Reading from a file
+
+Ok, so you now have a file with all the paths to the images we need. But the folder structure that files are in is still a mess. 
+
+<p align="center"><img src="https://media.giphy.com/media/7vARoDgcIknS5wBQq6/giphy.gif" title="Source: https://giphy.com/gifs/abba-waterloo-7vARoDgcIknS5wBQq6" width="35%">
+</p>
+
+It's time to read the contents of the file with a `while` loop!
+
+A `while` loop is a special type of repeating code that keeps going until it is interrupted.
+
+We will also use `read`. This command takes the contents of the file and loads them into a specified variable.
+
+<p align="center"><img src="https://media.giphy.com/media/WoWm8YzFQJg5i/source.gif" title="Source: https://giphy.com/gifs/cartoons-comics-sea-reading-WoWm8YzFQJg5i" width="35%">
+</p>
+
+<!-- James up to here! -->
