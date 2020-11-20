@@ -704,15 +704,13 @@ ber
 ```
 Compare the matching results to those of `\+`. `beer` is no longer matched because it has two `e` characters and `\?` matches only up to one.
 
-<!-- Thiseas got up to here -->
-
 #### 8. `^`: the beginning of the line
 
 ```bash
 $ grep '^[rb]\+' regex.txt
 ```
 
-> Lines starting with one or multiple of: r or b
+> Lines starting with [0 or 1 of: r or b]
 
 You should get:
 
@@ -752,12 +750,10 @@ be*r
 rear
 ```
 
-> We know this can be intimidating, _[we are still scared ourselves!]_, however there are lots of resources on the internet to help
-> (reminder: Google _everything_!), such as: [regex101](https://regex101.com/) or [rexegg](https://www.rexegg.com/regex-quickstart.html): website describing regex characters and its variations with different languages
-): website describing regex characters and its variations with different languages
+> We know regex can be intimidating _[we are still scared of them too!]_. However, there are lots of resources on the internet to help you put together the right regex
+> (reminder: Google _everything_!), such as: [regex101](https://regex101.com/) or [rexegg](https://www.rexegg.com/regex-quickstart.html)
 
-
-> Remember that that regex's can be slightly different per shell and language!
+> Remember that regex's can be slightly different per shell and language!
 
 ## Regex example!
 
@@ -783,13 +779,13 @@ angry.JPG
 
 What sort of regex would you use to find all files ending with `.JPG`?
 
-If we want to match a specific set of characters, that always follow a `.` and and then end of string?
+If we want to match a specific set of characters, that always follow a `.` and then end with a specific string?
 
 ```bash
 $ find Boosted-BBB/ -type f -name '*.JPG'
 ```
 
-Oooh look, we've done this before 😉.
+Oooh look, we've done this before. 😉
 
 ## `rename`
 
@@ -799,7 +795,7 @@ We can use a tool called `rename`!
 
 `rename` lets you apply a regex to the name of files to rename them!
 
-> Note: this is not always installed be default in some Unix operating systems, but is almost always easily installable via the corresponding package manager.
+> Note: this is not always installed by default in some Unix operating systems, but is almost always easily installable via the corresponding package manager.
 
 To convert all suffixes in the directory to lowercase characters:
 
@@ -809,29 +805,28 @@ $ find Boosted-BBB/ -type f -name '*.JPG' | rename 's/\.JPG$/.jpg/'
 
 You may note that substitution is written similar to what we used in parameter expansion (except with an extra `/`)!
 
-> Check with `find` whether the names are now as you expect!
+> You can use `find` to check whether the names are now as you expect!
 
-This 'one-liner' demonstrates that you don't need a for-loop to rename lots of files! Just pipe!
+The `rename` 'one-liner' demonstrates that you don't need a for-loop to rename lots of files! Just pipe!
 
 <p align="center">
     <img src="https://media1.tenor.com/images/16669249a63fd292abcdd549a33b1333/tenor.gif?itemid=10650902" title="Source: https://tenor.com/view/friends-phoebe-gif-10650902" width="50%">
 </p>
 
 
-To go into more detail what is exactly happening in the command above:
-
+Here is what is happening when we use the command above, in a bit more detail:
 
 1. We define we want to **s**ubstitute the regex matches for another string
 
 2. We define the regex to query. `\.JPG$`
 
-> Remember, we want to have the actual `.` character in the search string - therefore we _escape_ so it is not 'translated' by regex.
+> Remember, we want to have the actual `.` character in the search string - therefore we _escape_ so it will not be 'translated' by regex.
 
-3. Finally, we specify what we want to substitute any matches to the search string with, which in this case is `.jpg`
+3. Finally, we specify what we want to substitute anything that matches the search string with, which in this case is `.jpg`
 
 ## Onwards!
 
-Ok, so we can now again use find to see all the new and pretty and cleaned up filepaths:
+Ok, so we can now again use `find` to see all the new and pretty and cleaned up filepaths:
 
 ```bash
 $ suffix="jpg"
@@ -864,6 +859,8 @@ Programs can take in and spit out data from different _streams_. By default ther
 - `stdout`: the __st__ an __d__ ard  __out__ put
 - `stderr`: the __st__ an __d__ ard   __err__ or
 
+> **PRO TIP:** Each programme also has an 'exit code', which can tell you if execution completed with/without errors. You will rarely see these in the wild.
+
 <p align="center">
   <img src=".images/Datastreams.png" width="50%">
 </p>]
@@ -886,9 +883,9 @@ With a pipe, the `stdout` of one command becomes the `stdin` of the next!
 
 `stderr` is printed on your screen.
 
-# Concept: Redirects
+## Concept: Redirects
 
-Much like streams in the real world, datastreams can be redirected.
+Much like streams of water in the real world, datastreams can be redirected.
 
 This way you can save the stdout of a program (or even the stderr) into a file to save for later!
 
@@ -908,7 +905,7 @@ It is also possible to combine streams, but we won't get into that here.
     <img src="https://media.giphy.com/media/3o72EWUgbRNfLegO1W/giphy.gif" title="Source: https://media.giphy.com/media/3o72EWUgbRNfLegO1W/" width="80%">
 </p>
 
-# Let's redirect!
+## Let's redirect!
 
 We can get a list of all the file names by redirecting the `stdout` of the `find` command.
 
@@ -924,7 +921,7 @@ You can `cat` the resulting file to see that everything worked!
 <p align="center"><img src="https://media.giphy.com/media/JqDeI2yjpSRgdh35oe/giphy.gif" title="Source: https://media.giphy.com/media/JqDeI2yjpSRgdh35oe/" width="35%">
 </p>
 
-# Getting parts of a file path
+## Getting parts of a file path
 
 Before moving on, there are two useful commands you should know.
 
@@ -945,7 +942,7 @@ $ dirname data/Boosted-BBB//Having/the/time/of/your/life/bubobubo.JPG.MP3.TXT
 data/Boosted-BBB//Having/the/time/of/your/life
 ```
 
-# Reading from a file
+## Reading from a file
 
 Ok, so you now have a file with all the paths to the images we need. But the folder structure that files are in is still a mess. 
 
@@ -958,7 +955,376 @@ A `while` loop is a special type of repeating code that keeps going until it is 
 
 We will also use `read`. This command takes the contents of the file and loads them into a specified variable.
 
-<p align="center"><img src="https://media.giphy.com/media/WoWm8YzFQJg5i/source.gif" title="Source: https://giphy.com/gifs/cartoons-comics-sea-reading-WoWm8YzFQJg5i" width="35%">
+<p align="center">
+    <img src="https://media.giphy.com/media/WoWm8YzFQJg5i/source.gif" title="Source: https://giphy.com/gifs/cartoons-comics-sea-reading-WoWm8YzFQJg5i" width="35%">
 </p>
 
-<!-- James up to here! -->
+```bash
+$ mkdir images
+$ while read filepath; do
+>   echo "${filepath}" images/$(basename ${filepath})
+>   # mv ${filepath} images/$(basename ${filepath})
+> done < File_names.txt
+```
+
+Here we make a new directory to move all our files into. Then `while` we are still `read`ing lines from the contents of a file, we will sign a given line to the variable `filepath`. Then we will `do` an `echo` of the original file path, and then a our new `path` in our new directory. Once we've finished the `while` loop we will close it down with `done`. And of course, we need to specify the file we want to `read` through. We do this with our `<` redirect we introduced earlier!
+
+When you're ready, uncomment the `mv` command to move each file from the
+original location into the new location!
+
+> Question: in this context, why do you have to use 'basename' for the target directory?
+
+## Concept: While Loops
+
+Whoa hold up... maybe we went to fast.
+
+We have previously introduced the concept of a loop, and already used a few today.
+
+_from Basic BBB:_
+
+```bash
+$ for file in file1 file2 file3 file4; do
+>   echo "${file}"
+> done
+```
+
+`for` loops repeat a set of code for a set of items, by changing the value of a variable in each iteration. They always require some form of list, and therefore `for` loops are __finite__, they go through your list and stop when they run out of things.
+
+
+Instead, a `while` loop keeps going until a **statement** is false (i.e. can be infinite!).
+
+```bash
+$ while [statement]; do     #means while statement is true do
+>   [whatever you want to do]
+> done
+```
+
+
+An easy **pseudocode** example:
+
+> Pseudocode is code-_like_ syntax, but a computer will NOT understand it. the code below won't work if you try to copy it over.
+
+```bash
+$ n=3
+$ while n > 0; do
+>   echo $n
+>   n=$n - 1
+> done
+```
+
+will result in 
+
+```
+3
+2
+1
+```
+
+The condition means that while the variable `$n` contains a number that is more than 0 (i.e.condition results in `TRUE`), go onto the next iteration of the loop. If `$n` is _not_ more than 0 (i.e.condition results in `FALSE`) when we complete the loop and run `done`.
+
+Didn't you say while loop are infinite? 
+
+<p align="center">
+    <img src="https://media.giphy.com/media/U2BASTIsaw8WQ/source.gif" title="Source: https://giphy.com/gifs/elevator-berlin-lift-U2BASTIsaw8WQ" width="90%">
+</p>
+]
+
+What will this **Pseudocode** do?:
+
+```bash
+$ n=3
+$ while n < 5; do
+>   echo $n
+>   n=$n - 1
+> done
+```
+
+The number in `$n` will _always_ be less than 5 :scream:! That means the loop will never stop, unless interrupted!
+
+Therefore **always** include a stop, i.e. ensure your condition will eventually become 'false'!
+
+> In emergencies: <kbd>ctrl</kbd> + <kbd>c</kbd> (cancel the loop)
+
+Now going back to our example from before...
+
+```bash
+$ while read filepath; do
+>   echo "${filepath}" images/$(basename ${filepath})
+> done < File_names.txt
+```
+
+`read` is a special function that makes the condition `read filepath` to become `FALSE` when there are no more lines in the file `File_names.txt` (i.e. '`EOF`').
+
+> Programmer lingo: `EOF` means end of file! 
+
+If you already executed the `while` loop renaming the files with `mv` command uncommented, you can now run `ls -l images/`  and you should now see all your cleanly-named image files in there, and not buried under all those _[genius]_ abba lyrics!
+
+<!-- Thiseas got up to here -->
+
+## Pasting things side by side!
+
+As you remember from the beginning, we downloaded a metadata file, which
+includes different metadata categories for each file. Maybe we can use this to make our collection of images _even more_ organised?
+
+Lets look in the file!
+
+```bash
+$ cat Boosted-BBB-meta.tsv
+```
+
+We can see have different metadata categories assigned to each image. 
+
+Now we can put together a list that states which category each image is part of! However, we don't have the file paths to each image :-1:, which are stored in our `File_names.txt` file.
+
+We can use a tool called `paste` to paste the two lists together, and save the results!
+
+```bash
+$ ls -1 images/* | paste - Boosted-BBB-meta.tsv # > Annotations.txt
+```
+
+> **Tip**: `ls -1` forces the output into a single column. `paste` accepts the `stdin` and puts it at the position of `-`
+
+
+You should see with our _dry-run_ the file names in the first column, and all the metadata in the subsequent columns! 
+
+```
+images/alopochenaegyptiacaArnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	Artwork
+images/bubobubo.jpg	bubobubo	C	Normal
+...
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	A	Normal
+```
+
+Once you're happy, remove the comment and make the `Annotations.txt` file!
+
+You now have a meta-data sheet for each jpg!
+
+> **Important Disclaimer**: literally pastes columns, no _matching_ done. Therefore this method _only_ works if both columns are in the corresponding/expected order!
+
+## Editing text with `sed`
+
+But to share these images with your internet friends, you need to properly specify the category names, the 'A', 'B', 'C', categories aren't very informative.
+
+Let's add some _actual_ category names to the `Annotations.txt`.
+
+For this we can use `sed`, short for **s**tream **ed**itor, with a regex to edit the contents of a datastream on-the-fly.
+
+Remember how we have previously use `nano` to edit text files? Now we are going to be even more lazy and edit files _programmatically_!
+
+Running:
+
+```bash
+$ sed 's/A/dog/' Annotations.txt
+```
+
+will result in
+
+```
+images/alopochenaegyptiacadogrnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	dogrtwork
+images/bubobubo.jpg	bubobubo	C	Normal
+...
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	dog	Normal
+```
+
+Can you see what happened there? Do you see what went wrong?
+
+<p align="center"><img src="https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif" title="Source: https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/" width="40%">
+</p>
+
+ Don't worry though, your file has not been changed in any way! A nice thing about `sed` is it's _default_ mode is to always do a dry run.
+ 
+So what happened here and how can we fix it?
+ 
+ Our replacement (similar to bash expansions earlier) replaced _any_ `A` character with dog (i.e. we now have `dogrtwork`).
+ 
+The pattern matched  the first A in a line with `dog`. We therefore should make our regex more specific!
+
+We know the value we want is a column, and hence it is surrounded by TABs! We can therefore change the pattern to 's/\tA\t/\tdog\t/' to only match a single character column.
+
+```bash
+$ sed 's/\tA\t/\tdog\t/' Annotations.txt
+```
+
+results in
+
+```
+images/alopochenaegyptiacaArnhem.jpg	alopochenaegyptiacaArnhem	C	Funny
+images/angry.jpg	angry	B	Artwork
+images/bubobubo.jpg	bubobubo	C	Normal
+...
+images/snore.jpg	snore	B	Normal
+images/stretch.jpg	stretch	B	Funny
+images/weimanarer.jpg	weimanarer	dog	Normal
+```
+> On Macs, `sed` does not recognise `\t`.You will need to type in a tab character.
+
+Much better!
+
+To add _multiple_ changes we can use `-e` to provide multiple regular **e**xpressions to `sed`.
+
+```bash
+$ sed -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Annotations.txt
+```
+
+Check the results for any errors.
+
+When you are happy with the results, it is time to save the edits!
+
+`sed` can edit a file **i**n place, with the `-i` option.
+```bash
+$ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Annotations.txt
+```
+
+> **Note**: On Mac, the `-i` option needs an argument so replace it with `-i ''`
+
+## Cleanin' up my closet
+
+Lets actually organise our into descriptive folders based our metadata file!
+
+<p align="center">
+  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="60%">
+</p>
+
+
+For this, we need to use _conditionals_. We briefly introduced this earlier with `while` loops. This is a comparison of two things,
+and if they are the same something happens (typically indicated with `TRUE`), if different (typically indicated with `FALSE`), something else happens.
+
+The most basic conditional is an `if` `else` statement.
+
+
+The basic syntax is as follows:
+
+```bash
+$ if [[ ${my_variable} == "banana" ]]; then
+>   echo "Monkey takes a banana and runs away happy."
+> else
+>   echo "Monkey doesn't want that."
+> fi
+```
+
+You can have _sequential_ conditions too with `elif`, short for **el**se **if**.
+
+```bash
+$ if [[ ${my_variable} == "banana" ]]; then
+>   echo "Monkey takes a banana and runs away happy."
+> elif [[ ${my_variable} == "mango" ]]; then
+>   echo "Monkey takes a mango and eats it while staring at you."
+> else
+>   echo "Monkey doesn't want that."
+> fi
+```
+
+> Important: `[[` behaves different to `[`. Usually, `[[` is what you want. [_Long story, trust us._]
+
+Can you guess what would happen here depending on the contents of `my_variable`?
+
+Try re-running the statements after updating the variable in each of these:
+
+```bash
+$ my_variable="banana"
+# Run if/else statement again here
+$ my_variable="mango"
+# Run if/else statement again here
+$ my_variable="pear"
+# Run if/else statement again here
+```
+
+## Conditions of conditionals
+
+You can evaluate mathematical equations with `((`.
+
+```bash
+$ if (( 5 - 2 == 3)); then
+>   echo "YES"
+> fi
+```
+```
+YES
+```
+
+`!` can be used in all conditions as a "not". (i.e. Turning a TRUE into FALSE and vice versa.
+)
+
+For example in a maths example:
+
+```bash
+$ if (( 5 - 2 == 3)); then
+>   echo "YES"
+> fi
+```
+```
+YES
+```
+
+```bash
+$ if ! (( 5 - 2 == 3)); then
+>   echo "YES"
+> else
+>   echo "NO"
+> fi
+```
+```
+NO
+```
+
+> **Note**: `!` can act as a "not" with square brackets as well!
+
+
+There are other special `bash` options that do conditions for you, e.g. to check if files exist, or is a variable has non-zero length.
+
+
+```bash
+$ if [[ -f Annotations.txt ]]; then
+>   echo "File exists."
+> fi
+
+$ if [[ -n ${banana} ]]; then
+>   echo "Variable is set."
+> else
+>   echo "Variable is NOT set."
+> fi
+```
+```
+File exists.
+Variable is NOT set.
+```
+
+You can even combine multiple conditionals
+ - `&&`: 'AND' - both must evaluate true 
+  - `||`: 'OR' - at least one must evaluate true
+  
+For AND:
+
+```bash
+$ LifeUniverseEverything=42
+$ hitchhikers="awesome"
+## AND
+$ if [[ ${LifeUniverseEverything} == 42  && ${hitchhikers} == "awesome" ]]; then
+>   echo "Don't panic!"
+> fi
+```
+
+and for OR:
+
+```bash
+$ LifeUniverseEverything=41
+$ hitchhikers="awesome"
+## OR
+$ if [[ ${LifeUniverseEverything} == 42  || ${hitchhikers} == "awesome" ]]; then
+>   echo "Still don't panic!"
+> fi
+```
+
+<p align="center"><img src="https://media.giphy.com/media/BVlWY2vMZgLG8/source.gif" title="Source: https://giphy.com/gifs/life-answer-42-BVlWY2vMZgLG8/" width="40%">
+</p>
+
+Play around with the `hitchikers` variable to get a feel of how it works!
+
+## Sorting the images by category
+
+<!-- JAMES UP TO HERE -->
