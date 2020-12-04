@@ -162,7 +162,7 @@ find Boosted-BBB -type f -name "*$suffix"
 ```
 
 <p align="center">
-    <img src="https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" title="Source: https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" width="70%">
+    <img src="https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" title="Source: https://tenor.com/view/nagato-naruto-shippuden-nagato-kid-nani-apa-gif-12417317.gif" width="40%">
 </p>
 
 🎉 It found your files! What is the difference between these commands?
@@ -206,8 +206,8 @@ Minions say Banana
 
 <p align="center">
     <div class="row">
-        <img src="https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/giphy.gif" title="Source: https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/" width="90%">
-        <img src="https://media.giphy.com/media/bh4jzePjmd9iE/giphy.gif" title="Source: https://media.giphy.com/media/bh4jzePjmd9iE/" width="90%">
+        <img src="https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/giphy.gif" title="Source: https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/" width="40%">
+        <img src="https://media.giphy.com/media/bh4jzePjmd9iE/giphy.gif" title="Source: https://media.giphy.com/media/bh4jzePjmd9iE/" width="40%">
     </div>
 </p>
 
@@ -230,11 +230,11 @@ Can you guess what these commands do?
 
 <div class="row">
 <p align="center">
-  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/mUGRVgAkamLZe/giphy.gif" title="Source: https://giphy.com/gifs/pony-mUGRVgAkamLZe" width="90%">
+  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/mUGRVgAkamLZe/giphy.gif" title="Source: https://giphy.com/gifs/pony-mUGRVgAkamLZe" width="40%">
 </p>
 
 <p align="center">
-  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/2GdACZsbRnTmo/giphy.gif" title="Source: https://giphy.com/gifs/movie-photoset-2GdACZsbRnTmo" width="83%">
+  <img style="transform: scaleX(-1)" src="https://media.giphy.com/media/2GdACZsbRnTmo/giphy.gif" title="Source: https://giphy.com/gifs/movie-photoset-2GdACZsbRnTmo" width="43%">
 </p>
 </div>
 
@@ -440,7 +440,7 @@ $ echo ${foo/BBB/BareBonesBash}  # Change "BBB" to "BareBonesBash"
 /home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
 `
 
-<p align="center"><img src="https://media.giphy.com/media/8YpifFDs9Ux1VNQP1S/giphy.gif" title="Source: https://giphy.com/gifs/adweek-color-apple-8YpifFDs9Ux1VNQP1S/links" width="75%">
+<p align="center"><img src="https://media.giphy.com/media/8YpifFDs9Ux1VNQP1S/giphy.gif" title="Source: https://giphy.com/gifs/adweek-color-apple-8YpifFDs9Ux1VNQP1S/links" width="40%">
 </p>
 
 Omitting the string will remove the given pattern (i.e. replace it with an empty string).
@@ -650,7 +650,7 @@ ber
 ```
 
 <p align="center">
-  <img src="https://media.giphy.com/media/Zw3oBUuOlDJ3W/giphy.gif" title="Source: https://giphy.com/gifs/beer-cheers-shaun-of-the-dead-Zw3oBUuOlDJ3W" width="50%">
+  <img src="https://media.giphy.com/media/Zw3oBUuOlDJ3W/giphy.gif" title="Source: https://giphy.com/gifs/beer-cheers-shaun-of-the-dead-Zw3oBUuOlDJ3W" width="40%">
 </p>
 
 #### 5. `\`: **do not interpret next character**
@@ -875,7 +875,7 @@ _A program is like the human body; One way in, two ways out!_
 
 In the first session you learned about piping. Here's how that works!
 
-<img src=".images/Piping.png" width="100%">
+<img src="https://github.com/BareBonesBash/barebonesbash.github.io/raw/master/bbb2/.images/Piping.png" width="100%">
 
 <!-- image is stored in github repo so relative link won't work on hack.md -->
 
@@ -902,7 +902,7 @@ This way you can save the stdout of a program (or even the stderr) into a file t
 It is also possible to combine streams, but we won't get into that here.
 
 <p align="center">
-    <img src="https://media.giphy.com/media/3o72EWUgbRNfLegO1W/giphy.gif" title="Source: https://media.giphy.com/media/3o72EWUgbRNfLegO1W/" width="80%">
+    <img src="https://media.giphy.com/media/3o72EWUgbRNfLegO1W/giphy.gif" title="Source: https://media.giphy.com/media/3o72EWUgbRNfLegO1W/" width="60%">
 </p>
 
 ## Let's redirect!
@@ -1025,9 +1025,8 @@ The condition means that while the variable `$n` contains a number that is more 
 Didn't you say while loop are infinite? 
 
 <p align="center">
-    <img src="https://media.giphy.com/media/U2BASTIsaw8WQ/source.gif" title="Source: https://giphy.com/gifs/elevator-berlin-lift-U2BASTIsaw8WQ" width="90%">
+    <img src="https://media.giphy.com/media/U2BASTIsaw8WQ/source.gif" title="Source: https://giphy.com/gifs/elevator-berlin-lift-U2BASTIsaw8WQ" width="50%">
 </p>
-]
 
 What will this **Pseudocode** do?:
 
@@ -1187,7 +1186,7 @@ $ sed -i -e 's/\tA\t/\tdog\t/' -e 's/\tB\t/\tcat\t/' -e 's/\tC\t/\tbird\t/' Anno
 Lets actually organise our into descriptive folders based our metadata file!
 
 <p align="center">
-  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="60%">
+  <img src="https://media.giphy.com/media/ZylxniYTM4rOfltszT/giphy.gif" title="Source: https://giphy.com/gifs/queen-the-show-must-go-on-ZylxniYTM4rOfltszT" width="40%">
 </p>
 
 
@@ -1440,7 +1439,8 @@ $ find ~/boosted_barebonesbash/images/ -type f -name "*jpg"
 
 Boom! Everything moved into the correct subfolder!
 
-<p align="center"><img src="https://media.giphy.com/media/U6pavBhRsbNbPzrwWg/giphy.gif" title="Source: <p align="center">
+<p align="center">
+<img src="https://media.giphy.com/media/U6pavBhRsbNbPzrwWg/giphy.gif" title="Source:https://media.giphy.com/media/U6pavBhRsbNbPzrwWg/" width="40%">
 </p>
 
 ## But I have to do this every day!
@@ -1468,7 +1468,7 @@ So let's start writing your first script `first_script.sh`! Open a text editor.
 $ nano first_script.sh
 ```
 
-<p align="center"><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" title="Source: https://media.giphy.com/media/26tn33aiTi1jkl6H6/" width="60%">
+<p align="center"><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" title="Source: https://media.giphy.com/media/26tn33aiTi1jkl6H6/" width="40%">
 </p>
 
 ## Your first script!
@@ -1587,7 +1587,7 @@ $ bash ./first_script.sh Aida
 Hello Aida
 ```
 
-<img src=".images/bbb_aida.svg" width="10%">
+<img src="https://github.com/BareBonesBash/barebonesbash.github.io/raw/master/bbb2/.images/bbb_aida.svg" width="10%">
 
 And that's pretty much it to start writing your script. Add normal commands you would normally run 'manually' on the terminal, but define your variables with user-supplied arguments!
 
@@ -1703,9 +1703,9 @@ $ mv Boosted-BBB-meta  \
 ~/boosted_barebonesbash_scripting/Boosted-BBB-meta.tsv
 ```
 
-You are set up to start now!
+You are set up to start now! On your marks, get set, **GO*!
 
-<p align="center"><img src="https://media.giphy.com/media/nQz8YdVnMipdC/giphy.gif" title="Source: https://giphy.com/gifs/cute-adorable-puppy-nQz8YdVnMipdC" width="50%">
+<p align="center"><img src="https://media.giphy.com/media/nQz8YdVnMipdC/giphy.gif" title="Source: https://giphy.com/gifs/cute-adorable-puppy-nQz8YdVnMipdC" width="30%">
 </p>
 
 ## Today I learned...
