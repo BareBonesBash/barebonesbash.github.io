@@ -1327,4 +1327,423 @@ Play around with the `hitchikers` variable to get a feel of how it works!
 
 ## Sorting the images by category
 
-<!-- JAMES UP TO HERE -->
+We now want to create a directory for each category, and move images into the corresponding directory as recorded in our annotations file.
+
+We will hfirst check that we can extract the correct information for the moving, i.e. the name of the file and the corresponding category we defined above. 
+
+In our dry run we will print these two bits of information as extracted from the `Annotations.txt`.
+
+```bash
+$ cd ~/boosted_barebonesbash/
+
+## Parse the annotations file into variables
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+> 
+>   echo "${image_name}    ${animal}"
+> 
+> done < Annotations.txt
+```
+
+And you should see:
+
+```
+images/alopochenaegyptiacaArnhem.jpg    bird
+images/angry.jpg    cat
+images/bubobubo.jpg    bird
+images/bydgoszczForest.jpg    bird
+[...]
+images/pompeii.jpg    dog
+images/snore.jpg    cat
+images/stretch.jpg    cat
+images/weimanarer.jpg    dog
+```
+
+Looks good! So now, we can use conditionals to decide which file should go into which category. Again, with dry runs with `echo`
+
+```bash
+$ cd ~/boosted_barebonesbash/
+
+## Parse the annotations file into variables
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+> 
+>   # echo "${image_name}    ${animal}"
+> 
+>   ## Make a new directory for each animal, if one doesn't exist.
+>   mkdir -p images/${animal}
+> 
+>   ## If animal matches one of the three, move the image.
+>   if [[ ${animal} == "cat" ]]; then
+>     echo "mv ${image_name} images/cat/"
+>   elif [[ ${animal} == "dog" ]]; then
+>     echo "mv ${image_name} images/dog/"
+>   elif [[ ${animal} == "bird" ]]; then
+>     echo "mv ${image_name} images/bird/"
+>   fi
+> 
+> done < Annotations.txt
+```
+
+The if statement will check that the given `$animal` variable matches a corresponding string, and if so, it will move that file to the folder.
+
+If you're happy with the dry-run commands from echo, then we do the real-deal `mv` commands!
+
+```bash
+$ while read line; do
+>   image_name=$(echo "${line}" | cut -f1)
+>   animal=$(echo "${line}" | cut -f3)
+> 
+>   # echo "${image_name}    ${animal}"
+> 
+>   ## Make a new directory for each animal, if one doesn't exist.
+>   mkdir -p images/${animal}
+> 
+>   ## If animal matches one of the three, move the image.
+>   if [[ ${animal} == "cat" ]]; then
+>     mv ${image_name} images/cat/
+>   elif [[ ${animal} == "dog" ]]; then
+>     mv ${image_name} images/dog/
+>   elif [[ ${animal} == "bird" ]]; then
+>     mv ${image_name} images/bird/
+>   fi
+> 
+> done < Annotations.txt
+```
+
+## Housekeeping
+
+Let's see if everything moved where we wanted using find.
+
+```bash
+$ find ~/boosted_barebonesbash/images/ -type f -name "*jpg"
+```
+```
+/home/lamnidis/boosted_barebonesbash/images/cat/snore.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/giacomo.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/excited.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/angry.jpg
+/home/lamnidis/boosted_barebonesbash/images/cat/stretch.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/licorne.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/fanta.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/weimanarer.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/pompeii.jpg
+/home/lamnidis/boosted_barebonesbash/images/dog/nomnom.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/alopochenaegyptiacaArnhem.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/bubobubo.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/netsukeJapan.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/bydgoszczForest.jpg
+/home/lamnidis/boosted_barebonesbash/images/bird/exhibitRoyal.jpg
+```
+
+Boom! Everything moved into the correct subfolder!
+
+<p align="center"><img src="https://media.giphy.com/media/U6pavBhRsbNbPzrwWg/giphy.gif" title="Source: <p align="center">
+</p>
+
+## But I have to do this every day!
+
+We are already being lazy by getting the computer to loop through each file.
+
+But what happens if you have to do the same thing **EVERYDAY**? 
+
+Do you really wanna write all the commands every time?!
+
+<p align="center"><img src="https://media.giphy.com/media/iE4lKpKqwe7QIQCPjG/giphy.gif" title="Source: https://giphy.com/gifs/memecandy-iE4lKpKqwe7QIQCPjG" width="30%">
+</p>
+
+The ultimate goal of anyone working on the command line is to make a _program_ which you can run with a single command and it does all the work for you.
+
+That program is called a **_script_**.
+
+## What's a script?
+
+Similar to a play/movie script that tells actors what to do and the sequence in which they should do it, a computer script is a file containing all the commands that you want the computer to perform in a given order.
+
+So let's start writing your first script `first_script.sh`! Open a text editor.
+
+```bash
+$ nano first_script.sh
+```
+
+<p align="center"><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" title="Source: https://media.giphy.com/media/26tn33aiTi1jkl6H6/" width="60%">
+</p>
+
+## Your first script!
+
+The first thing you almost always need to do with any script is to specify which language the script is using. This is done with a 'shebang'
+
+<p align="center"><img src="https://media.giphy.com/media/3o6Mbi2vzeke98ApAA/giphy.gif" title="Source: https://giphy.com/gifs/season-14-the-simpsons-14x5-3o6Mbi2vzeke98ApAA
+" width="30%">
+</p>
+
+It consists of a `#!` to indicate it's a shebang, then a path to a list that *unix stores locations of all programs in. There are different ways of specifying this, but we will use here the most 'accepted' way.
+
+On the first line of your text editor window, type:
+
+```bash
+#! /usr/bin/env bash
+```
+
+In most cases, your shebang will be that exact path plus the language you are using.
+
+e.g. for python it would be `#! /usr/bin/env python`.
+
+For your first script, lets do something simple. The classic. We want the program to print "Hello world!".
+
+<p align="center"><img src="https://media.giphy.com/media/fedryX7dMGMe6lgqDm/giphy.gif" title="Source: https://giphy.com/gifs/computer-gif-artist-code-fedryX7dMGMe6lgqDm" width="30%">
+</p>
+
+
+How do we bash to print something in screen? Correct! You're an expert now: with `echo`!
+
+```bash
+#! /usr/bin/env bash
+
+echo "Hello world"
+```
+
+And save the file (if you don't remember how to do this, check [Basic BareBonesBash](https://barebonesbash.github.io/#/bbb1/basic_barebonesbash_walkthrough?id=text-editing-in-terminal)).
+
+That's it! You've made your first script!
+
+## How do you run a script?
+
+Now to run the script, we do:
+
+```bash
+$ bash ./first_script.sh
+```
+
+```
+Hello world
+```
+
+<p align="center"><img src="https://media.giphy.com/media/PnUatAYWMEMvmiwsyx/source.gif" title="Source: https://giphy.com/gifs/SpongeBobMovie-spongebob-squarepant-PnUatAYWMEMvmiwsyx" width="30%">
+  </p>
+  
+## Input Variables
+
+Now we want to change our script to instead of saying `Hello world` (which is a bit boring), to make it talk to you, i.e. `Hello <your_name>`.
+
+But how can the computer know your name? Well get the person to tell you of course!
+
+Instead of our script looking like this:
+
+```bash
+#! /usr/bin/env bash
+
+echo "Hello world"
+```
+
+We can use variables for the arguments passed to a script.
+
+...wait... what are arguments?
+
+Arguments are user supplied values when running the script in the prompt, that the script then will use to perform the tasks (with the argument taken into consideration).
+
+In Bash, the arguments passed on the command line can be called `${1}`,`${2}`, where
+
+- `${1}` is the first argument
+- `${2}` is the second argument
+- `${3}` is the third argument
+- and so on,
+
+supplied by the user in the terminal.
+
+So let's go back to our script and change the printing message!
+
+First, we want to take the first argument when running the command, and assign it to an informative variable.
+
+```bash
+#! /usr/bin/env bash
+
+name=${1}
+
+echo "Hello world"
+```
+
+Then, as we want to print out "Hello < name >" instead of "Hello World",
+we just need to replace `world` with the new `$name` variable!
+
+```bash
+#! /usr/bin/env bash
+
+name=${1}
+
+echo "Hello ${name}"
+```
+
+> Remember, quotes matter!
+
+Once you've updated your script, save, and lets try running the command again but this time by telling the script your name.
+
+```bash
+$ bash ./first_script.sh Aida
+```
+```
+Hello Aida
+```
+
+<img src=".images/bbb_aida.svg" width="10%">
+
+And that's pretty much it to start writing your script. Add normal commands you would normally run 'manually' on the terminal, but define your variables with user-supplied arguments!
+
+## Best practices when coding
+
+Ok, that's not _technically_ true. There are of course a few things that makes everyone's lives much better.
+
+There are a few best practices that you should follow when writing code, to ensure that anyone can understand your code.
+
+- Comment your code: add a short description of the steps. So in our first_script.sh, we should include:
+
+```bash
+#! /usr/bin/env bash
+
+## Read name from positional arguments
+name=${1}
+
+## Printing Hello and the specified variable into screen
+echo "Hello ${name}"
+```
+
+- Give variables informative names.
+    - use `${name}` not just `${n}`
+- Try to have all bash variables in `${}`. This helps distinguish them visually and ensures all variables are interpreted correctly.
+- Keep the code simple: try to simplify your code instead of having 1,000 lines
+    - This keeps it efficient, and is provides a good time to learn new things (with Google, of course :wink:)
+- Avoid duplicating code.
+    - You do this with things called `functions`, but we won't introduce this here.
+ 
+There are also a few other suggestions that we would personally highly recommend.
+
+1. Add a help message! This can be simply added with a conditional right at the beginning of the script. 
+    - For example, in our basic script, we could add the following:
+
+    ```bash
+    #! /usr/bin/env bash
+
+    name=${1}
+
+    if [[ ${name} == "--help" || ${name} == "-h" ]]; then
+      ## Print help message
+      echo "This script prints Hello <your_name> into screen."
+      echo "To run it type: bash ./first_script.sh <your_name>"
+    else
+      ## Printing Hello and the specified variable into screen
+      echo "Hello ${name}"
+     fi
+    ```
+
+    - You will often go back to old scripts and not remember the options and arguments they need.
+    - Having help text will make it easier to remember.
+
+<p align="center"><img src="https://media.giphy.com/media/phJ6eMRFYI6CQ/giphy.gif" title="Source: https://giphy.com/gifs/cat-fire-rescue-phJ6eMRFYI6CQ" width="40%">
+</p>
+
+2. Debugging your code!
+    - Try your code outside the script!
+    - Add print statements at each step of the script (with `echo`). These will be printing to console when each step is reached in the script (providing the script doesn't fail before the step).
+    - Add print statements to check the variables/commands render properly
+
+    
+3. Write the script by its functional parts. 
+    - Think what you want your script to do
+    - Write/Draw the steps to do
+    - Write code for the first step -> try it -> write code for the next step -> try it -> repeat until the end
+    - Simplify your code! Practise going back and finding more simplisitic routes to accomplish tasks.
+
+4. Explain your code to someone else! 
+    - Talking through the logic of it will often make the problem obvious.
+    - This is called the [rubber ducky debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging) approach. Many programmers have a rubber duck on their desk, who to explain their code to.
+
+<p align="center"><img src="https://media.giphy.com/media/aQrYT4WVN55aU/source.gif" title="Source: https://giphy.com/gifs/cheezburger-wtf-australia-aQrYT4WVN55aU" width="60%">
+</p>
+
+## Things to keep in mind
+
+Code for the same task can be written in multiple ways
+
+  - Some code is more **efficient** -> a.k.a runs faster.
+  - Some code is more **readable**.
+
+Some code is _both!_, Some code is neither... it's normally a tradeoff...
+
+<p align="center"><img src="https://media.giphy.com/media/3o7ZetIsjtbkgNE1I4/giphy.gif" title="Source: https://giphy.com/gifs/justin-g-run-away-fast-3o7ZetIsjtbkgNE1I4" width="40%">
+</p>
+  
+<p align="center"><img src="https://media.giphy.com/media/8dYmJ6Buo3lYY/giphy.gif" title="Source: https://giphy.com/gifs/baby-story-reading-8dYmJ6Buo3lYY" width="40%">
+</p>
+
+**Remember:** Practice makes perfect: the more you do it, the more you learn.
+
+## Time to practice!
+
+Your task now will be to generate a script to perform the image sorting that we have shown you in this presentation.
+
+**BUT:** This time you will need to make __an extra subdirectory within each of the categories__ with the secondary description of the images!
+> That is column 3 of the metadata file. (Artwork, Baby, Funny, Historical, Normal)
+
+
+For this, please make a new directory and download the data again:
+
+```bash
+$ mkdir ~/boosted_barebonesbash_scripting
+$ cd ~/boosted_barebonesbash_scripting
+
+## Get images zip and metadata file
+$ wget git.io/Boosted-BBB-images # On Mac: `curl -LO`
+$ wget git.io/Boosted-BBB-meta # On Mac: `curl -LO`
+
+## Unzip image folders and rename metadata file
+$ unzip Boosted-BBB-images
+$ mv Boosted-BBB-meta  \
+~/boosted_barebonesbash_scripting/Boosted-BBB-meta.tsv
+```
+
+You are set up to start now!
+
+<p align="center"><img src="https://media.giphy.com/media/nQz8YdVnMipdC/giphy.gif" title="Source: https://giphy.com/gifs/cute-adorable-puppy-nQz8YdVnMipdC" width="50%">
+</p>
+
+## Today I learned...
+
+To recap what we have gone through in this walkthrough:
+
+- Basic BBB recap!
+- `find` to locate files or directories
+- Difference between `""` and `''`
+- `rev`, `cut`, and bash expansion (`${}`) for manipulating strings
+- Regular expressions for weird and wonderful pattern matching
+- `rename` for renaming files
+- Plumbing: standard in and out, pipes and re-directs
+- `basename`/`dirname` getting just filenames or directories from paths 
+- While loops (reading contents of files)
+- `sed` for on-the-fly string manipulation _within_ files
+- If statements and conditionals (if this, then do that, else do this)
+- Scripts and arguments (now you're a programmer! Yes, you!)
+
+## _OPTIONAL:_ Rerun: Enter the janitor!
+
+Despite being lazy - you should ALWAYS keep your room tidy.
+
+- This stops losing files
+- Prevents getting lost in a maze of directories
+- Accidentally permanently deleting a days worth of work .small[
+
+\[_don't ask how many times this has happened._\]]
+
+Once you feel comfortable you've completed all today's tasks to your satisfaction, lets remove:
+  - the  `boosted_barebonesbash` directory 
+  - **all of its contents**. 
+
+```bash
+$ cd ~     # Don't delete a directory 
+         # while we are still in it! 
+$ rm -r boosted_barebonesbash*
+```
+
+<p align="center"><img src="https://media.giphy.com/media/VzwrrgjLyRzJS/giphy.gif" title="Source: https://giphy.com/gifs/scrubs-janitor-VzwrrgjLyRzJS" width="70%">
+</p>
