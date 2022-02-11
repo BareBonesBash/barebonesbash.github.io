@@ -2,7 +2,6 @@
 
 #### Thiseas C. Lamnidis, James A. Fellows Yates & Aida Andrades Valtueña
 
-🛠️ **UNDER CONSTRUCTION!** 🛠️
 
 This session will cover
 
