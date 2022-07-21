@@ -148,7 +148,7 @@
 
 layout: true
 <div class="my-header"></div>
-   <div class="my-footer"><img src="../_images/BareBonesBash_Icon.png" /></div>
+   <div class="my-footer"><img src="../../_images/BareBonesBash_Icon.png" /></div>
 
 
 ---
@@ -161,8 +161,6 @@ class: center, middle
 
 Thiseas C. Lamnidis
 
-James A. Fellows Yates
-
 Aida Andrades Valtueña
 <br/>
 <br/>
@@ -173,40 +171,6 @@ Aida Andrades Valtueña
 </a>
 .small[<br />This work is licensed under a <br/> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.]
 
----
-
-# Who are we?
-
-.small[### Thiseas]
-.medium[
-- BSc. @ Department of Biology (York)
-- MSc. @ Department of Anthropology (Durham)
-- Ph.D.(?) @ Department of Archaeogenetics (Jena)
-]
-
-.small[
-### James]
-.medium[
-- BSc. @ Department of Archaeology (York)
-- MSc. @ Institute for Archaeological Sciences (Tübingen)
-- Ph.D.(?) @ Department of Archaeogenetics (Jena)
-]
-
-.small[### Aida]
-.medium[
-- BSc. @ Department of Genetics, UAB (Barcelona)
-- MSc. @ Institute for Archaeological Sciences (Tübingen)
-- Ph.D.(?) @ Department of Archaeogenetics (Jena)
-]
-
-.right-column-33[
-<div class="vertical-center-with-title">
-  <img src=".images/bbb_all.svg" width="80%">
-</div>
-]
-
-???
-ALL
 
 ---
 
@@ -221,14 +185,13 @@ ALL
 
 - Objectives:
   - How to find stuff?
-  - What is a while loop?
-  - How to write a conditional statement (if/else)
+  - Concept: for loop  for and while loops?
   - Regular expressions (aka "Regex")
-  - How to write a simple bash script
+  - How to write a conditional statement (if/else)
   - _Simple_ text modification with `sed` (i.e. witchcraft)
+  - How to write a simple bash script
 
 ???
-THISEAS
 
 --
 
@@ -248,490 +211,23 @@ THISEAS
 
 ---
 
-class: center, middle
-
-# **RECAP**: Five Commandments of Bare Bones Bash
-
-???
-THISEAS
-
----
-
-class: middle
-
-.left-column[
-### 1. Be lazy! <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-]
-
-.right-column[
-- Desire for shortcuts motivates you to explore more!
-]
-
-???
-It's better to spend 1day working on a script that will save you 5min per day for the rest of your PhD, than putting in those 5 minutes!
-
-TAB will be you favourite key by the time we are done here.
-
----
-
-class: middle
-.left-column[
-### 1. Be lazy!
-### 2. ~~Google~~ The Hive-Mind knows everything.<br><br><br><br><br><br><br><br><br><br><br><br><br>
-]
-
-.right-column[
-- Desire for shortcuts motivates you to explore more!<br><br><br>
-
-- 99% of the time, someone else has already had the same issue.
-
-]
-???
-HOW to google programming questions is not as trivial as it sounds. In the final part of today's session we can talk a bit about this.
-
----
-
-class: middle
-.left-column[
-### 1. Be lazy!
-### 2. ~~Google~~ The Hive-Mind knows everything.
-### 3. Document everything you do.<br><br><br><br><br><br><br><br><br><br><br><br>
-]
-
-.right-column[
-- Desire for shortcuts motivates you to explore more!<br><br><br>
-
-- 99% of the time, someone else has already had the same issue.<br><br><br><br>
-
-- Make future you happy
-]
-
----
-
-class: middle
-
-.left-column[
-### 1. Be lazy!
-### 2. ~~Google~~ The Hive-Mind knows everything.
-### 3. Document everything you do.
-### 4. There will ALWAYS be a typo!<br><br><br><br><br><br><br><br><br><br><br>
-]
-.right-column[
-- Desire for shortcuts motivates you to explore more!<br><br><br>
-
-- 99% of the time, someone else has already had the same issue.<br><br><br><br>
-
-- Make future you happy<br><br><br><br>
-
-- Don't get disheartened, even best programmers make mistakes
-
-]
-
----
-
-class: middle
-
-.left-column[
-### 1. Be lazy!
-### 2. ~~Google~~ The Hive-Mind knows everything.
-### 3. Document everything you do.
-### 4. There will ALWAYS be a typo!
-### 5. Don't be afraid of you freedom!<br><br><br><br><br><br><br><br><br><br>
-
-]
-
-.right-column[
-- Desire for shortcuts motivates you to explore more!<br><br><br>
-
-- 99% of the time, someone else has already had the same issue.<br><br><br><br>
-
-- Make future you happy<br><br><br><br>
-
-- Don't get disheartened, even best programmers make mistakes<br><br><br><br>
-
-- Explore! Try out things!
-]
-
-???
-In my experience, most of learning in programming happens by failing. Repeatedly!
-
----
-
 class: center middle
 
 # Preparation!
 
----
-exclude: true
-# Materials
-
-- A long-form walkthrough, and these slides, are all freely available at:
-[https://barebonesbash.github.io/](https://barebonesbash.github.io/#/bbb2/README)
-
-Under the 'Boosted' section.
-
-<center>
-**INSERT BOOSTED BBB TOC SCREENSHOT HERE**
-</center>
 
 ---
+#Preparation
 
-# Into the hacker-verse
+You should have a folder and a metadata file from Session 1:
 
->  ⚠️This section is only for when we are giving the presentation in person! Otherwise, log onto your own unix local PC or server and jump [here](#mind-the)
+- Boosted-BBB-images
 
-- Connecting to our server
-  - In your browser, go to the URL that you got with your login information.
-  - Log-in with the user and password we provided you.
-
----
-
-class: center
-
-<p align="left"><img src=".images/Jupyter1.png" width="100%" ></p>
-
----
-
-class: center
-
-<p align="left"><img src=".images/Jupyter2.png" width="100%" ></p>
-
----
-
-class: center
-
-<p align="left"><img src=".images/Jupyter3.png" width="100%" ></p>
-
----
-
-class: center
-
-<p align="left"><img src=".images/Jupyter4.png" width="100%" ></p>
-
----
-
-class: center
-
-<p align="left"><img src=".images/Jupyter5.png" width="100%" ></p>
-
-???
-What you see here is the "command prompt". username@server:pwd$
-me, at the workshop server. ~ means "my HOME directory" (user specific).
-
----
-
-name: mind-the
-
-class: middle, center
-
-# Always mind the `$` and `>`!
-
-<p align="center">
-  <img title="Source: https://giphy.com/gifs/studiosoriginals-gilphabet-3o84U72tKO389H2lI4" src="https://media.giphy.com/media/3o84U72tKO389H2lI4/giphy.gif" width = "54%">
-  <img title="Source: https://giphy.com/gifs/animography-animated-typography-font-gzJNFeqcRcqnm" src="https://media.giphy.com/media/gzJNFeqcRcqnm/giphy.gif" width="30%">
-</p>
-
-**Tip** When _sharing_ code, don't include the `$` or `>` from your command prompt! makes it harder for others to run!
-
-To write multi-line code in one: replace a newline with a `;`
-
-???
-in Bash ALWAYS MIND THE `$`! Only copy after the `$` so you don't paste the command prompt too. `$` is also important when dealing with variables, which you saw a bit last time and will see more of today.
-
-In this presentation we will use `$` at the start of a line of code to show where the command prompt would be.
-
-We will use `>` to denote the subsequent lines of a multi-line code command.
-
----
-
-class: center,middle
-
-# Uhh... what did we do??
-
-## ([Last time](https://barebonesbash.github.io/#/bbb1/README))
-
-<p align="center">
-  <img title="Source: https://giphy.com/gifs/sonic-the-hedgehog-PJiqz1RHkdtGE" src="https://media.giphy.com/media/PJiqz1RHkdtGE/giphy.gif" >
-</p>
-
----
-
-# Uhh... what did we do?
-
-- **Make** a directory:
-
----
-# Uhh... what did we do?
-
-
-- ~~**Make** a directory:~~
-
-- **What** did that do again?
-
-```bash
-$ whatis mkdir
-## or
-$ man mkdir
-
-```
-
----
-
-# Uhh... what did we do?
-
-- **Make** a directory:
-
-.left-column[
-```bash
-$ mkdir boosted_barebonesbash
-```
-]
-
-.right-column[
-> **Tip:** You can specify multiple directories in one command!
-]
-
-???
-Some people in homework had one `mkdir` command for each directory they made, this isn't necessary! You can specify multiple new names after `mkdir` and each one will be created for you.
+- Boosted-BBB-meta: what does this file contain?
 
 --
 
-- How to **download** a file?
-
-```bash
-$ wget git.io/Boosted-BBB-meta
-```
-> Tip: If using a mac use 'curl -LO' instead!
-
-
---
-
-- How to **move** a something e.g. file into a directory?
-
-```bash
-$ mv Boosted-BBB-meta  boosted_barebonesbash/Boosted-BBB-meta.tsv
-```
-> `mv` can both move and rename! It even does these simultaneously!
-
----
-
-# Uhh... what did we do?
-
-- **Make** a directory:
-
-.left-column[
-```bash
-$ mkdir boosted_barebonesbash
-```
-]
-
-.right-column[
-> **Tip:** You can specify multiple directories in one command!
-]
-
-- How to **download** a file?
-
-```bash
-$ wget git.io/Boosted-BBB-meta
-```
-> Tip: If using a mac use 'curl -LO' instead!
-
-- How to **move** a something e.g. file into a directory?
-
-```bash
-$ mv Boosted-BBB-meta  boosted_barebonesbash/Boosted-BBB-meta.tsv
-```
-
-.left-column[
-- Change **into** a directory
-
-```bash
-$ cd boosted_barebonesbash
-
-```
-
-]
---
-.right-column[
-- What's **inside** my directory (+ info)?
-
-```bash
-$ ls -l
-
-```
-
-]
-
-
----
-
-# Uhh... what did we do?
-
-- What's **inside** a (text) file?
-
-```bash
-$ cat Boosted-BBB-meta.tsv
-$ head Boosted-BBB-meta.tsv
-$ tail Boosted-BBB-meta.tsv
-$ less Boosted-BBB-meta.tsv ## press q to quit!
-
-```
-???
-Remember, `less` opens a viewer window. exit that by pressing `q`
-
---
-
-- How to **combine** tools?
-- How to **search inside** a text file?
-
-```bash
-$ cat Boosted-BBB-meta.tsv | grep 'fanta' | wc -l
-
-```
-???
-Combine tools with `|`. You will learn a bit more about how that works today.
-
-`grep` will look for lines containing the string `'fanta'`.
---
-
-> Tip: Be _lazy_; No need for `cat`!
-
-```bash
-$ grep 'fanta' Boosted-BBB-meta.tsv | wc -l
-
-```
-
-
-???
-Remember we want to be lazy and efficient. While it is sometimes more 'readable', you don't need to cat every file into every program. Almost all programs accept a file by default.
-
-The latter means 1) less typing and 2) less computational resources
-
---
-
-- How do I **edit** a file?
-
-```bash
-$ nano Boosted-BBB-meta.tsv
-```
-> To exit without saving any changes: ctrl + x
-
-
-
-
----
-
-# Uhh... what did we do?
-
-- How to assign a **variable**
-
-```bash
-$ Variable=Yes
-```
-
---
-
-- How do I **repeat** a command multiple times on a list of things?
-
-```bash
-$ for i in Greece Spain Britain; do
->  echo "Does $i have lovely food? $Variable"
-> done
-
-```
---
-```
-Does Greece have lovely food? Yes
-Does Spain have lovely food? Yes
-Does Britain have lovely food? Yes
-
-```
-
----
-
-# Preparation
-
-
-- Download the following file
-
-```bash
-$ <whats_the_command?> git.io/Boosted-BBB-images
-```
-
----
-
-# Preparation
-
-- Download the following file
-
-```bash
-## use wget to download a file because it's _cooler_
-$ wget git.io/Boosted-BBB-images
-```
->Tip: write _why_ and _what_ you are doing in a comment with `#`
-
-???
-
-Also: COMMENTING IS LANGUAGE SPECIFIC. In bash you can only use #.
-
-i.e. Nicely written code should be self explanatory as to 'how', but 'why' is more useful.
-
---
-
-- `unzip` the `.zip` file by **auto-completing the file name with your TAB key!**
-
-```bash
-$ unzip Boosted-BBB-images
-```
-> **Protip**: Clear your terminal of old lines with <kbd>ctrl</kbd> + <kbd>l</kbd>
-
-
---
-
-.left-column[
-> * What is the name of the extracted directory?
-> * What do you see in there?
-
-- To remove unwanted files
-```bash
-$ rm Boosted-BBB-images
-```
-
-]
-
-.right-column[
-<p align="center">
-  <img title="Source: https://giphy.com/gifs/bobs-burgers-fox-bobs-burgers-3og0IRc1sW8yPON3WM" src="https://media.giphy.com/media/3og0IRc1sW8yPON3WM/giphy.gif" width="80%">
-</p>
-]
-
----
-
-# Final Tips
-
-.left-column[
-<p align="center">
-  <img title="https://giphy.com/gifs/UKTVGIFBANK-eMUEeNGdwU7JDZ28g0" src="https://media.giphy.com/media/eMUEeNGdwU7JDZ28g0/giphy.gif" width="80%">
-</p>
-]
-
-.left-column[
-
-- **Symlinks**: ALWAYS include a 'target' directory when using `ln -s` (even if just `.`).
-  - This is more readable, and less error prone!
-
-- **grep**: to select all lines _not_ matching a pattern, can use the grep flag `-v` (no need to `diff`!)
-
-- Comments
-  - Comment **step by step**!
-  - Better: **why** something is done, rather than _what_ it accomplishes.
-  - Helps others (such as your baffled bioinformaticians) and **yourself** in two years.
-
-]
-
-???
-
-Based on common issues with 'homework' from in-person sessions of BBB
+It contains metadata that will be use to sort the images in a nice structure in our messy folder
 
 ---
 
@@ -754,10 +250,8 @@ OK! Recap done! LETS'A GO!
 
 .large[
 - Where is my stuff??
-- Concept: Datastreams and redirects
-- Concept: Quotes matter!
+- Concept: for loops
 - How to rename stuff
-- Concept: Bash expansion
 - Concept: Regular expressions
 - While loop: to infinity and beyond!
 - Conditionals: IF/ELSE
@@ -797,7 +291,7 @@ $ find Boosted-BBB/  # Don't run yet!
   - Could also use `~/`
 --
 
-  - Could use absolute path e.g. `/home/james/`
+  - Could use absolute path e.g. `/home/aida/`
 
 <br/>
 <br/>
@@ -809,7 +303,7 @@ $ find Boosted-BBB/  # Don't run yet!
 <br/>
 <br/>
 
-> **Question** What is the difference between `Boosted-BBB/` and `/home/james/boosted_barebonesbash/Boosted-BBB/`?
+> **Question** What is the difference between `Boosted-BBB/` and `/home/aida/boosted_barebonesbash/Boosted-BBB/`?
 
 ---
 
@@ -939,58 +433,6 @@ What has changed here? Run the second command.]
 
 ???
 This time the command finds the files! What in tarnation is going on!?
-
----
-
-# Concept: Quotes matter!
-
-In bash, there is a big difference between a single quote `'` and a double quote `"`!
-
- - The contents of single quotes, are passed on as they are.
- - Inside double quotes, contents are _interpreted_!
-
-???
-AIDA
-That means that it will be read just like the rest of the code.
-
---
-
-.left-column-66[
-In some cases the difference doesn't matter:
-```bash
-$ echo "I like Greek Food"
-$ echo 'I like Greek Food'
-```
-```
-I like Greek Food
-I like Greek Food
-```
-]
-
---
-.right-column-33[
-      <p align="center"><img src="https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/giphy.gif" title="Source: https://media.giphy.com/media/NSqQkXJjnsVpZQezfg/" width="90%">
-      </p>
-      <p align="center"><img src="https://media.giphy.com/media/bh4jzePjmd9iE/giphy.gif" title="Source: https://media.giphy.com/media/bh4jzePjmd9iE/" width="90%">
-      </p>
-]
-
-.left-column-66[
-In other cases it makes all the difference:
-```bash
-$ Arr=Banana
-$ echo 'Pirates say $Arr'
-$ echo "Minions say $Arr"
-```
-```
-Pirates say $Arr
-Minions say Banana
-```
-]
-
-???
-You can already see from the syntax highlighting that $Arr is treated differently in the two quotes.
-
 ---
 
 # Cleaning up the filenames
@@ -998,15 +440,6 @@ You can already see from the syntax highlighting that $Arr is treated differentl
 It seems that wherever the files are from have completely mangled the file names (`.JPG.MP3.TXT`... WHAT?!)
 
 Lets clean up the filenames, and then we can sort the files into categories.
-
---
-
-**We first show an example that uses `cut` and `rev`.**
-
-Any guesses what these commands might do?
-
-  - `rev`:
-  - `cut`:
 
 ???
 Reward to anyone who uses `whatis` or `man`
@@ -1019,9 +452,55 @@ It seems that wherever the files are from have completely mangled the file names
 
 Lets clean up the filenames, and then we can sort the files into categories.
 
+We will need to repeat the clean up for each of the file names...
+
+--
+
+So, How do I **repeat** a command multiple times on a list of things?
+
+---
+
+# Concept: for loops
+
+- **for** loops allow us to go through a list of things and perform some actions. Let's see an example:
+
+--
+
+```bash
+$ Variable=Yes
+$ for i in Greece Spain Britain; do
+>  echo "Does $i have lovely food? $Variable"
+> done
+
+```
+--
+```
+Does Greece have lovely food? Yes
+Does Spain have lovely food? Yes
+Does Britain have lovely food? Yes
+
+```
+
+--
+- The for loop went through the list `Greece Spain Britain` and printed a statement with each item in the list
+
+--
+
+- Let's clean up the file names with a for loop!
+
+---
+
+# Cleaning up the filenames
+
+But how should we remove the weird endings???
+
+--
+
 **We first show an example that uses `cut` and `rev`.**
 
 Any guesses what these commands might do?
+
+--
 
   - `rev`: reverses a character string
   - `cut`: cuts a string into multiple pieces
@@ -1151,164 +630,6 @@ Remember how we were saying a variable is like a box that you can put anything i
 
 <p align="center"><img src="https://tenor.com/view/fantastic-beasts-fantastic-beasts-and-where-to-find-them-strudel-magic-food-gif-7865320.gif" title="Source: https://tenor.com/view/fantastic-beasts-fantastic-beasts-and-where-to-find-them-strudel-magic-food-gif-7865320.gif" width="50%">
 </p>
-
----
-
-# The basics
-
-Here's an example variable:
-```bash
-$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-```
-???
-THISEAS
-The absolute file path to some imaginary file.
-
---
-
-.left-column[
-
-To expand a variable use `${}`.
-```bash
-$ echo ${foo}
-```
-```
-/home/thiseas/folder/subfolder/BBB.is.bae.txt
-```
-]
-
-.right-column[
-<p align="center"><img src="https://media.giphy.com/media/8YpifFDs9Ux1VNQP1S/giphy.gif" title="Source: https://giphy.com/gifs/adweek-color-apple-8YpifFDs9Ux1VNQP1S/links" width="75%">
-</p>
-]
-
-???
-This is actually what bash did behind-the-scenes when we typed `$Var` thus far.
-It is a good idea to put all variables in `{}` so there is never any confusion as to which is the variable name.
-
---
-
-You can also add a **parameter** to expansions:
-```bash
-$ echo ${foo#/home/}
-$ echo ${foo#*/}
-```
-```
-thiseas/folder/subfolder/BBB.is.bae.txt
-home/thiseas/folder/subfolder/BBB.is.bae.txt
-
-```
-???
-The first command strips the text after the # from the START of the variable.
-
-You can also use wildcards to make more general expansions.
-
----
-
-# Some parameters for expansion
-
-```bash
-$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-$ echo ${foo}    # No parameters in this expansion
-$ echo ${foo#*/} # Removes everything before the first '/'
-$ echo ${foo%.*} # What will this do?
-```
---
-```
-/home/thiseas/folder/subfolder/BBB.is.bae.txt
- home/thiseas/folder/subfolder/BBB.is.bae.txt
-/home/thiseas/folder/subfolder/BBB.is.bae
-```
-???
-Bash will look for the provided pattern ONCE and remove it.
-
-There are more `.` and `/` but they are not removed.
---
-
-These expansion can be generalised:
-```bash
-$ echo ${foo##*/} # Removes everything before any '/'
-$ echo ${foo%%.*} # Removes everything after any '.'
-```
---
-```
-BBB.is.bae.txt
-/home/thiseas/folder/subfolder/BBB
-```
-???
-When the parameter is given twice, bash will keep searching for the pattern until it can no longer find it.
-
----
-# More parameters for expansion
-
-You can use two `/` to substitute parts of the variable:
-```bash
-$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-$ echo ${foo}                    # No parameters
-$ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
-```
-```
-/home/thiseas/folder/subfolder/BBB.is.bae.txt
-/home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
-```
---
-
-<p align="center"><img src="https://media.giphy.com/media/b7sNm0aR2EOqI/giphy.gif" title="Source: https://giphy.com/gifs/teachers-b7sNm0aR2EOqI" width="30%">
-</p>
-
----
-
-# More parameters for expansion
-
-You can use two `/` to substitute parts of the variable:
-```bash
-$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-$ echo ${foo}                    # No parameters
-$ echo ${foo/BBB/BareBonesBash}  # Change BBB to BareBonesBash
-```
-```
-/home/thiseas/folder/subfolder/BBB.is.bae.txt
-/home/thiseas/folder/subfolder/BareBonesBash.is.bae.txt
-```
-
-Leaving the second `/` out replaces the pattern with "an empty string".
-```bash
-$ echo ${foo/BBB}  # Remove BBB
-```
-???
-That is programmer speak for "nothing". i.e. it removes the pattern.
---
-```
-/home/thiseas/folder/subfolder/.is.bae.txt
-```
-
----
-# The last parameter, I swear!
-
-Finally, you can check the length of a variable by using a `#` BEFORE the variable name.
-```bash
-$ foo="/home/thiseas/folder/subfolder/BBB.is.bae.txt"
-$ echo ${#foo}  # The length of the variable contents
-```
---
-```
-45
-```
-So the filepath in `foo` is 45 characters long!
-
---
-
-This parameter is more useful when dealing with **bash arrays** (i.e. lists of things).
-<p align="center">
-  <img src="https://media.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif
-" title="Source: https://media.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif
-" width="40%">
-</p>
-
-???
-We will not be talking about bash arrays further, but they are basically indexed/numbered lists of stuff.
-
-That means you can, for example, ask for the 5th item in a bash array and get only that one. Look em up if that sounds useful to you! **[Rule 2]**
 
 ---
 # Writing pretty code
@@ -1885,90 +1206,6 @@ We can finally start sorting the pictures into categories!
 To do that, we need to keep track of all the file names. We can easily gather this information using a **redirect**!
 
 ---
-# Concept: Datastreams
-Programs can take in and spit out data from different _streams_. By default there are 3 such data streams.
-
-???
-THISEAS  
-Before we talk about redirects, you need to understand datastreams.
-
---
-.left-column[
-
-- `stdin`: the __st__an__d__ard __in__put
-- `stdout`: the __st__an__d__ard __out__put
-- `stderr`: the __st__an__d__ard __err__or
-]
-???
-stderr is what is usually printed on your screen, while stout is generally what ends up in output files, but it also goes to your screen by default.
---
-.right.column[
-<p align="center">
-  <img src=".images/Datastreams.png" width="50%">
-</p>]
-???
-In the background, each program also broadcasts an `exit code` which tells you if the program encountered errors. You will never see these in the wild, but it's good to know they exist.
---
-
-.left-column[
-<br><br><br>___A program is like the human body; One way in, two ways out!___
-]
-.right-column[<p align="center"><img src="https://media.giphy.com/media/4kg8IIClzvLtC/giphy.gif" title="Source: https://media.giphy.com/media/4kg8IIClzvLtC/" width="40%">
-</p>]
-???
-In this analogy exit codes would be how the person is _feeling_, I suppose.
-
----
-# Pipes revisited
-In the first session you learned about piping. Here's how that works!
-<br>
-<br>
---
-
-<p>
-  <img src=".images/Piping.png" width="100%">
-</p>
-<br>
-<br>
-The `stdout` of one script becomes the `stdin` of the other.
-`stderr` is printed on your screen.
-
----
-# Concept: Redirects
-
-Much like streams in the real world, datastreams can be redirected.
-
-???
-This way you can save the stdout of a program (or even the stderr) into a file to save for later.
-
---
-
-- `stdin` can be redirected with `<`.
-
-???
-An arrow pointing TO your program name!
-
---
-
-- `stdout` can be redirected with `>`.
-
-???
-An arrow pointing AWAY your program name!
-
---
-
-- `stderr` can be redirected with `2>`.
-
-???
-Because it is the secondary output stream.
-
---
-
-It is also possible to combine streams, but we won't get into that here.
-<p align="center"><img src="https://media.giphy.com/media/3o72EWUgbRNfLegO1W/giphy.gif" title="Source: https://media.giphy.com/media/3o72EWUgbRNfLegO1W/" width="80%">
-</p>
-
----
 
 # Let's redirect!
 
@@ -2064,9 +1301,7 @@ With the redirect after `done` we give the while loop `File_names.txt` as input.
 
 # Concept: While Loops
 
-We have previously introduced the concept of a loop, and already used a few today.
-
-**From Basic_BBB**
+We have previously seen the concept of `for` loop:
 
 ```bash
 $ for file in file1 file2 file3 file4; do
@@ -2634,7 +1869,7 @@ That program is called a **_script_**.
 Similar to a play/movie script that tells actors what to do and the sequence in which they should do it, a computer script is a file containing all the commands that you want the computer to perform in a given order.
 
 
-So let's start writing your first script `first_script.sh`! Open a text editor
+So let's start writing your first script `first_script.sh`! Open a text editor, we will use `nano`
 
 ```bash
 $ nano first_script.sh
@@ -2689,7 +1924,7 @@ How did we told bash to print something in screen?
 
 echo "Hello world"
 ```
-save the file.
+save the file by presing **Ctrl+X**, press **"Y"** to confimr you want to save and press enter to save it as `first_script.sh`.
 
 --
 
@@ -2829,7 +2064,7 @@ Hello Aida
 
 .column-right[
 <p>
-  <img src=".images/bbb_aida.svg" width="10%">
+  <img src="../../_images/bbb_aida.svg" width="10%">
 </p>
 ]
 
@@ -3009,23 +2244,14 @@ You are set up to start now!
 </p>
 ]
 
-
----
-# Our Proposed script!
-
-
 ---
 
 # Today I learned...
 
-- Basic BBB recap!
 - `find` to locate files or directories
-- Difference between `""` and `''`
-- `rev`, `cut`, and bash expansion (`${}`) for manipulating strings
+- What is a for loop
 - Regular expressions for weird and wonderful pattern matching
 - `rename` for renaming files
-- Plumbing: standard in and out, pipes and re-directs
-- `basename`/`dirname` getting just filenames or directories from paths 
 - While loops (reading contents of files)
 - `sed` for on-the-fly string manipulation _within_ files
 - If statements and conditionals (if this, then do that, else do this)
@@ -3063,6 +2289,15 @@ $ rm -r boosted_barebonesbash*
 <p align="center"><img src="https://media.giphy.com/media/VzwrrgjLyRzJS/giphy.gif" title="Source: https://giphy.com/gifs/scrubs-janitor-VzwrrgjLyRzJS" width="70%">
 </p>
 ]
+
+---
+
+# There is more!
+
+- This was a reduced version of previous BBB series
+
+- You can find all the slides and walkthroughs here: https://barebonesbash.github.io/#/
+
 
 ---
 
