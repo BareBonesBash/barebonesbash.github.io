@@ -29,8 +29,8 @@ format of the same content to help other trainers.
 
 ## Sessions
 
-We currently have one session, and will soon be expanded to two for slightly
-more advanced topics. See the sidebar for each session.
+We currently have two sessions, each formatted as both a slideshow presentation and a walkthrough-style tutorial.
+See the sidebar for links to each session.
 
 ## Acknowledgments
 
